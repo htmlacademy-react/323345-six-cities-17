@@ -1,4 +1,4 @@
-function HeaderNav() {
+function HeaderNav(): JSX.Element {
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">

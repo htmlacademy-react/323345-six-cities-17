@@ -1,7 +1,7 @@
-import HeaderLeft from './HeaderLeft';
-import HeaderNav from './HeaderNav';
+import HeaderLeft from './header-left.tsx';
+import HeaderNav from './header-nav.tsx';
 
-function HeaderPage() {
+function Header(): JSX.Element {
   return (
     <header className="header">
       <div className="container">
@@ -14,4 +14,4 @@ function HeaderPage() {
   );
 }
 
-export default HeaderPage;
+export default Header;

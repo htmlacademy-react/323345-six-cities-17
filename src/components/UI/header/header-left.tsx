@@ -1,4 +1,4 @@
-function HeaderLeft() {
+function HeaderLeft(): JSX.Element {
   return (
     <div className="header__left">
       <a className="header__logo-link header__logo-link--active">

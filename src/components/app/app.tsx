@@ -1,12 +1,12 @@
-import Main from '../pages/main/Main.tsx';
-import HeaderPage from './UI/header/header-page.tsx';
-import { offerCount } from '../const.ts';
+import MainPage from '../../pages/main-page/main-page.tsx';
+import Header from '../UI/header/header.tsx';
+import { offerCount } from '../../const.ts';
 
-function App() {
+function App(): JSX.Element {
   return (
     <div className="page page--gray page--main">
-      <HeaderPage />
-      <Main offerCount={offerCount} />
+      <Header />
+      <MainPage offerCount={offerCount} />
     </div>
   );
 }

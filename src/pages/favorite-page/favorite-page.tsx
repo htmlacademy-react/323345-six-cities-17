@@ -1,4 +1,6 @@
-function FavoritePage() {
+import Footer from '../../components/UI/footer/footer.tsx';
+
+function FavoritePage(): JSX.Element {
   return (
     <main className="page__main page__main--favorites">
       <div className="page__favorites-container container">
@@ -22,7 +24,7 @@ function FavoritePage() {
                     <a href="#">
                       <img
                         className="place-card__image"
-                        src="img/apartment-small-03.jpg"
+                        src="/img/apartment-small-03.jpg"
                         width="150"
                         height="110"
                         alt="Place image"
@@ -46,14 +48,14 @@ function FavoritePage() {
                           width="18"
                           height="19"
                         >
-                          <use xlink:href="#icon-bookmark"></use>
+                          <use xlinkHref="#icon-bookmark"></use>
                         </svg>
                         <span className="visually-hidden">In bookmarks</span>
                       </button>
                     </div>
                     <div className="place-card__rating rating">
                       <div className="place-card__stars rating__stars">
-                        <span style="width: 100%"></span>
+                        <span style={{ width: '100%' }}></span>
                         <span className="visually-hidden">Rating</span>
                       </div>
                     </div>
@@ -69,7 +71,7 @@ function FavoritePage() {
                     <a href="#">
                       <img
                         className="place-card__image"
-                        src="img/room-small.jpg"
+                        src="/img/room-small.jpg"
                         width="150"
                         height="110"
                         alt="Place image"
@@ -93,14 +95,14 @@ function FavoritePage() {
                           width="18"
                           height="19"
                         >
-                          <use xlink:href="#icon-bookmark"></use>
+                          <use xlinkHref="#icon-bookmark"></use>
                         </svg>
                         <span className="visually-hidden">In bookmarks</span>
                       </button>
                     </div>
                     <div className="place-card__rating rating">
                       <div className="place-card__stars rating__stars">
-                        <span style="width: 80%"></span>
+                        <span style={{ width: '80%' }}></span>
                         <span className="visually-hidden">Rating</span>
                       </div>
                     </div>
@@ -127,7 +129,7 @@ function FavoritePage() {
                     <a href="#">
                       <img
                         className="place-card__image"
-                        src="img/apartment-small-04.jpg"
+                        src="/img/apartment-small-04.jpg"
                         width="150"
                         height="110"
                         alt="Place image"
@@ -151,14 +153,14 @@ function FavoritePage() {
                           width="18"
                           height="19"
                         >
-                          <use xlink:href="#icon-bookmark"></use>
+                          <use xlinkHref="#icon-bookmark"></use>
                         </svg>
                         <span className="visually-hidden">In bookmarks</span>
                       </button>
                     </div>
                     <div className="place-card__rating rating">
                       <div className="place-card__stars rating__stars">
-                        <span style="width: 100%"></span>
+                        <span style={{ width: '100%' }}></span>
                         <span className="visually-hidden">Rating</span>
                       </div>
                     </div>
@@ -173,6 +175,9 @@ function FavoritePage() {
           </ul>
         </section>
       </div>
+      <Footer />
     </main>
   );
 }
+
+export default FavoritePage;
