@@ -1,4 +1,4 @@
-function Offer() {
+function OfferPlaceCard() {
   return (
     <article className="cities__card place-card">
       <div className="place-card__mark">
@@ -43,4 +43,4 @@ function Offer() {
   );
 }
 
-export default Offer;
+export default OfferPlaceCard;

@@ -1,6 +1,6 @@
-import Main from '../pages/main/Main.tsx';
-import Header from './UI/header/Header.tsx';
-import { offerCount } from '../const.ts';
+import Main from '../../pages/main/Main.tsx';
+import Header from '../UI/header/Header.tsx';
+import { offerCount } from '../../const.ts';
 
 function App() {
   return (

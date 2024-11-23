@@ -1,4 +1,4 @@
-import Offer from '../../components/offer/Offer.tsx';
+import OfferPlaceCard from '../../components/offer-place-card/offer-place-card.tsx';
 
 type mainProps = {
   offerCount: number;
@@ -78,7 +78,7 @@ function Main({ offerCount }: mainProps): JSX.Element {
             </form>
             <div className="cities__places-list places__list tabs__content">
               {offers.map((_, index) => (
-                <Offer key={index} />
+                <OfferPlaceCard key={index} />
               ))}
             </div>
           </section>
