@@ -1,7 +1,7 @@
 import HeaderLeft from './HeaderLeft';
 import HeaderNav from './HeaderNav';
 
-function Header() {
+function HeaderPage() {
   return (
     <header className="header">
       <div className="container">
@@ -14,4 +14,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default HeaderPage;
