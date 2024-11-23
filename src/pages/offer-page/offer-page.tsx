@@ -1,4 +1,4 @@
-function OfferPage() {
+function OfferPage(): JSX.Element {
   return (
     <main className="page__main page__main--offer">
       <section className="offer">
