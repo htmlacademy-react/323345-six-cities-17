@@ -1,5 +1,5 @@
-import { offerCount } from '../consts/const.ts';
+import { favoritesCount } from '../consts/const.ts';
 
-const simulationOffersList: number[] = Array.from({ length: offerCount });
+const simulationFavoritesList: number[] = Array.from({ length: favoritesCount });
 
-export default simulationOffersList;
+export default simulationFavoritesList;

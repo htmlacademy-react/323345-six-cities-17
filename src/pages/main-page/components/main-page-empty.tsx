@@ -1,5 +1,5 @@
 
-function MainEmptyPage(): JSX.Element {
+function MainPageEmpty(): JSX.Element {
   return (
     <div className="cities">
       <div className="cities__places-container cities__places-container--empty container">
@@ -18,4 +18,4 @@ function MainEmptyPage(): JSX.Element {
   );
 }
 
-export default MainEmptyPage;
+export default MainPageEmpty;

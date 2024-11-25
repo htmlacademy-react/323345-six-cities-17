@@ -1,6 +1,6 @@
-import Footer from '../../../ui/footer/footer.tsx';
+import Footer from '../../../widgets/footer/footer.tsx';
 
-function FavoriteEmptyPage(): JSX.Element {
+function FavoritesEmptyPage(): JSX.Element {
   return (
     <main className="page__main page__main--favorites page__main--favorites-empty">
       <div className="page__favorites-container container">
@@ -19,4 +19,4 @@ function FavoriteEmptyPage(): JSX.Element {
   );
 }
 
-export default FavoriteEmptyPage;
+export default FavoritesEmptyPage;

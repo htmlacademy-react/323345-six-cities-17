@@ -28,7 +28,7 @@ function OfferCardInfo({ place }:OffersCardInfo): JSX.Element {
       </h2>
       <p className="place-card__type">Apartment</p>
     </div>
-  )
+  );
 }
 
 export default OfferCardInfo;

@@ -15,7 +15,7 @@ function OfferCardImg({ place }:OffersCardProps):JSX.Element {
         />
       </a>
     </div>
-  )
+  );
 }
 
 export default OfferCardImg;
