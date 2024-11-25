@@ -1,4 +1,4 @@
-import Footer from '../../components/UI/footer/footer.tsx';
+import Footer from '../../ui/footer/footer.tsx';
 
 function FavoritePage(): JSX.Element {
   return (
