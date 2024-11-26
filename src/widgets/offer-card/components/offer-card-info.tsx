@@ -1,5 +1,5 @@
-import {capitalizeFirstLetter} from '../utils/capitalizeFirstLetter.ts';
-import {getPercentFromRating} from '../utils/getPercentFromRating.ts';
+import {capitalizeFirstLetter} from '../utils/capitalize-first-letter.ts';
+import {getPercentFromRating} from '../utils/percent-from-rating.ts';
 
 type OffersCardInfo = {
   place: string;

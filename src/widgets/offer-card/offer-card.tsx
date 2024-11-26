@@ -14,8 +14,10 @@ type CardProps = {
 
 function OfferCard({place, isPremium, price, previewImage, type, title, rating}: CardProps): JSX.Element {
   return (
-    <article className={`place-card ${place === 'main' ? 'cities__card' : place === 'favorites' && 'favorites__card'}`}>
-      {isPremium ? <OfferCardMark /> : null}
+    <article
+      className={`place-card ${place === 'main' ? 'cities__card' : place === 'favorites' && 'favorites__card'}`}
+    >
+      {isPremium ? <OfferCardMark/> : null}
       <OfferCardImg place={place} previewImage={previewImage}/>
       <OfferCardInfo place={place} price={price} type={type} title={title} rating={rating}/>
     </article>

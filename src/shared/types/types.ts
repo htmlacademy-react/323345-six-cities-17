@@ -3,12 +3,12 @@ export type OfferType = {
   title: string;
   type: string;
   price: number;
-  previewImage: string;
   city: CityType;
   location: LocationType;
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
+  previewImage: string;
 };
 
 export type CityType = {

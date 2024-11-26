@@ -10,8 +10,8 @@ function OfferCardImg({ place, previewImage }:OffersCardProps):JSX.Element {
         <img
           className="place-card__image"
           src={previewImage}
-          width="260"
-          height="200"
+          width={`${place === 'main' ? '260' : place === 'favorites' && '150'}`}
+          height={`${place === 'main' ? '200' : place === 'favorites' && '110'}`}
           alt="Place image"
         />
       </a>

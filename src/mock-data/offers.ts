@@ -2763,4 +2763,4 @@ const OFFERS_LIST: OfferType[] = [
   }
 ];
 
-export { OFFERS_LIST };
+export default OFFERS_LIST;
