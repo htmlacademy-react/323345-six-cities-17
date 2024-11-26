@@ -1,9 +1,11 @@
+import type {OfferType} from '../../shared/types/types.ts';
+
 import LocationTabs from '../../widgets/location-tabs/location-tabs.tsx';
 import MainPageBody from './components/main-page-body.tsx';
 import MainPageEmpty from './components/main-page-empty.tsx';
 
 type mainPageProps = {
-  offersList: number[];
+  offersList: OfferType[];
 };
 
 function MainPage({ offersList }: mainPageProps): JSX.Element {

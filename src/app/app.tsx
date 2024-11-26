@@ -1,12 +1,12 @@
 import MainPage from '../pages/main-page/main-page.tsx';
 import Header from '../widgets/header/header.tsx';
-import simulationOffersList from '../shared/utils/simulationOffersList.ts';
+import {OFFERS_LIST} from '../mock-data/offers.ts';
 
 function App(): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Header />
-      <MainPage offersList={simulationOffersList} />
+      <MainPage offersList={OFFERS_LIST} />
     </div>
   );
 }

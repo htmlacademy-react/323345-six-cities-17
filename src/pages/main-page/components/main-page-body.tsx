@@ -1,7 +1,9 @@
+import {OfferType} from '../../../shared/types/types.ts';
+
 import OfferCard from '../../../widgets/offer-card/offer-card.tsx';
 
 type mainPageBodyProps = {
-  offersList: number[];
+  offersList: OfferType[];
 }
 
 function MainPageBody({ offersList }: mainPageBodyProps): JSX.Element {
@@ -38,8 +40,17 @@ function MainPageBody({ offersList }: mainPageBodyProps): JSX.Element {
             </ul>
           </form>
           <div className="cities__places-list places__list tabs__content">
-            {offersList.map((_, index) => (
-              <OfferCard key={index} place='main' premium/>
+            {offersList.map((offer:OfferType) => (
+              <OfferCard
+                key={offer.id}
+                place='main'
+                isPremium={offer.isPremium}
+                price={offer.price}
+                previewImage={offer.previewImage}
+                type={offer.type}
+                title={offer.title}
+                rating={offer.rating}
+              />
             ))}
           </div>
         </section>

@@ -4,17 +4,24 @@ import OfferCardInfo from './components/offer-card-info.tsx';
 
 type CardProps = {
   place: string;
-  premium: boolean;
+  isPremium: boolean;
+  price: number;
+  previewImage: string;
+  type: string;
+  title: string;
+  rating: number;
 }
 
-function OfferCard({place, premium}: CardProps): JSX.Element {
+function OfferCard({place, isPremium, price, previewImage, type, title, rating}: CardProps): JSX.Element {
   return (
     <article className={`place-card ${place === 'main' ? 'cities__card' : place === 'favorites' && 'favorites__card'}`}>
-      {premium ? <OfferCardMark /> : null}
-      <OfferCardImg place={place} />
-      <OfferCardInfo place={place}/>
+      {isPremium ? <OfferCardMark /> : null}
+      <OfferCardImg place={place} previewImage={previewImage}/>
+      <OfferCardInfo place={place} price={price} type={type} title={title} rating={rating}/>
     </article>
   );
 }
 
 export default OfferCard;
+
+

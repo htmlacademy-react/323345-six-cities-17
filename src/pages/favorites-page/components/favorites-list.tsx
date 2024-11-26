@@ -18,7 +18,7 @@ function FavoritesList({ favoritesList }: FavoritesListProps): JSX.Element {
             </div>
           </div>
           <div className="favorites__places">
-            {favoritesList.map((_, index) => <OfferCard key={index} place='favorites' premium/>)}
+            {favoritesList.map((_, index) => <OfferCard key={index} place='favorites' isPremium/>)}
           </div>
         </li>
 
