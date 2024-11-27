@@ -1,13 +1,19 @@
 import HeaderLeft from './header-left.tsx';
 import HeaderNav from './header-nav.tsx';
+import HeaderNavNotLogin from './header-nav-not-logined.tsx';
 
-function Header(): JSX.Element {
+type HeaderProps = {
+  isLoginPage: boolean;
+  isAuthenticated: boolean;
+}
+
+function Header({ isLoginPage, isAuthenticated }:HeaderProps): JSX.Element {
   return (
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
           <HeaderLeft />
-          <HeaderNav />
+          { isAuthenticated ? !isLoginPage && <HeaderNav /> : <HeaderNavNotLogin />}
         </div>
       </div>
     </header>
