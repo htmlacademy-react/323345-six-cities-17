@@ -1,0 +1,43 @@
+.page__not-found__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.page__not-found__img {
+}
+
+.page__not-found__title {
+  margin: 10px;
+  font-size: 66px;
+  font-weight: 900;
+}
+
+.page__not-found__text {
+  font-size: 24px;
+}
+
+.page__not-found__title,
+.page__not-found__text {
+  color: #2597B9;
+  font-family: 'Source Sans 3', sans-serif;
+}
+
+.page__not-found__btn {
+  color: #FFFFFF;
+  font-size: 24px;
+  font-family: 'Source Sans 3', sans-serif;
+  padding: 8px 32px;
+  background-color: #2597B9;
+  border: none;
+  border-radius: 12px;
+  transition: transform 0.4s ease;
+
+  &:hover {
+    background-color: #269dc2;
+    transform: scale(1.02);
+    transition: scale 0.3s ease;
+    box-shadow: 0 5px 10px 0 rgba(23, 22, 22, 0.14), 0 4px 9px 0 rgba(12, 138, 183, 0.61);
+  }
+}
