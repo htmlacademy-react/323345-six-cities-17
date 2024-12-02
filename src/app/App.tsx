@@ -1,15 +1,21 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {RoutePath} from '../shared/consts/route-path';
+import {OfferType} from '../shared/types/types.ts';
 import {MainPage} from '../pages/main-page';
 import {LoginPage} from '../pages/login-page';
 import {FavoritesPage} from '../pages/favorites-page';
 import {OfferPage} from '../pages/offer-page';
 import {MainLayout} from '../shared/layout/main-layout';
 import {NotFoundPage} from '../pages/not-found-page';
-import {AUTHENTICATED} from '../shared/consts/const.ts';
 import {RedirectionRouteByAuth} from './routes/redirection-route-by-auth';
-import {RoutePath} from '../shared/consts/route-path.ts';
+import {AUTHENTICATED} from '../shared/consts/const';
+import FAVORITES_LIST from '../mocks/favorites';
 
-function App(): JSX.Element {
+type AppProps = {
+  offersList: OfferType[];
+}
+
+function App({offersList}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -18,7 +24,7 @@ function App(): JSX.Element {
             index
             element={
               <RedirectionRouteByAuth isAuthenticated={AUTHENTICATED}>
-                <MainPage/>
+                <MainPage offersList={offersList}/>
               </RedirectionRouteByAuth>
             }
           />
@@ -34,7 +40,7 @@ function App(): JSX.Element {
             path={RoutePath.FAVORITES}
             element={
               <RedirectionRouteByAuth isAuthenticated={AUTHENTICATED}>
-                <FavoritesPage/>
+                <FavoritesPage favoritesList={FAVORITES_LIST}/>
               </RedirectionRouteByAuth>
             }
           />

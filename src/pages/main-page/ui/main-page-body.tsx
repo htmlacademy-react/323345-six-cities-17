@@ -1,12 +1,11 @@
-import type { OfferType } from '../../../shared/types/types.ts';
-
-import { OfferCard } from '../../../widgets/offer-card';
+import type {OfferType} from '../../../shared/types/types.ts';
+import MainPageOffersList from './main-page-offers-list.tsx';
 
 type mainPageBodyProps = {
   offersList: OfferType[];
 }
 
-export function MainPageBody({ offersList }: mainPageBodyProps): JSX.Element {
+export function MainPageBody({offersList}: mainPageBodyProps): JSX.Element {
   return (
     <div className="cities">
       <div className="cities__places-container container">
@@ -39,20 +38,7 @@ export function MainPageBody({ offersList }: mainPageBodyProps): JSX.Element {
               </li>
             </ul>
           </form>
-          <div className="cities__places-list places__list tabs__content">
-            {offersList.map((offer:OfferType) => (
-              <OfferCard
-                key={offer.id}
-                place='main'
-                isPremium={offer.isPremium}
-                price={offer.price}
-                previewImage={offer.previewImage}
-                type={offer.type}
-                title={offer.title}
-                rating={offer.rating}
-              />
-            ))}
-          </div>
+          <MainPageOffersList offersList={offersList}/>
         </section>
         <div className="cities__right-section">
           <section className="cities__map map"></section>

@@ -1,8 +1,12 @@
 import {Footer} from '../../../widgets/footer';
 import {FavoritesList} from './components/favorites-list.tsx';
-import FAVORITES_LIST from '../../../mock-data/favorites.ts';
+import {OfferType} from '../../../shared/types/types.ts';
 
-export function FavoritesPage(): JSX.Element {
+type FavoritesPageProps = {
+  favoritesList: OfferType[];
+}
+
+export function FavoritesPage({favoritesList}: FavoritesPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <main className="page__main page__main--favorites">
@@ -10,7 +14,7 @@ export function FavoritesPage(): JSX.Element {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              <FavoritesList favoritesList={FAVORITES_LIST}/>
+              <FavoritesList favoritesList={favoritesList}/>
             </ul>
           </section>
         </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 import App from './app/App.tsx';
+import OFFERS_LIST from './mocks/offers.ts';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -9,6 +10,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App />
+    <App offersList={OFFERS_LIST}/>
   </React.StrictMode>,
 );
