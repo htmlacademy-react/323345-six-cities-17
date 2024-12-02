@@ -21,6 +21,7 @@ export function FavoritesList({favoritesList}: FavoritesListProps) {
         {group[1].map((favorite: OfferType): JSX.Element => (
           <OfferCard
             key={`favorite-${favorite.id}`}
+            id={favorite.id}
             place="favorites"
             isPremium={favorite.isPremium}
             price={favorite.price}
