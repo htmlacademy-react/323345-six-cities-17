@@ -21,3 +21,14 @@ export type LocationType = {
   longitude: number;
   zoom: number;
 };
+
+export type offerByCity = [
+  key: string,
+  value: OfferType[],
+]
+
+declare global {
+  interface Object {
+    groupBy<T>(list: T[], keyGetter: (item: T) => string): { [key: string]: T[] };
+  }
+}
