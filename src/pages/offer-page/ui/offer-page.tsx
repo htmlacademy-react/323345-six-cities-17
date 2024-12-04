@@ -1,6 +1,18 @@
-import {CommentsSendForm} from './components/comments-send-form.tsx';
+import {OfferSendForm} from './components/offer-send-form.tsx';
+import {useParams} from 'react-router-dom';
+import {OfferType} from '../../../shared/types/types.ts';
+import {getOfferById} from '../utils/get-offer-by-id.ts';
+import {capitalizeFirstLetter} from '../../../widgets/offer-card/utils/capitalize-first-letter.ts';
+import {getPercentFromRating} from '../../../widgets/offer-card/utils/percent-from-rating.ts';
 
-export function OfferPage(): JSX.Element {
+type OfferPageProps = {
+  offersList: OfferType[];
+}
+
+export function OfferPage({offersList}: OfferPageProps): JSX.Element {
+  const {offerId} = useParams<{ offerId: string }>();
+  const offer: OfferType | undefined = getOfferById({offerId, offersList});
+
   return (
     <div className="page page--gray page--main">
       <main className="page__main page__main--offer">
@@ -53,12 +65,13 @@ export function OfferPage(): JSX.Element {
           </div>
           <div className="offer__container container">
             <div className="offer__wrapper">
-              <div className="offer__mark">
-                <span>Premium</span>
-              </div>
+              {offer?.isPremium &&
+                <div className="offer__mark">
+                  <span>Premium</span>
+                </div>}
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
-                  Beautiful &amp; luxurious studio at great location
+                  {offer?.title}
                 </h1>
                 <button className="offer__bookmark-button button" type="button">
                   <svg className="offer__bookmark-icon" width="31" height="33">
@@ -76,7 +89,7 @@ export function OfferPage(): JSX.Element {
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
-                  Apartment
+                  {offer !== undefined && capitalizeFirstLetter(offer.type)}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
                   3 Bedrooms
@@ -86,7 +99,7 @@ export function OfferPage(): JSX.Element {
                 </li>
               </ul>
               <div className="offer__price">
-                <b className="offer__price-value">&euro;120</b>
+                <b className="offer__price-value">&euro;{offer?.price}</b>
                 <span className="offer__price-text">&nbsp;night</span>
               </div>
               <div className="offer__inside">
@@ -153,7 +166,8 @@ export function OfferPage(): JSX.Element {
                     <div className="reviews__info">
                       <div className="reviews__rating rating">
                         <div className="reviews__stars rating__stars">
-                          <span style={{width: '80%'}}></span>
+                          {offer !== undefined ? <span style={{width: getPercentFromRating(offer.rating)}}></span> :
+                            <span style={{width: 0}}></span>}
                           <span className="visually-hidden">Rating</span>
                         </div>
                       </div>
@@ -168,7 +182,7 @@ export function OfferPage(): JSX.Element {
                     </div>
                   </li>
                 </ul>
-                <CommentsSendForm/>
+                <OfferSendForm/>
               </section>
             </div>
           </div>

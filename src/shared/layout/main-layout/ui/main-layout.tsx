@@ -1,8 +1,8 @@
 import {Outlet, useLocation} from 'react-router-dom';
 import {useEffect, useState,} from 'react';
+import {Helmet, HelmetProvider} from 'react-helmet-async';
 import {Header} from '../../../../widgets/header';
 import {Footer} from '../../../../widgets/footer';
-import {Helmet} from 'react-helmet';
 import {getMetaTitlePage, MetaTitlePage} from '../../../consts/meta-title-page.ts';
 
 type MainLayoutProps = {
@@ -18,7 +18,7 @@ export function MainLayout({isAuthenticated}: MainLayoutProps): JSX.Element {
   }, [location.pathname]);
 
   return (
-    <>
+    <HelmetProvider>
       <Helmet>
         <title>{getMetaTitlePage(titleName)}</title>
         <meta name="description" content={MetaTitlePage(titleName)}/>
@@ -28,7 +28,7 @@ export function MainLayout({isAuthenticated}: MainLayoutProps): JSX.Element {
         <Outlet/>
         {location.pathname === '/favorites' && <Footer/>}
       </div>
-    </>
+    </HelmetProvider>
 
   );
 }

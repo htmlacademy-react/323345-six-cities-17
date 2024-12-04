@@ -1,7 +1,7 @@
 export type OfferType = {
   id: string;
   title: string;
-  type: string;
+  type: 'house' | 'hotel' | 'room' | 'apartment';
   price: number;
   city: CityType;
   location: LocationType;
@@ -12,14 +12,14 @@ export type OfferType = {
 };
 
 export type CityType = {
-  name: string;
+  name: 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf';
   location: LocationType;
 };
 
 export type LocationType = {
   latitude: number;
   longitude: number;
-  zoom: number;
+  zoom: 13 | 16;
 };
 
 export type offerByCity = [
