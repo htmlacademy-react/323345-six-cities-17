@@ -32,6 +32,7 @@ function App({offersList}: AppProps): JSX.Element {
               <RedirectionRouteByAuth isAuthenticated={AUTHENTICATED}>
                 <LoginPage/>
               </RedirectionRouteByAuth>
+
             }
           />
           <Route

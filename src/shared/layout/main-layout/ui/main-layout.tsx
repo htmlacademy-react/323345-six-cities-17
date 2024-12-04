@@ -3,7 +3,8 @@ import {useEffect, useState,} from 'react';
 import {Helmet, HelmetProvider} from 'react-helmet-async';
 import {Header} from '../../../../widgets/header';
 import {Footer} from '../../../../widgets/footer';
-import {getMetaTitlePage, MetaTitlePage} from '../../../consts/meta-title-page.ts';
+import {getMetaTitlePage, MetaTitlePage} from '../../../consts/meta-title-page';
+import {RoutePath} from '../../../consts/route-path';
 
 type MainLayoutProps = {
   isAuthenticated: boolean;
@@ -23,10 +24,10 @@ export function MainLayout({isAuthenticated}: MainLayoutProps): JSX.Element {
         <title>{getMetaTitlePage(titleName)}</title>
         <meta name="description" content={MetaTitlePage(titleName)}/>
       </Helmet>
-      <div className={`page ${location.pathname !== '/favorites' && 'page--gray page--main'}`}>
-        <Header isLoginPage={location.pathname === '/login'} isAuthenticated={isAuthenticated}/>
+      <div className={`page ${location.pathname !== `${RoutePath.FAVORITES}` && 'page--gray page--main'}`}>
+        <Header isLoginPage={location.pathname === `${RoutePath.LOGIN}`} isAuthenticated={isAuthenticated}/>
         <Outlet/>
-        {location.pathname === '/favorites' && <Footer/>}
+        {location.pathname === `${RoutePath.FAVORITES}` && <Footer/>}
       </div>
     </HelmetProvider>
 
