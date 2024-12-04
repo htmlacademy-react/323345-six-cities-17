@@ -3,7 +3,7 @@ import {RoutePath} from '../../../../shared/consts/route-path.ts';
 
 type OffersCardProps = {
   id: string;
-  place: string;
+  place: 'main' | 'favorites';
   previewImage: string;
 }
 

@@ -4,7 +4,7 @@ import {OfferCardInfo} from './components/offer-card-info';
 
 type CardProps = {
   id: string;
-  place: string;
+  place: 'main' | 'favorites';
   isPremium: boolean;
   price: number;
   previewImage: string;
