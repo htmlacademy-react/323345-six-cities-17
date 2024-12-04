@@ -5,8 +5,8 @@ import {NavLink} from 'react-router-dom';
 
 type OffersCardInfo = {
   id: string;
-  place: string;
-  price: 'main' | 'favorites';
+  place: 'main' | 'favorites';
+  price: number;
   type: string;
   title: string;
   rating: number;
