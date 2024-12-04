@@ -23,9 +23,7 @@ function App({offersList}: AppProps): JSX.Element {
           <Route
             index
             element={
-              <RedirectionRouteByAuth isAuthenticated={AUTHENTICATED}>
-                <MainPage offersList={offersList}/>
-              </RedirectionRouteByAuth>
+              <MainPage offersList={offersList}/>
             }
           />
           <Route
@@ -39,7 +37,9 @@ function App({offersList}: AppProps): JSX.Element {
           <Route
             path={RoutePath.FAVORITES}
             element={
-              <FavoritesPage favoritesList={FAVORITES_LIST_MOCK}/>
+              <RedirectionRouteByAuth isAuthenticated={AUTHENTICATED}>
+                <FavoritesPage favoritesList={FAVORITES_LIST_MOCK}/>
+              </RedirectionRouteByAuth>
             }
           />
           <Route
