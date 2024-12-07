@@ -19,7 +19,8 @@ function App({offersList}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={RoutePath.MAIN} element={<MainLayout isAuthenticated={AUTHENTICATED}/>}>
+        <Route path={RoutePath.MAIN}
+               element={<MainLayout isAuthenticated={AUTHENTICATED} favoritesList={FAVORITES_LIST_MOCK}/>}>
           <Route
             index
             element={

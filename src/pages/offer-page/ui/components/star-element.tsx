@@ -1,11 +1,10 @@
-import React from 'react';
-
 type StarType = {
   value: number;
-  formChangeHandle: React.MouseEventHandler<HTMLInputElement>;
+  formChangeHandle: (rating: number) => void;
+  isChecked: boolean;
 }
 
-export function StarElement({value, formChangeHandle}: StarType) {
+export function StarElement({value, formChangeHandle, isChecked}: StarType) {
   return (
     <>
       <input
@@ -14,7 +13,8 @@ export function StarElement({value, formChangeHandle}: StarType) {
         value={`${value}`}
         id={`${value}-stars`}
         type="radio"
-        onClick={formChangeHandle}
+        onChange={() => formChangeHandle(value)}
+        checked={isChecked}
       />
       <label
         htmlFor={`${value}-stars`}

@@ -5,12 +5,14 @@ import {Header} from '../../../../widgets/header';
 import {Footer} from '../../../../widgets/footer';
 import {getMetaTitlePage, MetaTitlePage} from '../../../consts/meta-title-page';
 import {RoutePath} from '../../../consts/route-path';
+import {OfferType} from '../../../types/types.ts';
 
 type MainLayoutProps = {
   isAuthenticated: boolean;
+  favoritesList: OfferType[];
 }
 
-export function MainLayout({isAuthenticated}: MainLayoutProps): JSX.Element {
+export function MainLayout({isAuthenticated, favoritesList}: MainLayoutProps): JSX.Element {
   const location = useLocation();
   const [titleName, setTitleName] = useState<string>(location.pathname);
 
@@ -25,7 +27,11 @@ export function MainLayout({isAuthenticated}: MainLayoutProps): JSX.Element {
         <meta name="description" content={MetaTitlePage(titleName)}/>
       </Helmet>
       <div className={`page ${location.pathname !== `${RoutePath.FAVORITES}` && 'page--gray page--main'}`}>
-        <Header isLoginPage={location.pathname === `${RoutePath.LOGIN}`} isAuthenticated={isAuthenticated}/>
+        <Header
+          isLoginPage={location.pathname === `${RoutePath.LOGIN}`}
+          isAuthenticated={isAuthenticated}
+          favoritesList={favoritesList}
+        />
         <Outlet/>
         {location.pathname === `${RoutePath.FAVORITES}` && <Footer/>}
       </div>

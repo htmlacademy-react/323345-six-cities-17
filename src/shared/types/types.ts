@@ -32,3 +32,4 @@ declare global {
     groupBy<T>(list: T[], keyGetter: (item: T) => string): { [key: string]: T[] };
   }
 }
+

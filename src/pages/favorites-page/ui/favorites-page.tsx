@@ -12,7 +12,17 @@ export function FavoritesPage({favoritesList}: FavoritesPageProps): JSX.Element 
         <section className="favorites">
           <h1 className="favorites__title">Saved listing</h1>
           <ul className="favorites__list">
-            <FavoritesList favoritesList={favoritesList}/>
+            {favoritesList.length > 0 ? <FavoritesList favoritesList={favoritesList}/> :
+              <h2
+                style={
+                  {
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }
+                }
+              >Вы пока ничего не добавили
+              </h2>}
           </ul>
         </section>
       </div>

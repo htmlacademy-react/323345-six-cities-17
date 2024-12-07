@@ -28,8 +28,8 @@ export function OfferCard({
   return (
     <article
       className={`place-card ${place === 'main' ? 'cities__card' : place === 'favorites' && 'favorites__card'}`}
-      onMouseOver={() => onHandlerActiveOffer ? onHandlerActiveOffer(id) : null}
-      onMouseOut={() => onHandlerActiveOffer ? onHandlerActiveOffer(null) : null}
+      onMouseOver={() => onHandlerActiveOffer && onHandlerActiveOffer(id)}
+      onMouseOut={() => onHandlerActiveOffer && onHandlerActiveOffer(null)}
     >
       {isPremium ? <OfferCardMark/> : null}
       <OfferCardImg id={id} place={place} previewImage={previewImage}/>
