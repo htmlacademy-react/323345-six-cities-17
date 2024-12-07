@@ -38,7 +38,7 @@ export function MainPageBody({offersList}: mainPageBodyProps): JSX.Element {
               </li>
             </ul>
           </form>
-          <MainPageOffersList offersList={offersList}/>
+          {offersList.length > 0 && <MainPageOffersList offersList={offersList}/>}
         </section>
         <div className="cities__right-section">
           <section className="cities__map map"></section>

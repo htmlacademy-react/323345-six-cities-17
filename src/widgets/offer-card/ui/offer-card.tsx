@@ -1,25 +1,39 @@
-import { OfferCardMark } from './components/offer-card-mark';
-import { OfferCardImg } from './components/offer-card-img';
-import { OfferCardInfo } from './components/offer-card-info';
+import {OfferCardMark} from './components/offer-card-mark';
+import {OfferCardImg} from './components/offer-card-img';
+import {OfferCardInfo} from './components/offer-card-info';
 
 type CardProps = {
-  place: string;
+  id: string;
+  place: 'main' | 'favorites';
   isPremium: boolean;
   price: number;
   previewImage: string;
   type: string;
   title: string;
   rating: number;
+  onHandlerActiveOffer?: (id: string | null) => void;
 }
 
-export function OfferCard({place, isPremium, price, previewImage, type, title, rating}: CardProps): JSX.Element {
+export function OfferCard({
+  id,
+  place,
+  isPremium,
+  price,
+  previewImage,
+  type,
+  title,
+  rating,
+  onHandlerActiveOffer
+}: CardProps): JSX.Element {
   return (
     <article
       className={`place-card ${place === 'main' ? 'cities__card' : place === 'favorites' && 'favorites__card'}`}
+      onMouseOver={() => onHandlerActiveOffer && onHandlerActiveOffer(id)}
+      onMouseOut={() => onHandlerActiveOffer && onHandlerActiveOffer(null)}
     >
       {isPremium ? <OfferCardMark/> : null}
-      <OfferCardImg place={place} previewImage={previewImage}/>
-      <OfferCardInfo place={place} price={price} type={type} title={title} rating={rating}/>
+      <OfferCardImg id={id} place={place} previewImage={previewImage}/>
+      <OfferCardInfo id={id} place={place} price={price} type={type} title={title} rating={rating}/>
     </article>
   );
 }

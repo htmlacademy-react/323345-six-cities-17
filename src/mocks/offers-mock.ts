@@ -1,6 +1,6 @@
 import {OfferType} from '../shared/types/types.ts';
 
-const OFFERS_LIST: OfferType[] = [
+const OFFERS_LIST_MOCK: OfferType[] = [
   {
     'id': 'a0a5c15f-50be-4a09-bb62-0f8af62f5625',
     'title': 'Tile House',
@@ -2763,4 +2763,4 @@ const OFFERS_LIST: OfferType[] = [
   }
 ];
 
-export default OFFERS_LIST;
+export default OFFERS_LIST_MOCK;

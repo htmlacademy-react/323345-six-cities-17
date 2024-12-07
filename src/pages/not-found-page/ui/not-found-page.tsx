@@ -12,7 +12,7 @@ export function NotFoundPage({isAuthenticated}: NotFoundPageProps): JSX.Element 
   return (
     <RedirectionRouteByAuth isAuthenticated={isAuthenticated}>
       <>
-        {<Header isLoginPage={false} isAuthenticated={isAuthenticated}/>}
+        {<Header isLoginPage={false} isAuthenticated={isAuthenticated} favoritesList={null}/>}
         <div className="page page--gray page--main">
           <div className="page__not-found__container">
             <img

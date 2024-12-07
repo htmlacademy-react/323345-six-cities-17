@@ -1,16 +1,19 @@
-import { capitalizeFirstLetter } from '../../utils/capitalize-first-letter';
-import { getPercentFromRating } from '../../utils/percent-from-rating';
+import {capitalizeFirstLetter} from '../../utils/capitalize-first-letter';
+import {getPercentFromRating} from '../../utils/percent-from-rating';
+import {RoutePath} from '../../../../shared/consts/route-path.ts';
+import {NavLink} from 'react-router-dom';
 
 type OffersCardInfo = {
-  place: string;
+  id: string;
+  place: 'main' | 'favorites';
   price: number;
   type: string;
   title: string;
   rating: number;
 }
 
-export function OfferCardInfo({ place, price, type, title, rating }:OffersCardInfo): JSX.Element {
-  const ratingPercent:number = getPercentFromRating(rating);
+export function OfferCardInfo({id, place, price, type, title, rating}: OffersCardInfo): JSX.Element {
+  const ratingPercent: number = getPercentFromRating(rating);
   return (
     <div className={`place-card__info ${place === 'favorites' && 'favorites__card-info'}`}>
       <div className="place-card__price-wrapper">
@@ -32,7 +35,9 @@ export function OfferCardInfo({ place, price, type, title, rating }:OffersCardIn
         </div>
       </div>
       <h2 className="place-card__name">
-        <a href="#">{title}</a>
+        <NavLink to={RoutePath.OFFER.replace(':offerId', id)} tabIndex={0}>
+          {title}
+        </NavLink>
       </h2>
       <p className="place-card__type">{capitalizeFirstLetter(type)}</p>
     </div>

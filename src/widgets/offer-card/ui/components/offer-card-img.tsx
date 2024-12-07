@@ -1,12 +1,18 @@
+import {NavLink} from 'react-router-dom';
+import {RoutePath} from '../../../../shared/consts/route-path.ts';
+
 type OffersCardProps = {
-  place: string;
+  id: string;
+  place: 'main' | 'favorites';
   previewImage: string;
 }
 
-export function OfferCardImg({ place, previewImage }:OffersCardProps):JSX.Element {
+export function OfferCardImg({id, place, previewImage}: OffersCardProps): JSX.Element {
   return (
-    <div className={`place-card__image-wrapper ${ place === 'main' ? 'cities__image-wrapper' : place === 'favorites' && 'favorites__image-wrapper'}`}>
-      <a href="#">
+    <div
+      className={`place-card__image-wrapper ${place === 'main' ? 'cities__image-wrapper' : place === 'favorites' && 'favorites__image-wrapper'}`}
+    >
+      <NavLink to={RoutePath.OFFER.replace(':offerId', id)} tabIndex={0}>
         <img
           className="place-card__image"
           src={previewImage}
@@ -14,7 +20,7 @@ export function OfferCardImg({ place, previewImage }:OffersCardProps):JSX.Elemen
           height={`${place === 'main' ? '200' : place === 'favorites' && '110'}`}
           alt="Place image"
         />
-      </a>
+      </NavLink>
     </div>
   );
 }

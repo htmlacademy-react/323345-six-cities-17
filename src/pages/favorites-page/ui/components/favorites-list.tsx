@@ -5,7 +5,7 @@ type FavoritesListProps = {
   favoritesList: OfferType[];
 }
 
-export function FavoritesList({favoritesList}: FavoritesListProps) {
+export function FavoritesList({favoritesList}: FavoritesListProps): JSX.Element[] {
   const groupedList: object = Object.groupBy(favoritesList, ((item: OfferType) => item.city.name));
   const favoritesListByCities: offerByCity[] = Object.entries(groupedList);
   return favoritesListByCities.map((group: offerByCity): JSX.Element => (
@@ -21,6 +21,7 @@ export function FavoritesList({favoritesList}: FavoritesListProps) {
         {group[1].map((favorite: OfferType): JSX.Element => (
           <OfferCard
             key={`favorite-${favorite.id}`}
+            id={favorite.id}
             place="favorites"
             isPremium={favorite.isPremium}
             price={favorite.price}
