@@ -6,7 +6,7 @@ import {OfferType} from '../../../shared/types/types.ts';
 type HeaderProps = {
   isLoginPage: boolean;
   isAuthenticated: boolean;
-  favoritesList: OfferType[];
+  favoritesList: OfferType[] | null;
 }
 
 export function Header({isLoginPage, isAuthenticated, favoritesList}: HeaderProps): JSX.Element {

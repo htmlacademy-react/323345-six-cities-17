@@ -4,7 +4,7 @@ import {OfferType} from '../../../shared/types/types.ts';
 import './header.css';
 
 type HeaderNavProps = {
-  favoritesList: OfferType[];
+  favoritesList: OfferType[] | null;
 }
 
 export function HeaderNav({favoritesList}: HeaderNavProps): JSX.Element {
@@ -20,7 +20,7 @@ export function HeaderNav({favoritesList}: HeaderNavProps): JSX.Element {
             <span className="tooltip">Личный кабинет пока в разработке</span>
           </span>
           <NavLink to={RoutePath.FAVORITES}>
-            <span className="header__favorite-count">{favoritesList.length}</span>
+            <span className="header__favorite-count">{favoritesList?.length}</span>
           </NavLink>
         </li>
         <li className="header__nav-item">
