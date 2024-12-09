@@ -23,7 +23,7 @@ export function OffersMap({offersList, activeOfferId}: UseMapProps) {
           lat: activeOffer?.city.location.latitude,
           lng: activeOffer?.city.location.longitude,
         },
-        zoom: offersList[0].city.location.zoom,
+        zoom: activeOffer?.city.location.zoom,
       });
 
       leaflet
@@ -38,7 +38,7 @@ export function OffersMap({offersList, activeOfferId}: UseMapProps) {
       setMap(instance);
       isRenderedRef.current = true;
     }
-  }, [mapRef, offersList]);
+  }, [mapRef, offersList, activeOfferId]);
 
   return (
     <div
