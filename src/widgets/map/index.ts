@@ -1,1 +1,1 @@
-export {Map} from './ui/offers-map.tsx';
+export {Map} from './ui/map.tsx';
