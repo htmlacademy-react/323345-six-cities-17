@@ -1,7 +1,7 @@
 import {OfferSendForm} from './components/offer-send-form.tsx';
 import {useParams} from 'react-router-dom';
 import {OfferType} from '../../../shared/types/types.ts';
-import {getOfferById} from '../utils/get-offer-by-id.ts';
+import {getOfferById} from '../../../shared/get-offer-by-id/ui/get-offer-by-id.ts';
 import {capitalizeFirstLetter} from '../../../widgets/offer-card/utils/capitalize-first-letter.ts';
 import {getPercentFromRating} from '../../../widgets/offer-card/utils/percent-from-rating.ts';
 
