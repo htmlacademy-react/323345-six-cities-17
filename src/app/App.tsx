@@ -8,8 +8,8 @@ import {OfferPage} from '../pages/offer-page';
 import {MainLayout} from '../shared/layout/main-layout';
 import {NotFoundPage} from '../pages/not-found-page';
 import {RedirectionRouteByAuth} from './routes/redirection-route-by-auth';
-import {AUTHENTICATED} from '../shared/consts/const';
-import FAVORITES_LIST from '../mocks/favorites';
+import {AUTHENTICATED} from '../shared/consts/isAuth.ts';
+import FAVORITES_LIST_MOCK from '../mocks/favorites-mock.ts';
 
 type AppProps = {
   offersList: OfferType[];
@@ -19,13 +19,14 @@ function App({offersList}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={RoutePath.MAIN} element={<MainLayout isAuthenticated={AUTHENTICATED}/>}>
+        <Route
+          path={RoutePath.MAIN}
+          element={<MainLayout isAuthenticated={AUTHENTICATED} favoritesList={FAVORITES_LIST_MOCK}/>}
+        >
           <Route
             index
             element={
-              <RedirectionRouteByAuth isAuthenticated={AUTHENTICATED}>
-                <MainPage offersList={offersList}/>
-              </RedirectionRouteByAuth>
+              <MainPage offersList={offersList}/>
             }
           />
           <Route
@@ -34,22 +35,21 @@ function App({offersList}: AppProps): JSX.Element {
               <RedirectionRouteByAuth isAuthenticated={AUTHENTICATED}>
                 <LoginPage/>
               </RedirectionRouteByAuth>
+
             }
           />
           <Route
             path={RoutePath.FAVORITES}
             element={
               <RedirectionRouteByAuth isAuthenticated={AUTHENTICATED}>
-                <FavoritesPage favoritesList={FAVORITES_LIST}/>
+                <FavoritesPage favoritesList={FAVORITES_LIST_MOCK}/>
               </RedirectionRouteByAuth>
             }
           />
           <Route
             path={RoutePath.OFFER}
             element={
-              <RedirectionRouteByAuth isAuthenticated={AUTHENTICATED}>
-                <OfferPage/>
-              </RedirectionRouteByAuth>
+              <OfferPage offersList={offersList}/>
             }
           />
         </Route>

@@ -1,0 +1,40 @@
+.header__user-name {
+  position: relative;
+}
+
+.tooltip {
+  display: none;
+  width: 320px;
+  color: #383838;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: -100%;
+  margin-left: -60px;
+}
+
+.header__nav-link:hover {
+  .tooltip {
+    display: block;
+  }
+}
+
+.header__logo,
+.footer__logo {
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s;
+  }
+}
+
+.header__favorite-count {
+  transition: background 0.3s;
+
+  &:hover {
+    background: #2571c3;
+  }
+}

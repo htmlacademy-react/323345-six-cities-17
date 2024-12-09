@@ -3,5 +3,5 @@ export const enum RoutePath {
   LOGIN = '/login',
   FAVORITES = '/favorites',
   NOT_FOUND = '*',
-  OFFER = '/offer',
+  OFFER = '/offer/:offerId',
 }

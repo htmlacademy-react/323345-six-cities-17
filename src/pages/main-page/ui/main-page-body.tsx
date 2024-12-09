@@ -1,11 +1,15 @@
-import type {OfferType} from '../../../shared/types/types.ts';
-import MainPageOffersList from './main-page-offers-list.tsx';
+import {useState} from 'react';
+import type {OfferType} from '../../../shared/types/types';
+import MainPageOffersList from './main-page-offers-list';
 
 type mainPageBodyProps = {
   offersList: OfferType[];
 }
 
 export function MainPageBody({offersList}: mainPageBodyProps): JSX.Element {
+  const [activeOffer, setActiveOffer] = useState<null | string>(null);
+  const isActiveOffer: (id: string | null) => void = (id: string | null): void => setActiveOffer(id);
+  console.log('Active card id -', activeOffer);
   return (
     <div className="cities">
       <div className="cities__places-container container">
@@ -38,10 +42,11 @@ export function MainPageBody({offersList}: mainPageBodyProps): JSX.Element {
               </li>
             </ul>
           </form>
-          <MainPageOffersList offersList={offersList}/>
+          {offersList.length > 0 && <MainPageOffersList offersList={offersList} isActiveOffer={isActiveOffer}/>}
         </section>
         <div className="cities__right-section">
           <section className="cities__map map"></section>
+          {/*<OffersMap offersList={offersList} activeOfferId={activeOffer}/>*/}
         </div>
       </div>
     </div>
