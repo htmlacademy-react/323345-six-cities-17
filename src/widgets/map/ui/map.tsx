@@ -1,51 +1,58 @@
-import leaflet from 'leaflet';
-import {RefObject, useEffect, useRef, useState} from 'react';
-import {OfferType} from '../../../shared/types/types.ts';
-import {getOfferById} from '../../../shared/get-offer-by-id';
+import {useEffect, useRef} from 'react';
+import {Icon, layerGroup, Marker} from 'leaflet';
+import {City, Point, Points} from '../../types/types';
+import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../const';
+import 'leaflet/dist/leaflet.css';
+import useMap from '../../../shared/hooks/use-map.tsx';
 
-type UseMapProps = {
-  offersList: OfferType[];
-  activeOfferId: string;
-}
+type MapProps = {
+  city: City;
+  points: Points;
+  selectedPoint: Point | undefined;
+};
 
-export function OffersMap({offersList, activeOfferId}: UseMapProps) {
-  const mapRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
-  const [map, setMap] = useState(null);
-  const isRenderedRef = useRef(false);
-  const activeOffer = getOfferById({activeOfferId, offersList});
+const defaultCustomIcon = new Icon({
+  iconUrl: URL_MARKER_DEFAULT,
+  iconSize: [40, 40],
+  iconAnchor: [20, 40]
+});
+
+const currentCustomIcon = new Icon({
+  iconUrl: URL_MARKER_CURRENT,
+  iconSize: [40, 40],
+  iconAnchor: [20, 40]
+});
+
+export function Map(props: MapProps): JSX.Element {
+  const {city, points, selectedPoint} = props;
+
+  const mapRef = useRef(null);
+  const map = useMap(mapRef, city);
+
   useEffect(() => {
-    if (mapRef.current === null && activeOffer === null) {
-      return;
-    }
-    if (!isRenderedRef.current) {
-      const instance = leaflet.map(mapRef.current, {
-        center: {
-          lat: activeOffer?.city.location.latitude,
-          lng: activeOffer?.city.location.longitude,
-        },
-        zoom: activeOffer?.city.location.zoom,
+    if (map) {
+      const markerLayer = layerGroup().addTo(map);
+      points.forEach((point) => {
+        const marker = new Marker({
+          lat: point.lat,
+          lng: point.lng
+        });
+
+        marker
+          .setIcon(
+            selectedPoint !== undefined && point.title === selectedPoint.title
+              ? currentCustomIcon
+              : defaultCustomIcon
+          )
+          .addTo(markerLayer);
       });
 
-      leaflet
-        .tileLayer(
-          'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-          {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-          },
-        )
-        .addTo(instance);
-
-      setMap(instance);
-      isRenderedRef.current = true;
+      return () => {
+        map.removeLayer(markerLayer);
+      };
     }
-  }, [mapRef, offersList, activeOfferId]);
+  }, [map, points, selectedPoint]);
 
-  return (
-    <div
-      className="cities__right-section"
-      style={{height: 'inherit'}}
-      ref={mapRef}
-    >
-    </div>
-  );
+  return <div style={{height: '500px'}} ref={mapRef}></div>;
 }
+

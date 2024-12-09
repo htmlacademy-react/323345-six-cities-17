@@ -1,11 +1,11 @@
 import {OfferType} from '../../types/types.ts';
 
 type GetOfferByIdProps = {
-  activeOfferId: string | undefined;
+  activeOffer: string | null;
   offersList: OfferType[];
 };
 
-export function getOfferById({activeOfferId, offersList}: GetOfferByIdProps): OfferType | undefined {
-  return offersList.length === 0 ? undefined : offersList.find((offer: OfferType) => offer.id === activeOfferId);
+export function getOfferById({activeOffer, offersList}: GetOfferByIdProps): OfferType | undefined {
+  return offersList.length === 0 ? undefined : offersList.find((offer: OfferType) => offer.id === activeOffer);
 }
 
