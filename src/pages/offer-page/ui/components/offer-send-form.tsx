@@ -3,6 +3,7 @@ import {StarElement} from './star-element';
 import {SendFormType} from '../../../../shared/types/send-form-type';
 import {StarCount} from '../../../../shared/consts/star-count';
 import {INITIAL_SEND_FORM_STATE} from '../../../../shared/consts/Initial-send-form-state';
+import {MIN_COMMENTS_LENGTH, MAX_COMMENTS_LENGTH} from '../../consts/comments-length'
 
 export function OfferSendForm() {
   const [formData, setFormData] = useState<SendFormType>(INITIAL_SEND_FORM_STATE);
@@ -17,7 +18,7 @@ export function OfferSendForm() {
     if (typeof value === 'number') {
       setStarChecked(value);
     }
-    if (formData.rating && formData.review.length >= 50 && formData.review.length < 300) {
+    if (formData.rating && formData.review.length >= MIN_COMMENTS_LENGTH && formData.review.length < MAX_COMMENTS_LENGTH) {
       setSendButtonDisabled(false);
     } else {
       setSendButtonDisabled(true);

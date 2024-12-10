@@ -12,9 +12,13 @@ export type OfferType = {
 };
 
 export type CityType = {
-  name: 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf';
+  name: CityNameType;
   location: LocationType;
 };
+
+export type CityNameType = 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf'
+
+
 
 export type LocationType = {
   latitude: number;
