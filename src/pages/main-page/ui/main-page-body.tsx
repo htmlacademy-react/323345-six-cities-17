@@ -48,7 +48,7 @@ export function MainPageBody({activeCityOffersList, activeCity}: mainPageBodyPro
         </section>
         <div className="cities__right-section">
           <section className="cities__map map"></section>
-          {/* <Map city={activeCity} points={activeCityOffersList} selectedPoint={activeOffer}/> */}
+          {/*<OffersMap offersList={offersList} activeOfferId={activeOffer}/>*/}
         </div>
       </div>
     </div>
