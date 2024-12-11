@@ -1,1 +1,1 @@
-export {Map} from './ui/map.tsx';
+export {Map} from './ui/city-map.tsx';

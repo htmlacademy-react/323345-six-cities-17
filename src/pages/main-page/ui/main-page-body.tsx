@@ -1,23 +1,29 @@
-import {useState} from 'react';
-import type {OfferType} from '../../../shared/types/types';
+import { useState } from 'react';
+import type { OfferType } from '../../../shared/types/types';
 import MainPageOffersList from './main-page-offers-list';
-import {Map} from '../../../widgets/map';
+import { CityMap } from '../../../widgets/map/ui/city-map';
 
 type mainPageBodyProps = {
   activeCityOffersList: OfferType[];
   activeCity: string;
-}
+};
 
-export function MainPageBody({activeCityOffersList, activeCity}: mainPageBodyProps): JSX.Element {
-  const [activeOffer, setActiveOffer] = useState<null | string>(null);
-  const isActiveOffer: (id: string | null) => void = (id: string | null): void => setActiveOffer(id);
-  const selectedPoint = activeCityOffersList;
+export function MainPageBody({
+  activeCityOffersList,
+  activeCity,
+}: mainPageBodyProps): JSX.Element {
+  const [activeOffer, setActiveOffer] = useState<string | undefined>(undefined);
+  const isActiveOffer: (id: string | undefined) => void = (
+    id: string | undefined
+  ): void => setActiveOffer(id);
   return (
     <div className="cities">
       <div className="cities__places-container container">
         <section className="cities__places places">
           <h2 className="visually-hidden">Places</h2>
-          <b className="places__found">{activeCityOffersList.length} places to stay in {activeCity}</b>
+          <b className="places__found">
+            {activeCityOffersList.length} places to stay in {activeCity}
+          </b>
           <form className="places__sorting" action="#" method="get">
             <span className="places__sorting-caption">Sort by</span>
             <span className="places__sorting-type" tabIndex={0}>
@@ -44,11 +50,18 @@ export function MainPageBody({activeCityOffersList, activeCity}: mainPageBodyPro
               </li>
             </ul>
           </form>
-          <MainPageOffersList activeCityOffersList={activeCityOffersList} isActiveOffer={isActiveOffer}/>
+          <MainPageOffersList
+            activeCityOffersList={activeCityOffersList}
+            isActiveOffer={isActiveOffer}
+          />
         </section>
         <div className="cities__right-section">
-          <section className="cities__map map"></section>
-          {/*<OffersMap offersList={offersList} activeOfferId={activeOffer}/>*/}
+          {/* <section className="cities__map map"></section> */}
+          <CityMap
+            city={activeCity}
+            points={activeCityOffersList}
+            selectedPoint={activeOffer}
+          />
         </div>
       </div>
     </div>

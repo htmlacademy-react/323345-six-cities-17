@@ -18,8 +18,6 @@ export type CityType = {
 
 export type CityNameType = 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf'
 
-
-
 export type LocationType = {
   latitude: number;
   longitude: number;

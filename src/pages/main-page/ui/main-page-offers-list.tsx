@@ -1,12 +1,15 @@
-import type {OfferType} from '../../../shared/types/types';
-import {OfferCard} from '../../../widgets/offer-card';
+import type { OfferType } from '../../../shared/types/types';
+import { OfferCard } from '../../../widgets/offer-card';
 
 type MainPageOffersListProps = {
   activeCityOffersList: OfferType[];
-  isActiveOffer?: (id: string | null) => void;
-}
+  isActiveOffer?: (id: string | undefined) => void;
+};
 
-function MainPageOffersList({activeCityOffersList, isActiveOffer}: MainPageOffersListProps) {
+function MainPageOffersList({
+  activeCityOffersList,
+  isActiveOffer,
+}: MainPageOffersListProps) {
   // const [activeOffer, setActiveOffer] = useState<null | string>(null);
   // const isActiveOffer: (id: string | null) => void = (id: string | null): void => setActiveOffer(id);
   // eslint-disable-next-line no-console
