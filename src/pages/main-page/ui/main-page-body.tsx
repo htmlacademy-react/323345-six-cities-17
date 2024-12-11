@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { OfferType } from '../../../shared/types/types';
 import MainPageOffersList from './main-page-offers-list';
-import { CityMap } from '../../../widgets/map/ui/city-map';
+import { CityMap } from '../../../widgets/city-map/ui/city-map';
 
 type mainPageBodyProps = {
   activeCityOffersList: OfferType[];

@@ -1,7 +1,7 @@
 import {OfferType} from '../../types/types.ts';
 
 type GetOfferByIdProps = {
-  activeOffer: string | null;
+  activeOffer: string | undefined;
   offersList: OfferType[];
 };
 

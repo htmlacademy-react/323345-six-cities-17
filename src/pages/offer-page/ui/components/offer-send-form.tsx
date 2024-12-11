@@ -58,9 +58,9 @@ export function OfferSendForm() {
             <StarElement
               key={star}
               value={star}
-              formChangeHandle={(rating) =>
-                onFormChangeHandle('rating', rating)
-              }
+              formChangeHandle={(rating) => {
+                onFormChangeHandle('rating', rating);
+              }}
               isChecked={starChecked === star}
             />
           )
