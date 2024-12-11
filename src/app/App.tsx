@@ -1,59 +1,59 @@
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import {RoutePath} from '../shared/consts/route-path';
-import {OfferType} from '../shared/types/types.ts';
-import {MainPage} from '../pages/main-page';
-import {LoginPage} from '../pages/login-page';
-import {FavoritesPage} from '../pages/favorites-page';
-import {OfferPage} from '../pages/offer-page';
-import {MainLayout} from '../shared/layout/main-layout';
-import {NotFoundPage} from '../pages/not-found-page';
-import {RedirectionRouteByAuth} from './routes/redirection-route-by-auth';
-import {AUTHENTICATED} from '../shared/consts/isAuth.ts';
-import FAVORITES_LIST_MOCK from '../mocks/favorites-mock.ts';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { RoutePath } from '../shared/consts/route-path';
+import { OfferType } from '../shared/types/types';
+import { MainPage } from '../pages/main-page';
+import { LoginPage } from '../pages/login-page';
+import { FavoritesPage } from '../pages/favorites-page';
+import { OfferPage } from '../pages/offer-page';
+import { MainLayout } from '../shared/layout/main-layout';
+import { NotFoundPage } from '../pages/not-found-page';
+import { RedirectionRouteByAuth } from './routes/redirection-route-by-auth';
+import { AUTHENTICATED } from '../shared/consts/isAuth.ts';
+import FAVORITES_LIST_MOCK from '../mocks/favorites-mock';
 
 type AppProps = {
   offersList: OfferType[];
 }
 
-function App({offersList}: AppProps): JSX.Element {
+function App({ offersList }: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
-          path={RoutePath.MAIN}
-          element={<MainLayout isAuthenticated={AUTHENTICATED} favoritesList={FAVORITES_LIST_MOCK}/>}
+          path={ RoutePath.MAIN }
+          element={ <MainLayout isAuthenticated={ AUTHENTICATED } favoritesList={ FAVORITES_LIST_MOCK }/> }
         >
           <Route
             index
             element={
-              <MainPage offersList={offersList}/>
+              <MainPage offersList={ offersList }/>
             }
           />
           <Route
-            path={RoutePath.LOGIN}
+            path={ RoutePath.LOGIN }
             element={
-              <RedirectionRouteByAuth isAuthenticated={AUTHENTICATED}>
+              <RedirectionRouteByAuth isAuthenticated={ AUTHENTICATED }>
                 <LoginPage/>
               </RedirectionRouteByAuth>
 
             }
           />
           <Route
-            path={RoutePath.FAVORITES}
+            path={ RoutePath.FAVORITES }
             element={
-              <RedirectionRouteByAuth isAuthenticated={AUTHENTICATED}>
-                <FavoritesPage favoritesList={FAVORITES_LIST_MOCK}/>
+              <RedirectionRouteByAuth isAuthenticated={ AUTHENTICATED }>
+                <FavoritesPage favoritesList={ FAVORITES_LIST_MOCK }/>
               </RedirectionRouteByAuth>
             }
           />
           <Route
-            path={RoutePath.OFFER}
+            path={ RoutePath.OFFER }
             element={
-              <OfferPage offersList={offersList}/>
+              <OfferPage offersList={ offersList }/>
             }
           />
         </Route>
-        <Route path={RoutePath.NOT_FOUND} element={<NotFoundPage isAuthenticated={AUTHENTICATED}/>}/>
+        <Route path={ RoutePath.NOT_FOUND } element={ <NotFoundPage isAuthenticated={ AUTHENTICATED }/> }/>
       </Routes>
     </BrowserRouter>
   );

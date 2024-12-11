@@ -1,17 +1,20 @@
-import {OfferSendForm} from './components/offer-send-form.tsx';
-import {useParams} from 'react-router-dom';
-import {OfferType} from '../../../shared/types/types.ts';
-import {getOfferById} from '../../../shared/get-offer-by-id/ui/get-offer-by-id.ts';
-import {capitalizeFirstLetter} from '../../../widgets/offer-card/utils/capitalize-first-letter.ts';
-import {getPercentFromRating} from '../../../widgets/offer-card/utils/percent-from-rating.ts';
+import { OfferSendForm } from './components/offer-send-form.tsx';
+import { useParams } from 'react-router-dom';
+import { OfferType } from '../../../shared/types/types.ts';
+import { getOfferById } from '../../../shared/get-offer-by-id/ui/get-offer-by-id.ts';
+import { capitalizeFirstLetter } from '../../../widgets/offer-card/utils/capitalize-first-letter.ts';
+import { getPercentFromRating } from '../../../widgets/offer-card/utils/percent-from-rating.ts';
 
 type OfferPageProps = {
   offersList: OfferType[];
-}
+};
 
-export function OfferPage({offersList}: OfferPageProps): JSX.Element {
-  const {offerId} = useParams<{ offerId: string }>();
-  const offer: OfferType | undefined = getOfferById({offerId, offersList});
+export function OfferPage({ offersList }: OfferPageProps): JSX.Element {
+  const { activeOffer } = useParams<{ activeOffer: string }>();
+  const offer: OfferType | undefined = getOfferById({
+    activeOffer,
+    offersList,
+  });
 
   return (
     <div className="page page--gray page--main">
@@ -65,14 +68,13 @@ export function OfferPage({offersList}: OfferPageProps): JSX.Element {
           </div>
           <div className="offer__container container">
             <div className="offer__wrapper">
-              {offer?.isPremium &&
+              {offer?.isPremium && (
                 <div className="offer__mark">
                   <span>Premium</span>
-                </div>}
+                </div>
+              )}
               <div className="offer__name-wrapper">
-                <h1 className="offer__name">
-                  {offer?.title}
-                </h1>
+                <h1 className="offer__name">{offer?.title}</h1>
                 <button className="offer__bookmark-button button" type="button">
                   <svg className="offer__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
@@ -82,7 +84,7 @@ export function OfferPage({offersList}: OfferPageProps): JSX.Element {
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
-                  <span style={{width: '80%'}}></span>
+                  <span style={{ width: '80%' }}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="offer__rating-value rating__value">4.8</span>
@@ -139,9 +141,9 @@ export function OfferPage({offersList}: OfferPageProps): JSX.Element {
                     from 18th century.
                   </p>
                   <p className="offer__text">
-                    An independent House, strategically located between Rembrandt
-                    Square and National Opera, but where the bustle of the city
-                    comes to rest in this alley flowery and colorful.
+                    An independent House, strategically located between
+                    Rembrandt Square and National Opera, but where the bustle of
+                    the city comes to rest in this alley flowery and colorful.
                   </p>
                 </div>
               </div>
@@ -166,8 +168,15 @@ export function OfferPage({offersList}: OfferPageProps): JSX.Element {
                     <div className="reviews__info">
                       <div className="reviews__rating rating">
                         <div className="reviews__stars rating__stars">
-                          {offer !== undefined ? <span style={{width: getPercentFromRating(offer.rating)}}></span> :
-                            <span style={{width: 0}}></span>}
+                          {offer !== undefined ? (
+                            <span
+                              style={{
+                                width: getPercentFromRating(offer.rating),
+                              }}
+                            />
+                          ) : (
+                            <span style={{ width: 0 }} />
+                          )}
                           <span className="visually-hidden">Rating</span>
                         </div>
                       </div>
@@ -182,7 +191,7 @@ export function OfferPage({offersList}: OfferPageProps): JSX.Element {
                     </div>
                   </li>
                 </ul>
-                <OfferSendForm/>
+                <OfferSendForm />
               </section>
             </div>
           </div>
@@ -230,7 +239,7 @@ export function OfferPage({offersList}: OfferPageProps): JSX.Element {
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">
-                      <span style={{width: '80%'}}></span>
+                      <span style={{ width: '80%' }}></span>
                       <span className="visually-hidden">Rating</span>
                     </div>
                   </div>
@@ -277,7 +286,7 @@ export function OfferPage({offersList}: OfferPageProps): JSX.Element {
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">
-                      <span style={{width: '80%'}}></span>
+                      <span style={{ width: '80%' }}></span>
                       <span className="visually-hidden">Rating</span>
                     </div>
                   </div>
@@ -327,7 +336,7 @@ export function OfferPage({offersList}: OfferPageProps): JSX.Element {
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">
-                      <span style={{width: '100%'}}></span>
+                      <span style={{ width: '100%' }}></span>
                       <span className="visually-hidden">Rating</span>
                     </div>
                   </div>
