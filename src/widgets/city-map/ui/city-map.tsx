@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Icon, layerGroup, Marker } from 'leaflet';
+import L, { Icon, layerGroup, Marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {
   URL_MARKER_CURRENT,
@@ -13,6 +13,8 @@ type MapProps = {
   city: string;
   points: OfferType[] | undefined;
   selectedPoint: string | undefined;
+  offerPage: OfferType | false;
+  className: string;
 };
 
 const defaultCustomIcon = new Icon({
@@ -31,22 +33,37 @@ export function CityMap({
   city,
   points,
   selectedPoint,
+  offerPage,
+  className,
 }: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const locationCity: CityType | undefined = CITIES_LIST.find(
     (item) => item.name === city
   );
   const map = useMap({ mapRef, locationCity: locationCity! });
-
   useEffect(() => {
     if (map) {
       map.flyTo(
         [
-          Number(locationCity?.location.latitude),
-          Number(locationCity?.location.longitude),
+          offerPage
+            ? Number(offerPage.location.latitude)
+            : Number(locationCity?.location.latitude),
+          offerPage
+            ? Number(offerPage.location.longitude)
+            : Number(locationCity?.location.longitude),
         ],
-        13
+        offerPage ? 16 : 13
       );
+
+      offerPage
+        ? L.circle(
+            [
+              Number(offerPage.location.latitude),
+              Number(offerPage.location.longitude),
+            ],
+            { radius: 400 }
+          ).addTo(map)
+        : undefined;
 
       const markerLayer = layerGroup().addTo(map);
       points?.forEach((point) => {
@@ -75,6 +92,7 @@ export function CityMap({
       };
     }
   }, [
+    offerPage,
     map,
     points,
     selectedPoint,
@@ -82,5 +100,19 @@ export function CityMap({
     locationCity?.location.longitude,
   ]);
 
-  return <div className="cities__map" ref={mapRef}></div>;
+  return (
+    <section
+      className={className}
+      ref={mapRef}
+      style={
+        className === 'offer__map'
+          ? {
+              maxWidth: '1144px',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+            }
+          : undefined
+      }
+    />
+  );
 }

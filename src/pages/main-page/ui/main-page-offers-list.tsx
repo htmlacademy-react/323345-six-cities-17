@@ -10,10 +10,6 @@ function MainPageOffersList({
   activeCityOffersList,
   isActiveOffer,
 }: MainPageOffersListProps) {
-  // const [activeOffer, setActiveOffer] = useState<null | string>(null);
-  // const isActiveOffer: (id: string | null) => void = (id: string | null): void => setActiveOffer(id);
-  // eslint-disable-next-line no-console
-
   return (
     <div className="cities__places-list places__list tabs__content">
       {activeCityOffersList.map((offer: OfferType) => (

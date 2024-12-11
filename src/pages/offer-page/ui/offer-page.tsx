@@ -4,17 +4,22 @@ import { OfferType } from '../../../shared/types/types.ts';
 import { getOfferById } from '../../../shared/get-offer-by-id/ui/get-offer-by-id.ts';
 import { capitalizeFirstLetter } from '../../../widgets/offer-card/utils/capitalize-first-letter.ts';
 import { getPercentFromRating } from '../../../widgets/offer-card/utils/percent-from-rating.ts';
+import { CityMap } from '../../../widgets/city-map/index.ts';
 
 type OfferPageProps = {
   offersList: OfferType[];
 };
 
 export function OfferPage({ offersList }: OfferPageProps): JSX.Element {
-  const { activeOffer } = useParams<{ activeOffer: string }>();
-  const offer: OfferType | undefined = getOfferById({
-    activeOffer,
+  const { offerId } = useParams<{ offerId: string }>();
+  const offer: OfferType = getOfferById({
+    offerId,
     offersList,
-  });
+  })!;
+
+  const activeCityOffersList = offersList.filter(
+    (item) => item.city.name === offer.city.name
+  );
 
   return (
     <div className="page page--gray page--main">
@@ -195,7 +200,14 @@ export function OfferPage({ offersList }: OfferPageProps): JSX.Element {
               </section>
             </div>
           </div>
-          <section className="offer__map map"></section>
+
+          <CityMap
+            city={offer.city.name}
+            points={activeCityOffersList}
+            selectedPoint={offerId}
+            offerPage={offer}
+            className="offer__map"
+          />
         </section>
         <div className="container">
           <section className="near-places places">

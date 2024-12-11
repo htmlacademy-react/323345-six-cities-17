@@ -56,11 +56,12 @@ export function MainPageBody({
           />
         </section>
         <div className="cities__right-section">
-          {/* <section className="cities__map map"></section> */}
           <CityMap
             city={activeCity}
             points={activeCityOffersList}
             selectedPoint={activeOffer}
+            className="cities__map"
+            offerPage={false}
           />
         </div>
       </div>
