@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import L, { Icon, layerGroup, Marker } from 'leaflet';
-import { RoutePath } from '../../../shared/consts/route-path';
 import classNames from 'classnames';
 import {
   URL_MARKER_CURRENT,
@@ -9,10 +8,9 @@ import {
 import useMap from '../../../shared/hooks/use-map';
 import { CityType, OfferType } from '../../../shared/types/types';
 import { CITIES_LIST } from '../../../shared/consts/cities';
-import { NavLink } from 'react-router-dom';
 
 type MapProps = {
-  city: string | undefined;
+  city: string;
   points: OfferType[] | undefined;
   selectedPoint: string | undefined;
   offerPage: OfferType | false;
@@ -40,18 +38,10 @@ export function CityMap({
   const locationCity: CityType | undefined = CITIES_LIST.find(
     (item) => item.name === city
   );
-  if (!locationCity) {
-    return (
-      <>
-        <h2>Извините, нет предложений</h2>
-        <NavLink to={RoutePath.MAIN} />
-      </>
-    );
-  }
 
   const map = useMap({
     mapRef,
-    locationCity,
+    locationCity : {name: 'Amsterdam', location:{latitude:50, longitude:50,zoom:13}},
   });
   useEffect(() => {
     if (map) {

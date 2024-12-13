@@ -38,19 +38,19 @@ export function OfferPage({
   }
 
   /**
-   * @param { OfferType[] } offersList - список всех предложений.
-   * @param { string } offer.city.name - название текущего города.
-   * @returns { OfferType[] } список всех предложений для этого города.
+   * @param offersList - список всех предложений.
+   * @param offer.city.name - название текущего города.
+   * @returns список всех предложений для этого города.
    */
   const activeCityOffersList = offersList.filter(
     (item) => item.city.name === offer.city.name
   );
 
   /**
-   * @param { OfferType } offer - текущее предложение
-   * @param { OfferType[] } activeCityOffersList - список предложений в этом городе.
-   * @param { number } NEAR_OFFER_COUNT - число, сколько нужно отобразить близжайших предлложений.
-   * @returns { OfferType[] } список из близжайших предложений в количестве = NEAR_OFFER_COUNT.
+   * @param offer - текущее предложение
+   * @param activeCityOffersList - список предложений в этом городе.
+   * @param NEAR_OFFER_COUNT - число, сколько нужно отобразить близжайших предлложений.
+   * @returns список из близжайших предложений в количестве = NEAR_OFFER_COUNT.
    */
   const nearPoints = findNearestPoint({
     offer,
@@ -214,7 +214,7 @@ export function OfferPage({
                 <OfferCard
                   key={nearOffer.id}
                   id={nearOffer.id}
-                  place="main"
+                  place='main'
                   isPremium={nearOffer.isPremium}
                   price={nearOffer.price}
                   previewImage={nearOffer.previewImage}

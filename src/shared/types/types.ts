@@ -36,7 +36,7 @@ declare global {
   interface Object {
     groupBy<T>(
       list: T[],
-      keyGetter: (item: T) => undefined
+      keyGetter: (item: T) => string
     ): { [key: string]: T[] };
   }
 }
