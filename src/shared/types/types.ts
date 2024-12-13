@@ -23,7 +23,7 @@ export type CityNameType =
   | 'Amsterdam'
   | 'Hamburg'
   | 'Dusseldorf'
-  | undefined;
+  | 'Not found';
 
 export type LocationType = {
   latitude: number;
@@ -37,7 +37,7 @@ declare global {
   interface Object {
     groupBy<T>(
       list: T[],
-      keyGetter: (item: T) => string
+      keyGetter: (item: T) => undefined
     ): { [key: string]: T[] };
   }
 }

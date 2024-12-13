@@ -1,4 +1,4 @@
-import {offerByCity, OfferType} from '../../../../shared/types/types.ts';
+import {offerByCity, OfferType} from '../../../../shared/types/types';
 import {OfferCard} from '../../../../widgets/offer-card';
 
 type FavoritesListProps = {

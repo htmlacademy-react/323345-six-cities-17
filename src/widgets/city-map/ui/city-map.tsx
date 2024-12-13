@@ -10,7 +10,7 @@ import { CityType, OfferType } from '../../../shared/types/types';
 import { CITIES_LIST } from '../../../shared/consts/cities';
 
 type MapProps = {
-  city: string;
+  city: string | undefined;
   points: OfferType[] | undefined;
   selectedPoint: string | undefined;
   offerPage: OfferType | false;
@@ -42,7 +42,7 @@ export function CityMap({
   const map = useMap({
     mapRef,
     locationCity: {
-      name: undefined,
+      name: 'Not found',
       location: { latitude: 0, longitude: 0, zoom: 13 },
     },
   });
