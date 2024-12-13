@@ -42,7 +42,7 @@ export function CityMap({
   const map = useMap({
     mapRef,
     locationCity: {
-      name: 'Not found',
+      name: 'Paris',
       location: { latitude: 0, longitude: 0, zoom: 13 },
     },
   });

@@ -22,8 +22,7 @@ export type CityNameType =
   | 'Brussels'
   | 'Amsterdam'
   | 'Hamburg'
-  | 'Dusseldorf'
-  | 'Not found';
+  | 'Dusseldorf';
 
 export type LocationType = {
   latitude: number;
