@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import L, { Icon, layerGroup, Marker } from 'leaflet';
-import 'leaflet/dist/leaflet.css';
+import classNames from 'classnames';
 import {
   URL_MARKER_CURRENT,
   URL_MARKER_DEFAULT,
@@ -14,7 +14,6 @@ type MapProps = {
   points: OfferType[] | undefined;
   selectedPoint: string | undefined;
   offerPage: OfferType | false;
-  className: string;
 };
 
 const defaultCustomIcon = new Icon({
@@ -34,13 +33,19 @@ export function CityMap({
   points,
   selectedPoint,
   offerPage,
-  className,
 }: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const locationCity: CityType | undefined = CITIES_LIST.find(
     (item) => item.name === city
   );
-  const map = useMap({ mapRef, locationCity: locationCity! });
+
+  const map = useMap({
+    mapRef,
+    locationCity: {
+      name: undefined,
+      location: { latitude: 0, longitude: 0, zoom: 13 },
+    },
+  });
   useEffect(() => {
     if (map) {
       map.flyTo(
@@ -52,18 +57,18 @@ export function CityMap({
             ? Number(offerPage.location.longitude)
             : Number(locationCity?.location.longitude),
         ],
-        offerPage ? 16 : 13
+        13
       );
 
-      offerPage
-        ? L.circle(
-            [
-              Number(offerPage.location.latitude),
-              Number(offerPage.location.longitude),
-            ],
-            { radius: 400 }
-          ).addTo(map)
-        : undefined;
+      if (offerPage) {
+        L.circle(
+          [
+            Number(offerPage.location.latitude),
+            Number(offerPage.location.longitude),
+          ],
+          { radius: 1000 }
+        ).addTo(map);
+      }
 
       const markerLayer = layerGroup().addTo(map);
       points?.forEach((point) => {
@@ -102,17 +107,11 @@ export function CityMap({
 
   return (
     <section
-      className={className}
+      className={classNames('map', {
+        'offer__map': offerPage,
+        'cities__map': !offerPage,
+      })}
       ref={mapRef}
-      style={
-        className === 'offer__map'
-          ? {
-              maxWidth: '1144px',
-              marginLeft: 'auto',
-              marginRight: 'auto',
-            }
-          : undefined
-      }
     />
   );
 }
