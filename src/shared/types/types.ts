@@ -16,7 +16,13 @@ export type CityType = {
   location: LocationType;
 };
 
-export type CityNameType = 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf'
+export type CityNameType =
+  | 'Paris'
+  | 'Cologne'
+  | 'Brussels'
+  | 'Amsterdam'
+  | 'Hamburg'
+  | 'Dusseldorf';
 
 export type LocationType = {
   latitude: number;
@@ -24,14 +30,13 @@ export type LocationType = {
   zoom: 13 | 16;
 };
 
-export type offerByCity = [
-  key: string,
-  value: OfferType[],
-]
+export type offerByCity = [key: string, value: OfferType[]];
 
 declare global {
   interface Object {
-    groupBy<T>(list: T[], keyGetter: (item: T) => string): { [key: string]: T[] };
+    groupBy<T>(
+      list: T[],
+      keyGetter: (item: T) => string
+    ): { [key: string]: T[] };
   }
 }
-

@@ -60,7 +60,6 @@ export function MainPageBody({
             city={activeCity}
             points={activeCityOffersList}
             selectedPoint={activeOffer}
-            className="cities__map"
             offerPage={false}
           />
         </div>
