@@ -3,12 +3,10 @@ import { OfferCard } from '../../../widgets/offer-card';
 
 type MainPageOffersListProps = {
   activeCityOffersList: OfferType[];
-  isActiveOffer?: (id: string | undefined) => void;
 };
 
 function MainPageOffersList({
   activeCityOffersList,
-  isActiveOffer,
 }: MainPageOffersListProps) {
   return (
     <div className="cities__places-list places__list tabs__content">
@@ -23,7 +21,6 @@ function MainPageOffersList({
           type={offer.type}
           title={offer.title}
           rating={offer.rating}
-          onHandlerActiveOffer={isActiveOffer}
         />
       ))}
     </div>

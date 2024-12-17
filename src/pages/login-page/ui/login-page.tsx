@@ -1,4 +1,11 @@
+import { useNavigate } from 'react-router-dom';
+import { UseAppDispatch } from '../../../shared/hooks/use-app-dispatch';
+import { auth } from '../../../store/action/app-action';
+import { RoutePath } from '../../../shared/consts/route-path';
+
 export function LoginPage(): JSX.Element {
+  const dispatch = UseAppDispatch();
+  const navigate = useNavigate();
   return (
     <div className="page page--gray page--login">
       <main className="page__main page__main--login">
@@ -26,7 +33,16 @@ export function LoginPage(): JSX.Element {
                   required
                 />
               </div>
-              <button className="login__submit form__submit button" type="submit">Sign in</button>
+              <button className="login__submit form__submit button" type="submit" onClick={
+                (e)=>{
+                  e.preventDefault();
+                  dispatch(auth(true));
+                  navigate(RoutePath.MAIN);
+                }
+              }
+              >
+                Sign in
+              </button>
             </form>
           </section>
           <section className="locations locations--login locations--current">

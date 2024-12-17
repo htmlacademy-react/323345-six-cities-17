@@ -1,13 +1,16 @@
 import {NavLink} from 'react-router-dom';
-import {RoutePath} from '../../../shared/consts/route-path.ts';
-import {OfferType} from '../../../shared/types/types.ts';
-import './header.css';
+import {RoutePath} from '../../../../shared/consts/route-path.ts';
+import {OfferType} from '../../../../shared/types/types.ts';
+import '../header.css';
+import { UseAppDispatch } from '../../../../shared/hooks/use-app-dispatch.ts';
+import { auth } from '../../../../store/action/app-action.ts';
 
 type HeaderNavProps = {
   favoritesList: OfferType[] | null;
 }
 
 export function HeaderNav({favoritesList}: HeaderNavProps): JSX.Element {
+  const dispatch = UseAppDispatch();
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
@@ -23,10 +26,10 @@ export function HeaderNav({favoritesList}: HeaderNavProps): JSX.Element {
             <span className="header__favorite-count">{favoritesList?.length}</span>
           </NavLink>
         </li>
-        <li className="header__nav-item">
-          <a className="header__nav-link" href="#">
+        <li className="header__nav-item" onClick={()=>dispatch(auth(false))}>
+          <div className="header__nav-link">
             <span className="header__signout">Sign out</span>
-          </a>
+          </div>
         </li>
       </ul>
     </nav>

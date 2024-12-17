@@ -38,3 +38,7 @@
     background: #2571c3;
   }
 }
+
+.header__nav-link {
+  cursor: pointer;
+}
