@@ -18,14 +18,14 @@ type MapProps = {
 
 const defaultCustomIcon = new Icon({
   iconUrl: URL_MARKER_DEFAULT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40],
+  iconSize: [27, 39],
+  iconAnchor: [14, 39],
 });
 
 const currentCustomIcon = new Icon({
   iconUrl: URL_MARKER_CURRENT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40],
+  iconSize: [27, 39],
+  iconAnchor: [14, 39],
 });
 
 export function CityMap({
@@ -41,7 +41,7 @@ export function CityMap({
 
   const map = useMap({
     mapRef,
-    locationCity : {name: 'Amsterdam', location:{latitude:50, longitude:50,zoom:13}},
+    locationCity : {name: 'Paris', location:{latitude:48.85661, longitude:2.351499,zoom:13}},
   });
   useEffect(() => {
     if (map) {

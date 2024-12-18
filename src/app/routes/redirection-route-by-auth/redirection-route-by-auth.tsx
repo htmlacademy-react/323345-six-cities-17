@@ -1,15 +1,16 @@
-import {ReactElement} from 'react';
-import {Navigate, useLocation} from 'react-router-dom';
-import {RoutePath} from '../../../shared/consts/route-path.ts';
+import { ReactElement } from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
+import { RoutePath } from '../../../shared/consts/route-path.ts';
+import { UseAppSelector } from '../../../shared/hooks/use-app-selector.ts';
 
 
 type NoAuthRouteProps = {
-  isAuthenticated: boolean;
   children: ReactElement;
 }
 
-export function RedirectionRouteByAuth({isAuthenticated, children}: NoAuthRouteProps): JSX.Element {
+export function RedirectionRouteByAuth({ children }: NoAuthRouteProps): JSX.Element {
   const location = useLocation().pathname;
+  const isAuthenticated = UseAppSelector((state) => state.auth);
 
   if (isAuthenticated) {
     if (location === `${RoutePath.LOGIN}`) {

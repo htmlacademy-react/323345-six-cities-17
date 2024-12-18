@@ -8,7 +8,6 @@ import { OfferPage } from '../pages/offer-page';
 import { MainLayout } from '../shared/layout/main-layout';
 import { NotFoundPage } from '../pages/not-found-page';
 import { RedirectionRouteByAuth } from './routes/redirection-route-by-auth';
-import { AUTHENTICATED } from '../shared/consts/isAuth';
 import FAVORITES_LIST_MOCK from '../mocks/favorites-mock';
 import COMMENTS_MOCK from '../mocks/comment-mock';
 
@@ -24,7 +23,6 @@ function App({ offersList }: AppProps): JSX.Element {
           path={RoutePath.MAIN}
           element={
             <MainLayout
-              isAuthenticated={AUTHENTICATED}
               favoritesList={FAVORITES_LIST_MOCK}
             />
           }
@@ -33,7 +31,7 @@ function App({ offersList }: AppProps): JSX.Element {
           <Route
             path={RoutePath.LOGIN}
             element={
-              <RedirectionRouteByAuth isAuthenticated={AUTHENTICATED}>
+              <RedirectionRouteByAuth>
                 <LoginPage />
               </RedirectionRouteByAuth>
             }
@@ -41,7 +39,7 @@ function App({ offersList }: AppProps): JSX.Element {
           <Route
             path={RoutePath.FAVORITES}
             element={
-              <RedirectionRouteByAuth isAuthenticated={AUTHENTICATED}>
+              <RedirectionRouteByAuth>
                 <FavoritesPage favoritesList={FAVORITES_LIST_MOCK} />
               </RedirectionRouteByAuth>
             }
@@ -55,7 +53,7 @@ function App({ offersList }: AppProps): JSX.Element {
         </Route>
         <Route
           path={RoutePath.NOT_FOUND}
-          element={<NotFoundPage isAuthenticated={AUTHENTICATED} />}
+          element={<NotFoundPage />}
         />
       </Routes>
     </BrowserRouter>

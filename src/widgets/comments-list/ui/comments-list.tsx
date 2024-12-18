@@ -1,5 +1,6 @@
 import { Comment } from '../../../entities/comment';
 import { OfferSendForm } from '../../../pages/offer-page/ui/components/offer-send-form';
+import { UseAppSelector } from '../../../shared/hooks/use-app-selector';
 import { CommentType } from '../../../shared/types/comment-type';
 import { OfferType } from '../../../shared/types/types';
 
@@ -9,6 +10,7 @@ type CommentsListProps = {
 };
 
 export function CommentsList({ offer, commentsList }: CommentsListProps) {
+  const isAuthenticated = UseAppSelector((state) => state.auth);
   return (
     <section className="offer__reviews reviews">
       <h2 className="reviews__title">
@@ -21,7 +23,7 @@ export function CommentsList({ offer, commentsList }: CommentsListProps) {
             <Comment offer={offer} commentData={comment} key={comment.id} />
           ))}
       </ul>
-      <OfferSendForm />
+      {isAuthenticated && <OfferSendForm />}
     </section>
   );
 }

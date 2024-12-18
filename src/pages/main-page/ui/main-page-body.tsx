@@ -1,21 +1,18 @@
-import { useState } from 'react';
-import type { OfferType } from '../../../shared/types/types';
+import type { CityNameType, OfferType } from '../../../shared/types/types';
 import MainPageOffersList from './main-page-offers-list';
 import { CityMap } from '../../../widgets/city-map/ui/city-map';
+import { UseAppSelector } from '../../../shared/hooks/use-app-selector';
 
 type mainPageBodyProps = {
   activeCityOffersList: OfferType[];
-  activeCity: string;
+  activeCity: CityNameType;
 };
 
 export function MainPageBody({
   activeCityOffersList,
   activeCity,
 }: mainPageBodyProps): JSX.Element {
-  const [activeOffer, setActiveOffer] = useState<string | undefined>(undefined);
-  const isActiveOffer: (id: string | undefined) => void = (
-    id: string | undefined
-  ): void => setActiveOffer(id);
+  const activeOffer = UseAppSelector((state)=> state.activeOffer);
   return (
     <div className="cities">
       <div className="cities__places-container container">
@@ -52,7 +49,6 @@ export function MainPageBody({
           </form>
           <MainPageOffersList
             activeCityOffersList={activeCityOffersList}
-            isActiveOffer={isActiveOffer}
           />
         </section>
         <div className="cities__right-section">

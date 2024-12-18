@@ -4,15 +4,11 @@ import {RedirectionRouteByAuth} from '../../../app/routes/redirection-route-by-a
 import pageNotFoundImage from '../assets/blue-monday.png';
 import './not-found-page.css';
 
-type NotFoundPageProps = {
-  isAuthenticated: boolean;
-}
-
-export function NotFoundPage({isAuthenticated}: NotFoundPageProps): JSX.Element {
+export function NotFoundPage(): JSX.Element {
   return (
-    <RedirectionRouteByAuth isAuthenticated={isAuthenticated}>
+    <RedirectionRouteByAuth >
       <>
-        {<Header isLoginPage={false} isAuthenticated={isAuthenticated} favoritesList={null}/>}
+        {<Header isLoginPage={false} favoritesList={null}/>}
         <div className="page page--gray page--main">
           <div className="page__not-found__container">
             <img

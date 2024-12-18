@@ -8,11 +8,10 @@ import {RoutePath} from '../../../consts/route-path';
 import {OfferType} from '../../../types/types.ts';
 
 type MainLayoutProps = {
-  isAuthenticated: boolean;
   favoritesList: OfferType[];
 }
 
-export function MainLayout({isAuthenticated, favoritesList}: MainLayoutProps): JSX.Element {
+export function MainLayout({ favoritesList}: MainLayoutProps): JSX.Element {
   const location = useLocation();
   const [titleName, setTitleName] = useState<string>(location.pathname);
 
@@ -29,7 +28,6 @@ export function MainLayout({isAuthenticated, favoritesList}: MainLayoutProps): J
       <div className={`page ${location.pathname !== `${RoutePath.FAVORITES}` && 'page--gray page--main'}`}>
         <Header
           isLoginPage={location.pathname === `${RoutePath.LOGIN}`}
-          isAuthenticated={isAuthenticated}
           favoritesList={favoritesList}
         />
         <Outlet/>
