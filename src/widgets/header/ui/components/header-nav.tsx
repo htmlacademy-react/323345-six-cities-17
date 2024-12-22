@@ -2,7 +2,7 @@ import {NavLink} from 'react-router-dom';
 import {RoutePath} from '../../../../shared/consts/route-path.ts';
 import {OfferType} from '../../../../shared/types/types.ts';
 import '../header.css';
-import { UseAppDispatch } from '../../../../shared/hooks/use-app-dispatch.ts';
+import { useAppDispatch } from '../../../../shared/hooks/use-app-dispatch.ts';
 import { auth } from '../../../../store/action/app-action.ts';
 
 type HeaderNavProps = {
@@ -10,7 +10,7 @@ type HeaderNavProps = {
 }
 
 export function HeaderNav({favoritesList}: HeaderNavProps): JSX.Element {
-  const dispatch = UseAppDispatch();
+  const dispatch = useAppDispatch();
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">

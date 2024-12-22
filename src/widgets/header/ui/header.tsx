@@ -2,7 +2,7 @@ import {HeaderLeft} from './components/header-left.tsx';
 import {HeaderNav} from './components/header-nav.tsx';
 import {HeaderNavNotLogin} from './header-nav-not-logined';
 import {OfferType} from '../../../shared/types/types.ts';
-import { UseAppSelector } from '../../../shared/hooks/use-app-selector.ts';
+import { useAppSelector } from '../../../shared/hooks/use-app-selector.ts';
 
 type HeaderProps = {
   isLoginPage: boolean;
@@ -10,7 +10,7 @@ type HeaderProps = {
 }
 
 export function Header({isLoginPage, favoritesList}: HeaderProps): JSX.Element {
-  const isAuthenticated = UseAppSelector((state) => state.auth);
+  const isAuthenticated = useAppSelector((state) => state.auth);
   return (
     <header className="header">
       <div className="container">

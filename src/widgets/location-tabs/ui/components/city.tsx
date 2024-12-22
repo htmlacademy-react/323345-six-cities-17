@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import { CityNameType } from '../../../../shared/types/types';
 import { changeActiveCity } from '../../../../store/action/app-action';
-import { UseAppDispatch } from '../../../../shared/hooks/use-app-dispatch';
+import { useAppDispatch } from '../../../../shared/hooks/use-app-dispatch';
 
 type CityProps = {
   city: CityNameType;
@@ -12,7 +12,7 @@ export function City({
   city,
   isActive,
 }: CityProps): JSX.Element {
-  const dispatch = UseAppDispatch();
+  const dispatch = useAppDispatch();
   const choseCity = (name: CityNameType) => {
     dispatch(changeActiveCity(name));
   };
