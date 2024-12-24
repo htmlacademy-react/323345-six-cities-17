@@ -9,7 +9,7 @@ type SortByProps = {
 
 export function SortBy({onSortedOffersListHandler, currentSortType}:SortByProps) {
   const [isOpened, setIsOpened] = useState(false);
-  const keysList = Object.values(sortKeys);
+  const keysList = Object.keys(sortKeys);
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by </span>
@@ -20,19 +20,22 @@ export function SortBy({onSortedOffersListHandler, currentSortType}:SortByProps)
         </svg>
       </span>
       <ul className={classNames('places__options places__options--custom', {'places__options--opened' : isOpened})} >
-        {keysList.map((current):JSX.Element => (
-          <li
-            className="places__option"
-            tabIndex={0}
-            onClick={()=>{
-              onSortedOffersListHandler(current);
-              setIsOpened(!isOpened);
-            }}
-            key={current}
-          >
-            {current}
-          </li>
-        ))}
+        {keysList.map((current):JSX.Element => {
+          const currentValue = current as keyof typeof sortKeys;
+          return (
+            <li
+              className="places__option"
+              tabIndex={0}
+              onClick={()=>{
+                onSortedOffersListHandler(sortKeys[currentValue]);
+                setIsOpened(!isOpened);
+              }}
+              key={current}
+            >
+              {sortKeys[currentValue]}
+            </li>
+          )})
+        }
 
       </ul>
     </form>

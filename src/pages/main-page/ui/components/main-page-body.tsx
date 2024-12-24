@@ -22,8 +22,7 @@ export function MainPageBody({
   const sortedOffersListHandler = (current: sortKeys):void => {
     setCurrentSortType(current);
   };
-  const key = Object.entries(sortKeys).find(([_, value]) => value === currentSortType)?.[0];
-  const sortedOffers = sortOffers({key, activeCityOffersList});
+  const sortedOffers = sortOffers({currentSortType, activeCityOffersList});
   return (
     <div className="cities">
       <div className="cities__places-container container">
