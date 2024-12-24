@@ -30,12 +30,12 @@ export function SortBy({onSortedOffersListHandler, currentSortType}:SortByProps)
                 onSortedOffersListHandler(sortKeys[currentValue]);
                 setIsOpened(!isOpened);
               }}
-              key={current}
+              key={currentValue}
             >
               {sortKeys[currentValue]}
             </li>
-          )})
-        }
+          )}
+        )}
 
       </ul>
     </form>
