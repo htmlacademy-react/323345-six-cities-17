@@ -34,8 +34,8 @@ export function SortBy({onSortedOffersListHandler, currentSortType}:SortByProps)
             >
               {sortKeys[currentValue]}
             </li>
-          )}
-        )}
+          );
+        })}
 
       </ul>
     </form>
