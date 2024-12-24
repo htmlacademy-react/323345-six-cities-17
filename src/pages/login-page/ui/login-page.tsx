@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import { UseAppDispatch } from '../../../shared/hooks/use-app-dispatch';
+import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
 import { auth } from '../../../store/action/app-action';
 import { RoutePath } from '../../../shared/consts/route-path';
 
 export function LoginPage(): JSX.Element {
-  const dispatch = UseAppDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   return (
     <div className="page page--gray page--login">

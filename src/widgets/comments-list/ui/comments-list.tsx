@@ -1,8 +1,9 @@
 import { Comment } from '../../../entities/comment';
 import { OfferSendForm } from '../../../pages/offer-page/ui/components/offer-send-form';
-import { UseAppSelector } from '../../../shared/hooks/use-app-selector';
+import { useAppSelector } from '../../../shared/hooks/use-app-selector';
 import { CommentType } from '../../../shared/types/comment-type';
 import { OfferType } from '../../../shared/types/types';
+import { authSelector } from '../../../store/selectors/auth-selector';
 
 type CommentsListProps = {
   offer: OfferType;
@@ -10,7 +11,7 @@ type CommentsListProps = {
 };
 
 export function CommentsList({ offer, commentsList }: CommentsListProps) {
-  const isAuthenticated = UseAppSelector((state) => state.auth);
+  const isAuthenticated = useAppSelector(authSelector);
   return (
     <section className="offer__reviews reviews">
       <h2 className="reviews__title">

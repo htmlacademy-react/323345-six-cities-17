@@ -1,5 +1,5 @@
-import type { OfferType } from '../../../shared/types/types';
-import { OfferCard } from '../../../widgets/offer-card';
+import type { OfferType } from '../../../../shared/types/types';
+import { OfferCard } from '../../../../widgets/offer-card';
 
 type MainPageOffersListProps = {
   activeCityOffersList: OfferType[];

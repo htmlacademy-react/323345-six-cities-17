@@ -8,7 +8,6 @@ type UseMapProps = {
 };
 
 function useMap({ mapRef, locationCity }: UseMapProps): Map | null {
-  // const locationCity: CityType = CITIES_LIST.find((item) => item.name === city);
   const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef<boolean>(false);
 
