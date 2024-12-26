@@ -15,11 +15,11 @@ export function RedirectionRouteByAuth({ children }: NoAuthRouteProps): JSX.Elem
 
   if (isAuthenticated) {
     if (location === `${RoutePath.LOGIN}`) {
-      return <Navigate to={RoutePath.MAIN} replace/>;
+      return <Navigate to={RoutePath.MAIN} replace />;
     }
   } else {
     if (location !== `${RoutePath.LOGIN}`) {
-      return <Navigate to={RoutePath.LOGIN} replace/>;
+      return <Navigate to={RoutePath.LOGIN} replace />;
     }
   }
 

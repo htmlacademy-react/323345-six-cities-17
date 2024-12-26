@@ -8,7 +8,7 @@ const initialState: AppStore = {
   auth: false,
   activeCity: 'Paris',
   activeOffer: undefined,
-  offers:[],
+  offers: [],
   isLoading: true
 };
 

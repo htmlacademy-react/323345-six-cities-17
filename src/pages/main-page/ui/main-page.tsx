@@ -21,9 +21,8 @@ export function MainPage({ offersList }: MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <main
-        className={`page__main page__main--index ${
-          isEmptyOffersList ? 'page__main--index-empty' : ''
-        }`}
+        className={`page__main page__main--index ${isEmptyOffersList ? 'page__main--index-empty' : ''
+          }`}
       >
         <h1 className="visually-hidden">Cities</h1>
         <LocationTabs
@@ -31,10 +30,10 @@ export function MainPage({ offersList }: MainPageProps): JSX.Element {
         />
         {
           (!isEmptyOffersList && !isLoading) &&
-            <MainPageBody
-              activeCityOffersList={activeCityOffersList}
-              activeCity={activeCity}
-            />
+          <MainPageBody
+            activeCityOffersList={activeCityOffersList}
+            activeCity={activeCity}
+          />
         }
         {
           isLoading ? <Loader /> : <MainPageEmpty />

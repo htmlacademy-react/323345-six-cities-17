@@ -1,4 +1,4 @@
-import axios, {AxiosInstance} from 'axios';
+import axios, { AxiosInstance } from 'axios';
 import { BASE_URL, REQUEST_TIMEOUT } from '../shared/consts/axios-route-params';
 
 export const createAPI = (): AxiosInstance => {

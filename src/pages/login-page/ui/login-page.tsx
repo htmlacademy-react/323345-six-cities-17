@@ -34,7 +34,7 @@ export function LoginPage(): JSX.Element {
                 />
               </div>
               <button className="login__submit form__submit button" type="submit" onClick={
-                (e)=>{
+                (e) => {
                   e.preventDefault();
                   dispatch(auth(true));
                   navigate(RoutePath.MAIN);

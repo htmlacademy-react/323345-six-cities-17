@@ -26,16 +26,15 @@ export function OfferCard({
   rating,
 }: CardProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const choseOffer = (offerId:string | undefined)=>{
+  const choseOffer = (offerId: string | undefined) => {
     dispatch(changeActiveOffer(offerId));
   };
   return (
     <article
-      className={`place-card ${
-        place === 'main'
-          ? 'cities__card'
-          : place === 'favorites' && 'favorites__card'
-      }`}
+      className={`place-card ${place === 'main'
+        ? 'cities__card'
+        : place === 'favorites' && 'favorites__card'
+        }`}
       onMouseEnter={() => choseOffer(id)}
       onMouseOut={() => choseOffer(undefined)}
     >

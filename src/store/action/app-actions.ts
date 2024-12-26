@@ -11,10 +11,10 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   extra: AxiosInstance;
 }>(
   'data/fetchOffers',
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, { dispatch, extra: api }) => {
     try {
       dispatch(isLoading(true));
-      const {data} = await api.get<OfferType[]>(APIRoute.Offers);
+      const { data } = await api.get<OfferType[]>(APIRoute.Offers);
       dispatch(loadOffers(data));
     } catch (error) {
       throw new Error('Warning, we have error');

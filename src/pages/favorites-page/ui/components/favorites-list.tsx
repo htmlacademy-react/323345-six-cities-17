@@ -1,11 +1,11 @@
-import {offerByCityType, OfferType} from '../../../../shared/types';
-import {OfferCard} from '../../../../widgets/offer-card';
+import { offerByCityType, OfferType } from '../../../../shared/types';
+import { OfferCard } from '../../../../widgets/offer-card';
 
 type FavoritesListProps = {
   favoritesList: OfferType[];
 }
 
-export function FavoritesList({favoritesList}: FavoritesListProps): JSX.Element[] {
+export function FavoritesList({ favoritesList }: FavoritesListProps): JSX.Element[] {
   const groupedList: object = Object.groupBy(favoritesList, ((item: OfferType) => item.city.name));
   const favoritesListByCities: offerByCityType[] = Object.entries(groupedList);
   return favoritesListByCities.map((group: offerByCityType): JSX.Element => (
