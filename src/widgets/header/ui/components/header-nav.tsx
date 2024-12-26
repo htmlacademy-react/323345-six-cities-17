@@ -15,14 +15,13 @@ export function HeaderNav({favoritesList}: HeaderNavProps): JSX.Element {
     <nav className="header__nav">
       <ul className="header__nav-list">
         <li className="header__nav-item user">
-          <span className="header__nav-link header__nav-link--profile">
-            <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-            <span className="header__user-name user__name">
-              Oliver.conner@gmail.com
+          <NavLink className="user__link" to={RoutePath.FAVORITES}>
+            <span className="header__nav-link header__nav-link--profile">
+              <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+              <span className="header__user-name user__name">
+                Oliver.conner@gmail.com
+              </span>
             </span>
-            <span className="tooltip">Личный кабинет пока в разработке</span>
-          </span>
-          <NavLink to={RoutePath.FAVORITES}>
             <span className="header__favorite-count">{favoritesList?.length}</span>
           </NavLink>
         </li>

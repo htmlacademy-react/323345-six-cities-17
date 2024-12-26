@@ -29,16 +29,16 @@ export function MainPage({ offersList }: MainPageProps): JSX.Element {
         <LocationTabs
           activeCity={activeCity}
         />
-        {(!isEmptyOffersList && !isLoading) ?
-          (
+        {
+          (!isEmptyOffersList && !isLoading) &&
             <MainPageBody
               activeCityOffersList={activeCityOffersList}
               activeCity={activeCity}
             />
-          )
-          : isLoading
-            ? <Loader />
-            : <MainPageEmpty />}
+        }
+        {
+          isLoading ? <Loader /> : <MainPageEmpty />
+        }
       </main>
     </div>
   );
