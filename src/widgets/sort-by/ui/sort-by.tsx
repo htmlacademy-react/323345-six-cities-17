@@ -30,7 +30,7 @@ export function SortBy({onSortedOffersListHandler, currentSortType}:SortByProps)
                 onSortedOffersListHandler(sortKeys[currentValue]);
                 setIsOpened(!isOpened);
               }}
-              key={currentValue}
+              key={crypto.randomUUID()}
             >
               {sortKeys[currentValue]}
             </li>

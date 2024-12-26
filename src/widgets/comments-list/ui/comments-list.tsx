@@ -1,8 +1,8 @@
 import { Comment } from '../../../entities/comment';
 import { OfferSendForm } from '../../../pages/offer-page/ui/components/offer-send-form';
 import { useAppSelector } from '../../../shared/hooks/use-app-selector';
-import { CommentType } from '../../../shared/types/comment-type';
-import { OfferType } from '../../../shared/types/types';
+import { CommentType } from '../../../shared/types/types/comment-type';
+import { OfferType } from '../../../shared/types';
 import { authSelector } from '../../../store/selectors/auth-selector';
 
 type CommentsListProps = {

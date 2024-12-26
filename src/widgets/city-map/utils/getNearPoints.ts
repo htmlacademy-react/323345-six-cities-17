@@ -1,4 +1,4 @@
-import { OfferType } from '../../../shared/types/types';
+import { OfferType } from '../../../shared/types';
 
 type FindNearestPointProps = {
   offer: OfferType;

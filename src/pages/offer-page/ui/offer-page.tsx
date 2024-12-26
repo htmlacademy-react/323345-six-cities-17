@@ -1,12 +1,12 @@
 import { NavLink, useParams } from 'react-router-dom';
 import { RoutePath } from '../../../shared/consts/route-path';
-import { OfferType } from '../../../shared/types/types';
+import { OfferType } from '../../../shared/types';
 import { getOfferById } from '../../../shared/get-offer-by-id/ui/get-offer-by-id';
 import { capitalizeFirstLetter } from '../../../widgets/offer-card/utils/capitalize-first-letter';
 import { CityMap } from '../../../widgets/city-map/index';
 import { findNearestPoint } from '../../../widgets/city-map/utils/getNearPoints';
 import { CommentsList } from '../../../widgets/comments-list';
-import { CommentType } from '../../../shared/types/comment-type';
+import { CommentType } from '../../../shared/types/types/comment-type';
 import { OfferCard } from '../../../widgets/offer-card/index';
 import style from './offer-page.module.css';
 import { getPercentFromRating } from '../../../widgets/offer-card/utils/percent-from-rating';

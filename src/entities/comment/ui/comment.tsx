@@ -1,5 +1,5 @@
-import { CommentType } from '../../../shared/types/comment-type';
-import { OfferType } from '../../../shared/types/types';
+import { CommentType } from '../../../shared/types/types/comment-type';
+import { OfferType } from '../../../shared/types';
 import { getPercentFromRating } from '../../../widgets/offer-card/utils/percent-from-rating';
 import { getDateToComment } from '../utils/get-date-to-comment';
 

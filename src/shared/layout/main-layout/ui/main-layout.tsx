@@ -5,7 +5,7 @@ import {Header} from '../../../../widgets/header';
 import {Footer} from '../../../../widgets/footer';
 import {getMetaTitlePage, MetaTitlePage} from '../../../consts/meta-title-page';
 import {RoutePath} from '../../../consts/route-path';
-import {OfferType} from '../../../types/types.ts';
+import {OfferType} from '../../../types';
 
 type MainLayoutProps = {
   favoritesList: OfferType[];

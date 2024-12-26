@@ -1,5 +1,5 @@
 import {FavoritesList} from './components/favorites-list.tsx';
-import {OfferType} from '../../../shared/types/types.ts';
+import {OfferType} from '../../../shared/types';
 
 type FavoritesPageProps = {
   favoritesList: OfferType[];

@@ -1,4 +1,4 @@
-import { CityType } from '../types/types';
+import { CityType } from '../types';
 export const CITIES_LIST: CityType[] = [
   {
     name: 'Paris',

@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeActiveCity, changeActiveOffer, auth } from '../action/app-action';
+import { changeActiveCity, changeActiveOffer, auth, loadOffers, isLoading } from '../action/action';
 
 import { AppStore } from '../types/app-store';
 
@@ -8,6 +8,8 @@ const initialState: AppStore = {
   auth: false,
   activeCity: 'Paris',
   activeOffer: undefined,
+  offers:[],
+  isLoading: true
 };
 
 export const appReducer = createReducer(initialState, (builder) => {
@@ -20,5 +22,11 @@ export const appReducer = createReducer(initialState, (builder) => {
     })
     .addCase(auth, (state, { payload }) => {
       state.auth = payload;
+    })
+    .addCase(loadOffers, (state, { payload }) => {
+      state.offers = payload;
+    })
+    .addCase(isLoading, (state, { payload }) => {
+      state.isLoading = payload;
     });
 });

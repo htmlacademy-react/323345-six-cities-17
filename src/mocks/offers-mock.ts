@@ -1,4 +1,4 @@
-import {OfferType} from '../shared/types/types.ts';
+import {OfferType} from '../shared/types';
 
 const OFFERS_LIST_MOCK: OfferType[] = [
   {

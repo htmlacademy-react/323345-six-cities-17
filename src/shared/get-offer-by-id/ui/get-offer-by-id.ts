@@ -1,4 +1,4 @@
-import {OfferType} from '../../types/types.ts';
+import {OfferType} from '../../types';
 
 type GetOfferByIdProps = {
   offerId: string | undefined;

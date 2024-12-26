@@ -1,9 +1,9 @@
 import {NavLink} from 'react-router-dom';
 import {RoutePath} from '../../../../shared/consts/route-path.ts';
-import {OfferType} from '../../../../shared/types/types.ts';
+import {OfferType} from '../../../../shared/types';
 import '../header.css';
 import { useAppDispatch } from '../../../../shared/hooks/use-app-dispatch.ts';
-import { auth } from '../../../../store/action/app-action.ts';
+import { auth } from '../../../../store/action/action.ts';
 
 type HeaderNavProps = {
   favoritesList: OfferType[] | null;

@@ -1,4 +1,4 @@
-import type { CityNameType, OfferType } from '../../../../shared/types/types';
+import type { CityNameType, OfferType } from '../../../../shared/types';
 import MainPageOffersList from './main-page-offers-list';
 import { CityMap } from '../../../../widgets/city-map/ui/city-map';
 import { useAppSelector } from '../../../../shared/hooks/use-app-selector';

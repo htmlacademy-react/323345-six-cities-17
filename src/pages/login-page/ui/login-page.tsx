@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
-import { auth } from '../../../store/action/app-action';
+import { auth } from '../../../store/action/action';
 import { RoutePath } from '../../../shared/consts/route-path';
 
 export function LoginPage(): JSX.Element {

@@ -6,7 +6,7 @@ import {
   URL_MARKER_DEFAULT,
 } from '../../../shared/consts/map-markers-url';
 import useMap from '../../../shared/hooks/use-map';
-import { CityType, OfferType } from '../../../shared/types/types';
+import { CityType, OfferType } from '../../../shared/types';
 import { CITIES_LIST } from '../../../shared/consts/cities';
 
 type MapProps = {
