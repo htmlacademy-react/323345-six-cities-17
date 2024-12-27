@@ -10,11 +10,11 @@ import { RedirectionRouteByAuth } from './routes/redirection-route-by-auth';
 import FAVORITES_LIST_MOCK from '../mocks/favorites-mock';
 import COMMENTS_MOCK from '../mocks/comment-mock';
 import { appStore } from '../store';
-import { fetchOffersAction } from '../store/action/app-actions';
+import { asyncFetchOffersAction } from '../store/action/async-fetch-offers-action';
 import { useAppSelector } from '../shared/hooks/use-app-selector';
 import { offersSelector } from '../store/selectors/load-offers-selector';
 
-appStore.dispatch(fetchOffersAction());
+appStore.dispatch(asyncFetchOffersAction());
 
 function App(): JSX.Element {
   const offersList = useAppSelector(offersSelector);
