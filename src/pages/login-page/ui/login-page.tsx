@@ -29,12 +29,14 @@ export function LoginPage(): JSX.Element {
                 e.preventDefault();
                 if (loginRef.current !== null && passwordRef.current !== null) {
                   const validPassword = validatePassword(passwordRef.current.value);
-                  validPassword
-                    ? dispatch(loginAction({
+                  if (validPassword) {
+                    dispatch(loginAction({
                       login: loginRef.current.value,
                       password: passwordRef.current.value,
-                    }))
-                    : showError('Пароль должен содержать хотя бы по одной цифре и букве');
+                    }));
+                  } else {
+                    showError('Пароль должен содержать хотя бы по одной цифре и букве');
+                  }
                 }
                 if (authStatus === AuthStatus.Auth) {
                   return <Navigate to={RoutePath.MAIN} />;
