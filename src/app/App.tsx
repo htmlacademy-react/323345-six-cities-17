@@ -9,14 +9,19 @@ import { NotFoundPage } from '../pages/not-found-page';
 import { RedirectionRouteByAuth } from './routes/redirection-route-by-auth';
 import FAVORITES_LIST_MOCK from '../mocks/favorites-mock';
 import COMMENTS_MOCK from '../mocks/comment-mock';
-import { appStore } from '../store';
-import { asyncFetchOffersAction } from '../store/action/async-fetch-offers-action';
 import { useAppSelector } from '../shared/hooks/use-app-selector';
 import { offersSelector } from '../store/selectors/load-offers-selector';
+import { checkAuthAction, fetchOffersAction } from '../store/action/async-action';
+import { useAppDispatch } from '../shared/hooks/use-app-dispatch';
+import { useEffect } from 'react';
 
-appStore.dispatch(asyncFetchOffersAction());
 
 function App(): JSX.Element {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchOffersAction());
+    dispatch(checkAuthAction());
+  }, [dispatch]);
   const offersList = useAppSelector(offersSelector);
   return (
     <BrowserRouter>

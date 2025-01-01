@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { appStore } from './store/store/app-store.ts';
 
 import App from './app/App.tsx';
+import { ErrorMessage } from './shared/error-message/index.ts';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -13,7 +14,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={appStore}>
-      <App/>
+      <ErrorMessage />
+      <App />
     </Provider>
   </React.StrictMode>,
 );

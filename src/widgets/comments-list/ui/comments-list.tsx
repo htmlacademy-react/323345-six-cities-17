@@ -4,6 +4,7 @@ import { useAppSelector } from '../../../shared/hooks/use-app-selector';
 import { CommentType } from '../../../shared/types/types/comment-type';
 import { OfferType } from '../../../shared/types';
 import { authSelector } from '../../../store/selectors/auth-selector';
+import { AuthStatus } from '../../../shared/consts/auth-status';
 
 type CommentsListProps = {
   offer: OfferType;
@@ -12,6 +13,7 @@ type CommentsListProps = {
 
 export function CommentsList({ offer, commentsList }: CommentsListProps) {
   const isAuthenticated = useAppSelector(authSelector);
+
   return (
     <section className="offer__reviews reviews">
       <h2 className="reviews__title">
@@ -24,7 +26,7 @@ export function CommentsList({ offer, commentsList }: CommentsListProps) {
             <Comment offer={offer} commentData={comment} key={comment.id} />
           ))}
       </ul>
-      {isAuthenticated && <OfferSendForm />}
+      {isAuthenticated === AuthStatus.Auth && <OfferSendForm />}
     </section>
   );
 }
