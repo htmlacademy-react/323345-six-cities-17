@@ -1,4 +1,4 @@
-import type {OfferType} from '../shared/types/types.ts';
+import type {OfferType} from '../shared/types';
 
 const FAVORITES_LIST_MOCK: OfferType[] = [
   {

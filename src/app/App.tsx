@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { RoutePath } from '../shared/consts/route-path';
-import { OfferType } from '../shared/types/types';
 import { MainPage } from '../pages/main-page';
 import { LoginPage } from '../pages/login-page';
 import { FavoritesPage } from '../pages/favorites-page';
@@ -10,12 +9,20 @@ import { NotFoundPage } from '../pages/not-found-page';
 import { RedirectionRouteByAuth } from './routes/redirection-route-by-auth';
 import FAVORITES_LIST_MOCK from '../mocks/favorites-mock';
 import COMMENTS_MOCK from '../mocks/comment-mock';
+import { useAppSelector } from '../shared/hooks/use-app-selector';
+import { offersSelector } from '../store/selectors/load-offers-selector';
+import { checkAuthAction, fetchOffersAction } from '../store/action/async-action';
+import { useAppDispatch } from '../shared/hooks/use-app-dispatch';
+import { useEffect } from 'react';
 
-type AppProps = {
-  offersList: OfferType[];
-};
 
-function App({ offersList }: AppProps): JSX.Element {
+function App(): JSX.Element {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchOffersAction());
+    dispatch(checkAuthAction());
+  }, [dispatch]);
+  const offersList = useAppSelector(offersSelector);
   return (
     <BrowserRouter>
       <Routes>

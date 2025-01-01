@@ -4,7 +4,7 @@ type StarType = {
   isChecked: boolean;
 }
 
-export function StarElement({value, formChangeHandle, isChecked}: StarType) {
+export function StarElement({ value, formChangeHandle, isChecked }: StarType) {
   return (
     <>
       <input

@@ -1,5 +1,5 @@
-import {NavLink} from 'react-router-dom';
-import {RoutePath} from '../../../../shared/consts/route-path.ts';
+import { NavLink } from 'react-router-dom';
+import { RoutePath } from '../../../../shared/consts/route-path.ts';
 
 type OffersCardProps = {
   id: string;
@@ -7,7 +7,7 @@ type OffersCardProps = {
   previewImage: string;
 }
 
-export function OfferCardImg({id, place, previewImage}: OffersCardProps): JSX.Element {
+export function OfferCardImg({ id, place, previewImage }: OffersCardProps): JSX.Element {
   return (
     <div
       className={`place-card__image-wrapper ${place === 'main' ? 'cities__image-wrapper' : place === 'favorites' && 'favorites__image-wrapper'}`}

@@ -3,6 +3,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { RoutePath } from '../../../shared/consts/route-path.ts';
 import { useAppSelector } from '../../../shared/hooks/use-app-selector.ts';
 import { authSelector } from '../../../store/selectors/auth-selector.ts';
+import { AuthStatus } from '../../../shared/consts/auth-status.ts';
 
 
 type NoAuthRouteProps = {
@@ -13,13 +14,13 @@ export function RedirectionRouteByAuth({ children }: NoAuthRouteProps): JSX.Elem
   const location = useLocation().pathname;
   const isAuthenticated = useAppSelector(authSelector);
 
-  if (isAuthenticated) {
+  if (isAuthenticated === AuthStatus.Auth) {
     if (location === `${RoutePath.LOGIN}`) {
-      return <Navigate to={RoutePath.MAIN} replace/>;
+      return <Navigate to={RoutePath.MAIN} replace />;
     }
   } else {
     if (location !== `${RoutePath.LOGIN}`) {
-      return <Navigate to={RoutePath.LOGIN} replace/>;
+      return <Navigate to={RoutePath.LOGIN} replace />;
     }
   }
 

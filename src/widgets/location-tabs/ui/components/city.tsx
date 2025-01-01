@@ -1,6 +1,6 @@
 import cn from 'classnames';
-import { CityNameType } from '../../../../shared/types/types';
-import { changeActiveCity } from '../../../../store/action/app-action';
+import { CityNameType } from '../../../../shared/types';
+import { changeActiveCity } from '../../../../store/action/action';
 import { useAppDispatch } from '../../../../shared/hooks/use-app-dispatch';
 
 type CityProps = {

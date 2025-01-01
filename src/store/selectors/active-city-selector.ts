@@ -1,3 +1,3 @@
-import { AppStore } from '../types/app-store';
+import { AppState } from '../types/app-state';
 
-export const activeCitySelector = (state: AppStore) => state.activeCity;
+export const activeCitySelector = (state: AppState) => state.activeCity;

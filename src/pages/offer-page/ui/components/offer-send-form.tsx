@@ -1,6 +1,6 @@
 import { FormEvent, useState } from 'react';
 import { StarElement } from './star-element';
-import { SendFormType } from '../../../../shared/types/send-form-type';
+import { SendFormType } from '../../../../shared/types/types/send-form-type';
 import { StarCount } from '../../../../shared/consts/star-count';
 import { INITIAL_SEND_FORM_STATE } from '../../../../shared/consts/Initial-send-form-state';
 import {

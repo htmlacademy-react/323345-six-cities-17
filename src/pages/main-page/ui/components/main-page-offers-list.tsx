@@ -1,4 +1,4 @@
-import type { OfferType } from '../../../../shared/types/types';
+import type { OfferType } from '../../../../shared/types';
 import { OfferCard } from '../../../../widgets/offer-card';
 
 type MainPageOffersListProps = {

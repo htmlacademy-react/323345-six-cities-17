@@ -1,4 +1,4 @@
-import type { CityNameType, OfferType } from '../../../../shared/types/types';
+import type { CityNameType, OfferType } from '../../../../shared/types';
 import MainPageOffersList from './main-page-offers-list';
 import { CityMap } from '../../../../widgets/city-map/ui/city-map';
 import { useAppSelector } from '../../../../shared/hooks/use-app-selector';
@@ -19,10 +19,10 @@ export function MainPageBody({
 }: mainPageBodyProps): JSX.Element {
   const activeOffer = useAppSelector(activeOfferSelector);
   const [currentSortType, setCurrentSortType] = useState<sortKeys>(sortKeys.POPULAR);
-  const sortedOffersListHandler = (current: sortKeys):void => {
+  const sortedOffersListHandler = (current: sortKeys): void => {
     setCurrentSortType(current);
   };
-  const sortedOffers = sortOffers({currentSortType, activeCityOffersList});
+  const sortedOffers = sortOffers({ currentSortType, activeCityOffersList });
   return (
     <div className="cities">
       <div className="cities__places-container container">

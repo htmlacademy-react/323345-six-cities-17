@@ -4,16 +4,19 @@ import { Provider } from 'react-redux';
 import { appStore } from './store/store/app-store.ts';
 
 import App from './app/App.tsx';
-import OFFERS_LIST_MOCK from './mocks/offers-mock.ts';
+import { ErrorMessage } from './shared/error-message/index.ts';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
+
 root.render(
   <React.StrictMode>
     <Provider store={appStore}>
-      <App offersList={OFFERS_LIST_MOCK}/>
+      <ErrorMessage />
+      <App />
     </Provider>
   </React.StrictMode>,
 );
+

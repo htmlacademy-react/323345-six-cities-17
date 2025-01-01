@@ -1,4 +1,4 @@
-import { OfferType } from '../../../shared/types/types';
+import { OfferType } from '../../../shared/types';
 
 type FindNearestPointProps = {
   offer: OfferType;
@@ -19,7 +19,7 @@ export function findNearestPoint({
   const offersWithDistance = activeCityOffersList.map((point) => {
     const distance = Math.sqrt(
       Math.pow(point.location.latitude - offer.location.latitude, 2) +
-        Math.pow(point.location.longitude - offer.location.longitude, 2)
+      Math.pow(point.location.longitude - offer.location.longitude, 2)
     );
     return { point, distance };
   });
