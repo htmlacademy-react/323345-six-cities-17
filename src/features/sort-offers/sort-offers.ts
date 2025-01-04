@@ -1,14 +1,14 @@
 import { sortKeys } from '../../shared/consts/sort-keys';
-import { OfferType } from '../../shared/types/types';
+import { OfferType } from '../../shared/types';
 
 type SortOffersProps = {
   currentSortType: string;
   activeCityOffersList: OfferType[];
 }
 
-export function sortOffers ({currentSortType, activeCityOffersList}: SortOffersProps) {
-  const sortedList: OfferType[] = JSON.parse(JSON.stringify(activeCityOffersList));
-  switch(currentSortType) {
+export function sortOffers({ currentSortType, activeCityOffersList }: SortOffersProps) {
+  const sortedList: OfferType[] = [...activeCityOffersList];
+  switch (currentSortType) {
     case sortKeys.TOP_RATED_FIRST:
       return sortedList.sort((itemA, itemB) => itemB.rating - itemA.rating);
     case sortKeys.PRICE_FIRST_LOW:

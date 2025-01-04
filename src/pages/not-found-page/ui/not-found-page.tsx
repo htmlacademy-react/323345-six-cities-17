@@ -1,6 +1,6 @@
-import {NavLink} from 'react-router-dom';
-import {Header} from '../../../widgets/header';
-import {RedirectionRouteByAuth} from '../../../app/routes/redirection-route-by-auth';
+import { NavLink } from 'react-router-dom';
+import { Header } from '../../../widgets/header';
+import { RedirectionRouteByAuth } from '../../../app/routes/redirection-route-by-auth';
 import pageNotFoundImage from '../assets/blue-monday.png';
 import './not-found-page.css';
 
@@ -8,7 +8,7 @@ export function NotFoundPage(): JSX.Element {
   return (
     <RedirectionRouteByAuth >
       <>
-        {<Header isLoginPage={false} favoritesList={null}/>}
+        {<Header isLoginPage={false} favoritesList={null} />}
         <div className="page page--gray page--main">
           <div className="page__not-found__container">
             <img

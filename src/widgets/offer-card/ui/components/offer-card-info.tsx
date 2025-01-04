@@ -1,7 +1,7 @@
-import {capitalizeFirstLetter} from '../../utils/capitalize-first-letter';
-import {getPercentFromRating} from '../../utils/percent-from-rating';
-import {RoutePath} from '../../../../shared/consts/route-path.ts';
-import {NavLink} from 'react-router-dom';
+import { capitalizeFirstLetter } from '../../utils/capitalize-first-letter';
+import { getPercentFromRating } from '../../utils/percent-from-rating';
+import { RoutePath } from '../../../../shared/consts/route-path.ts';
+import { NavLink } from 'react-router-dom';
 
 type OffersCardInfo = {
   id: string;
@@ -12,7 +12,7 @@ type OffersCardInfo = {
   rating: number;
 }
 
-export function OfferCardInfo({id, place, price, type, title, rating}: OffersCardInfo): JSX.Element {
+export function OfferCardInfo({ id, place, price, type, title, rating }: OffersCardInfo): JSX.Element {
   const ratingPercent: number = getPercentFromRating(rating);
   return (
     <div className={`place-card__info ${place === 'favorites' && 'favorites__card-info'}`}>
@@ -30,7 +30,7 @@ export function OfferCardInfo({id, place, price, type, title, rating}: OffersCar
       </div>
       <div className="place-card__rating rating">
         <div className="place-card__stars rating__stars">
-          <span style={{width: ratingPercent}}></span>
+          <span style={{ width: ratingPercent }}></span>
           <span className="visually-hidden">Rating</span>
         </div>
       </div>
