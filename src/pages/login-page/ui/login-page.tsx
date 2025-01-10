@@ -35,7 +35,7 @@ export function LoginPage(): JSX.Element {
                       password: passwordRef.current.value,
                     }));
                   } else {
-                    showError('Пароль должен содержать хотя бы по одной цифре и букве');
+                    showError('Пароль должен содержать хотя бы по одной цифре и латинской букве');
                   }
                 }
                 if (authStatus === AuthStatus.Auth) {

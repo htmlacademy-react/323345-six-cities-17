@@ -1,18 +1,15 @@
 import { NavLink } from 'react-router-dom';
 import { RoutePath } from '../../../../shared/consts/route-path.ts';
-import { OfferType } from '../../../../shared/types';
 import '../header.css';
 import { useAppDispatch } from '../../../../shared/hooks/use-app-dispatch.ts';
 import { useAppSelector } from '../../../../shared/hooks/use-app-selector.ts';
 import { userNameSelector } from '../../../../store/selectors/user-name-selector.ts';
 import { logoutAction } from '../../../../store/action/async-action.ts';
+import { loadFavoriteOffersSelector } from '../../../../store/selectors/load-favorite-offers-selector.ts';
 
-type HeaderNavProps = {
-  favoritesList: OfferType[] | null;
-}
-
-export function HeaderNav({ favoritesList }: HeaderNavProps): JSX.Element {
+export function HeaderNav(): JSX.Element {
   const dispatch = useAppDispatch();
+  const favoritesList = useAppSelector(loadFavoriteOffersSelector);
   function logout() {
     dispatch(logoutAction());
   }

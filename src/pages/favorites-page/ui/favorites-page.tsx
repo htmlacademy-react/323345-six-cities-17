@@ -1,11 +1,10 @@
 import { FavoritesList } from './components/favorites-list.tsx';
-import { OfferType } from '../../../shared/types';
+import { loadFavoriteOffersSelector } from '../../../store/selectors/load-favorite-offers-selector.ts';
+import { useAppSelector } from '../../../shared/hooks/use-app-selector.ts';
 
-type FavoritesPageProps = {
-  favoritesList: OfferType[];
-}
 
-export function FavoritesPage({ favoritesList }: FavoritesPageProps): JSX.Element {
+export function FavoritesPage(): JSX.Element {
+  const favoritesList = useAppSelector(loadFavoriteOffersSelector);
   return (
     <main className="page__main page__main--favorites">
       <div className="page__favorites-container container">

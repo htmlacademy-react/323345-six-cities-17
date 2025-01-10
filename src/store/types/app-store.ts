@@ -1,5 +1,5 @@
 import { AuthStatus } from '../../shared/consts/auth-status';
-import { OfferType } from '../../shared/types';
+import { CommentType, OfferType } from '../../shared/types';
 import { CityNameType } from '../../shared/types';
 
 export type AppStore = {
@@ -8,6 +8,8 @@ export type AppStore = {
   activeCity: CityNameType;
   activeOffer: string | undefined;
   offers: OfferType[];
+  comments: CommentType[];
+  favoriteOffers: OfferType[];
   isLoading: boolean;
   error: string | null;
 };

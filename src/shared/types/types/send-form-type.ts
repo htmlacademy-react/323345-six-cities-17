@@ -1,4 +1,4 @@
 export type SendFormType = {
-  review: string;
+  comment: string;
   rating: null | number;
 }

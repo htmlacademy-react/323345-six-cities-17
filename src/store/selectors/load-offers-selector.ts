@@ -1,3 +1,3 @@
 import { AppState } from '../types/app-state';
 
-export const offersSelector = (state: AppState) => state.offers;
+export const loadOffersSelector = (state: AppState) => state.offers;

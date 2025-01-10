@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeActiveCity, changeActiveOffer, loadOffers, isLoading, AuthorizationStatus, setError, saveUserName } from '../action/action';
+import { changeActiveCity, changeActiveOffer, loadOffers, isLoading, AuthorizationStatus, setError, saveUserName, loadComments } from '../action/action';
 
 import { AppStore } from '../types/app-store';
 import { AuthStatus } from '../../shared/consts/auth-status';
@@ -11,6 +11,8 @@ const initialState: AppStore = {
   activeCity: 'Paris',
   activeOffer: undefined,
   offers: [],
+  favoriteOffers: [],
+  comments: [],
   isLoading: true,
   error: null
 };
@@ -31,6 +33,9 @@ export const appReducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadOffers, (state, { payload }) => {
       state.offers = payload;
+    })
+    .addCase(loadComments, (state, { payload }) => {
+      state.comments = payload;
     })
     .addCase(isLoading, (state, { payload }) => {
       state.isLoading = payload;

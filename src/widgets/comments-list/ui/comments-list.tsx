@@ -1,19 +1,26 @@
 import { Comment } from '../../../entities/comment';
 import { OfferSendForm } from '../../../pages/offer-page/ui/components/offer-send-form';
 import { useAppSelector } from '../../../shared/hooks/use-app-selector';
-import { CommentType } from '../../../shared/types/types/comment-type';
 import { OfferType } from '../../../shared/types';
 import { authSelector } from '../../../store/selectors/auth-selector';
 import { AuthStatus } from '../../../shared/consts/auth-status';
+import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
+import { useEffect } from 'react';
+import { fetchCommentsAction } from '../../../store/action/async-action';
+import { loadCommentsSelector } from '../../../store/selectors/load-comments-selector';
 
 type CommentsListProps = {
   offer: OfferType;
-  commentsList: CommentType[];
+  offerId: string;
 };
 
-export function CommentsList({ offer, commentsList }: CommentsListProps) {
+export function CommentsList({ offer, offerId }: CommentsListProps) {
   const isAuthenticated = useAppSelector(authSelector);
-
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchCommentsAction(offerId));
+  }, [dispatch, offerId]);
+  const commentsList = useAppSelector(loadCommentsSelector);
   return (
     <section className="offer__reviews reviews">
       <h2 className="reviews__title">
@@ -26,7 +33,7 @@ export function CommentsList({ offer, commentsList }: CommentsListProps) {
             <Comment offer={offer} commentData={comment} key={comment.id} />
           ))}
       </ul>
-      {isAuthenticated === AuthStatus.Auth && <OfferSendForm />}
+      {isAuthenticated === AuthStatus.Auth && <OfferSendForm offerId={offerId} />}
     </section>
   );
 }
