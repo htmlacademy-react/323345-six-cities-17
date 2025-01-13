@@ -9,7 +9,7 @@ const initialState: InitialUserType = {
   authorizationStatus: AuthStatus.Unknown,
   user: {
     name: null,
-    avatarUrl: null,
+    avatarUrl: undefined,
     isPro: false,
     email: null,
     token: null,
