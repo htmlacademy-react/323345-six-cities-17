@@ -4,6 +4,7 @@ import { checkAuthAction, loginAction, logoutAction } from '../../action/async-a
 import { InitialUserType } from './initial-user-type';
 import { UserType } from '../../../shared/types/types/user-type';
 import { saveToken } from '../../../api/token';
+import { toast } from 'react-toastify';
 
 const initialState: InitialUserType = {
   authorizationStatus: AuthStatus.Unknown,
@@ -61,6 +62,7 @@ export const userSlice = createSlice({
         state.isLoading = false;
         state.error = true;
         state.authorizationStatus = AuthStatus.NoAuth;
+        toast.error('Не получилось связаться с сервером')
       })
       .addCase(logoutAction.pending, (state) => {
         state.isLoading = true;
