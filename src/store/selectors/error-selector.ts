@@ -1,3 +1,3 @@
-import { AppStore } from '../types/app-store';
+import { AppState } from '../types/app-state';
 
-export const errorSelector = (state: AppStore) => state.error;
+export const errorSelector = (state: AppState) => state.commentsSlice.error || state.favoriteSlice.error || state.offersSlice.error;

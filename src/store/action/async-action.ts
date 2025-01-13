@@ -3,66 +3,56 @@ import { AppDispatch, AppState } from '../types/app-state';
 import { AxiosInstance } from 'axios';
 import { AuthData, CommentType, OfferType, SendFormType, UserData } from '../../shared/types';
 import { APIRoute } from '../../shared/consts/api-route';
-import { loadOffers, isLoading, setError, AuthorizationStatus, saveUserName, loadFavoriteOffers, loadComments } from './action';
-import { appStore } from '../store/app-store';
+import { setError, authorizationStatus } from './action';
+import { appStore } from '../app-store';
 import { TIMEOUT_SHOW_ERROR } from '../../shared/consts/timeout-show-error';
 import { AuthStatus } from '../../shared/consts/auth-status';
-import { dropToken, saveToken } from '../../api/token';
+import { dropToken } from '../../api/token';
+import { UserType } from '../../shared/types/types/user-type';
 
-export const fetchOffersAction = createAsyncThunk<void, undefined, {
-  dispatch: AppDispatch;
+export const fetchOffersAction = createAsyncThunk<OfferType[], undefined, {
   state: AppState;
   extra: AxiosInstance;
 }>(
-  'data/fetchOffers',
-  async (_arg, { dispatch, extra: api }) => {
-    try {
-      dispatch(isLoading(true));
-      const { data } = await api.get<OfferType[]>(APIRoute.Offers);
-      dispatch(loadOffers(data));
-    } catch (error) {
-      throw new Error('Warning, we have error');
-    } finally {
-      dispatch(isLoading(false));
-    }
+  'offers/fetchOffers',
+  async (_arg, { extra: api }) => {
+    const { data } = await api.get<OfferType[]>(APIRoute.Offers);
+    return data;
   },
 );
 
-export const fetchFavoriteOffersAction = createAsyncThunk<void, undefined, {
-  dispatch: AppDispatch;
+export const fetchFavoriteOffersAction = createAsyncThunk<OfferType[], undefined, {
   state: AppState;
   extra: AxiosInstance;
 }>(
-  'data/fetchFavoriteOffers',
-  async (_arg, { dispatch, extra: api }) => {
-    try {
-      dispatch(isLoading(true));
-      const { data } = await api.get<OfferType[]>(APIRoute.Favorite);
-      dispatch(loadFavoriteOffers(data));
-    } catch (error) {
-      throw new Error('Warning, we have error');
-    } finally {
-      dispatch(isLoading(false));
-    }
+  'favorite/fetchFavoriteOffers',
+  async (_arg, { extra: api }) => {
+    const { data } = await api.get<OfferType[]>(APIRoute.Favorite);
+    return data;
   },
 );
 
-export const fetchCommentsAction = createAsyncThunk<void, string, {
-  dispatch: AppDispatch;
+export const sendFavoriteOffersAction = createAsyncThunk<
+  void,
+  { offerId: string },
+  {
+    state: AppState;
+    extra: AxiosInstance;
+  }>(
+    'comments/sendComment',
+    async ({ offerId }, { extra: api }) => {
+      await api.post<UserData>((`${APIRoute.Comments}/${offerId}`));
+    }
+  );
+
+export const fetchCommentsAction = createAsyncThunk<CommentType[], string, {
   state: AppState;
   extra: AxiosInstance;
 }>(
-  'data/loadComments',
-  async (id, { dispatch, extra: api }) => {
-    try {
-      dispatch(isLoading(true));
-      const { data } = await api.get<CommentType[]>((`${APIRoute.Comments}/${id}`));
-      dispatch(loadComments(data));
-    } catch (error) {
-      throw new Error('Warning, we have error');
-    } finally {
-      dispatch(isLoading(false));
-    }
+  'comments/loadComments',
+  async (id, { extra: api }) => {
+    const { data } = await api.get<CommentType[]>((`${APIRoute.Comments}/${id}`));
+    return data;
   },
 );
 
@@ -70,52 +60,37 @@ export const sendCommentAction = createAsyncThunk<
   void,
   { offerId: string; formData: SendFormType },
   {
-    dispatch: AppDispatch;
     state: AppState;
     extra: AxiosInstance;
   }>(
-    'data/sendComment',
-    async ({ offerId, formData }, { dispatch, extra: api }) => {
-
-      try {
-        await api.post<UserData>((`${APIRoute.Comments}/${offerId}`), formData);
-        dispatch(fetchCommentsAction(offerId));
-      } catch {
-        throw new Error('Warning, we have error');
-      }
+    'comments/sendComment',
+    async ({ offerId, formData }, { extra: api }) => {
+      await api.post<UserData>((`${APIRoute.Comments}/${offerId}`), formData);
     },
   );
 
-export const checkAuthAction = createAsyncThunk<void, undefined, {
-  dispatch: AppDispatch;
+export const checkAuthAction = createAsyncThunk<UserType, undefined, {
   state: AppState;
   extra: AxiosInstance;
 }>(
   'user/checkAuth',
-  async (_arg, { dispatch, extra: api }) => {
-    try {
-      await api.get(APIRoute.Login);
-      dispatch(AuthorizationStatus(AuthStatus.Auth));
-    } catch {
-      dispatch(AuthorizationStatus(AuthStatus.NoAuth));
-    }
+  async (_arg, { extra: api }) => {
+    const { data } = await api.get<UserType>(APIRoute.Login);
+    return data;
   },
 );
 
 export const loginAction = createAsyncThunk<
-  void,
+  UserType,
   AuthData,
   {
-    dispatch: AppDispatch;
     state: AppState;
     extra: AxiosInstance;
   }>(
     'user/login',
-    async ({ login: email, password }, { dispatch, extra: api }) => {
-      const { data: { token } } = await api.post<UserData>(APIRoute.Login, { email, password });
-      saveToken(token);
-      dispatch(AuthorizationStatus(AuthStatus.Auth));
-      dispatch(saveUserName(email));
+    async ({ login: email, password }, { extra: api }) => {
+      const { data } = await api.post<UserType>(APIRoute.Login, { email, password });
+      return data;
     },
   );
 
@@ -128,7 +103,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   async (_arg, { dispatch, extra: api }) => {
     await api.delete(APIRoute.Logout);
     dropToken();
-    dispatch(AuthorizationStatus(AuthStatus.NoAuth));
+    dispatch(authorizationStatus(AuthStatus.NoAuth));
   },
 );
 

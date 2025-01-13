@@ -11,7 +11,6 @@ import { checkAuthAction, fetchFavoriteOffersAction, fetchOffersAction } from '.
 import { useAppDispatch } from '../shared/hooks/use-app-dispatch';
 import { useEffect } from 'react';
 
-
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
   useEffect(() => {

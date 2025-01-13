@@ -40,7 +40,7 @@ export function MainPageBody({
           <CityMap
             city={activeCity}
             points={activeCityOffersList}
-            selectedPoint={activeOffer}
+            selectedPoint={activeOffer?.id}
             offerPage={false}
           />
         </div>

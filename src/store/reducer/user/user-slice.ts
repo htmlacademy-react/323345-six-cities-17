@@ -1,0 +1,81 @@
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AuthStatus } from '../../../shared/consts/auth-status';
+import { checkAuthAction, loginAction, logoutAction } from '../../action/async-action';
+import { InitialUserType } from './initial-user-type';
+import { UserType } from '../../../shared/types/types/user-type';
+import { saveToken } from '../../../api/token';
+
+const initialState: InitialUserType = {
+  authorizationStatus: AuthStatus.Unknown,
+  user: {
+    name: null,
+    avatarUrl: null,
+    isPro: false,
+    email: null,
+    token: null,
+  },
+  isLoading: true,
+  error: false
+};
+
+export const userSlice = createSlice({
+  name: 'userSlice',
+  initialState,
+  reducers: {
+    authorizationStatus: (state, { payload }: PayloadAction<AuthStatus>) => {
+      state.authorizationStatus = payload;
+    },
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(checkAuthAction.pending, (state) => {
+        state.isLoading = true;
+        state.error = false;
+        state.authorizationStatus = AuthStatus.Unknown;
+      })
+      .addCase(checkAuthAction.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = false;
+        state.authorizationStatus = AuthStatus.Auth;
+        state.user = payload;
+        saveToken(payload.token!);
+      })
+      .addCase(checkAuthAction.rejected, (state) => {
+        state.isLoading = false;
+        state.error = true;
+        state.authorizationStatus = AuthStatus.NoAuth;
+      })
+      .addCase(loginAction.pending, (state) => {
+        state.isLoading = true;
+        state.error = false;
+        state.authorizationStatus = AuthStatus.Unknown;
+      })
+      .addCase(loginAction.fulfilled, (state, { payload }: PayloadAction<UserType>) => {
+        state.isLoading = false;
+        state.error = false;
+        state.authorizationStatus = AuthStatus.Auth;
+        state.user = payload;
+
+      })
+      .addCase(loginAction.rejected, (state) => {
+        state.isLoading = false;
+        state.error = true;
+        state.authorizationStatus = AuthStatus.NoAuth;
+      })
+      .addCase(logoutAction.pending, (state) => {
+        state.isLoading = true;
+        state.error = false;
+        state.authorizationStatus = AuthStatus.Unknown;
+      })
+      .addCase(logoutAction.fulfilled, (state) => {
+        state.isLoading = false;
+        state.error = false;
+        state.authorizationStatus = AuthStatus.NoAuth;
+      })
+      .addCase(logoutAction.rejected, (state) => {
+        state.isLoading = false;
+        state.error = true;
+        state.authorizationStatus = AuthStatus.Auth;
+      });
+  }
+});
