@@ -1,16 +1,20 @@
 import { createAction } from '@reduxjs/toolkit';
-import { CityNameType, OfferType } from '../../shared/types';
+import { CityNameType, CommentType, OfferType } from '../../shared/types';
 import { AuthStatus } from '../../shared/consts/auth-status';
 
-export const AuthorizationStatus = createAction<AuthStatus>('user/isAuth');
+export const authorizationStatus = createAction<AuthStatus>('user/isAuth');
 
-export const changeActiveCity = createAction<CityNameType>('app/changeActiveCity');
+export const changeActiveCity = createAction<CityNameType>('city/changeActiveCity');
 
 export const saveUserName = createAction<string>('user/saveUserName');
 
-export const changeActiveOffer = createAction<string | undefined>('app/changeActiveOffer');
+export const changeActiveOffer = createAction<string | undefined>('offers/changeActiveOffer');
 
-export const loadOffers = createAction<OfferType[]>('data/loadOffers');
+export const loadOffers = createAction<OfferType[]>('offers/loadOffers');
+
+export const loadFavoriteOffers = createAction<OfferType[]>('favorite/loadFavoriteOffers');
+
+export const loadComments = createAction<CommentType[]>('comments/loadComments');
 
 export const isLoading = createAction<boolean>('data/isLoading');
 

@@ -1,4 +1,4 @@
-import { NavLink, useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { RoutePath } from '../../../shared/consts/route-path';
 import { OfferType } from '../../../shared/types';
 import { getOfferById } from '../../../shared/get-offer-by-id/ui/get-offer-by-id';
@@ -6,35 +6,26 @@ import { capitalizeFirstLetter } from '../../../widgets/offer-card/utils/capital
 import { CityMap } from '../../../widgets/city-map/index';
 import { findNearestPoint } from '../../../widgets/city-map/utils/getNearPoints';
 import { CommentsList } from '../../../widgets/comments-list';
-import { CommentType } from '../../../shared/types/types/comment-type';
 import { OfferCard } from '../../../widgets/offer-card/index';
-import style from './offer-page.module.css';
+import './offer-card-wrapper.css';
 import { getPercentFromRating } from '../../../widgets/offer-card/utils/percent-from-rating';
+import { useAppSelector } from '../../../shared/hooks/use-app-selector';
+import { loadOffersSelector } from '../../../store/selectors/load-offers-selector';
 
 const NEAR_OFFER_COUNT: number = 3;
 
-type OfferPageProps = {
-  offersList: OfferType[];
-  commentsList: CommentType[];
-};
 
-export function OfferPage({
-  offersList,
-  commentsList,
-}: OfferPageProps): JSX.Element {
+export function OfferPage(): JSX.Element {
   const { offerId } = useParams<{ offerId: string }>();
+  const offersList = useAppSelector(loadOffersSelector);
   const offer: OfferType | undefined = getOfferById({
     offerId,
     offersList,
   });
 
+
   if (!offer) {
-    return (
-      <>
-        <h2>Извините, нет предложений</h2>
-        <NavLink to={RoutePath.MAIN} />
-      </>
-    );
+    return <Navigate to={RoutePath.NOT_FOUND} replace />;
   }
 
   /**
@@ -193,7 +184,7 @@ export function OfferPage({
                   </p>
                 </div>
               </div>
-              <CommentsList offer={offer} commentsList={commentsList} />
+              {offerId && <CommentsList offer={offer} offerId={offerId} />}
             </div>
           </div>
 
@@ -209,7 +200,7 @@ export function OfferPage({
             <h2 className="near-places__title">
               Other places in the neighbourhood
             </h2>
-            <div className={style.wrapper}>
+            <div className="offer__card-wrapper">
               {nearPoints.slice(1).map((nearOffer) => (
                 <OfferCard
                   key={nearOffer.id}

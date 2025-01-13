@@ -1,3 +1,3 @@
-import { AppStore } from '../types/app-store';
+import { AppState } from '../types/app-state';
 
-export const activeOfferSelector = (state: AppStore) => state.activeOffer;
+export const activeOfferSelector = (state: AppState) => state.offersSlice.activeOffer;

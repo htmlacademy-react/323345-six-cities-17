@@ -7,34 +7,27 @@ import { OfferPage } from '../pages/offer-page';
 import { MainLayout } from '../shared/layout/main-layout';
 import { NotFoundPage } from '../pages/not-found-page';
 import { RedirectionRouteByAuth } from './routes/redirection-route-by-auth';
-import FAVORITES_LIST_MOCK from '../mocks/favorites-mock';
-import COMMENTS_MOCK from '../mocks/comment-mock';
-import { useAppSelector } from '../shared/hooks/use-app-selector';
-import { offersSelector } from '../store/selectors/load-offers-selector';
-import { checkAuthAction, fetchOffersAction } from '../store/action/async-action';
+import { checkAuthAction, fetchFavoriteOffersAction, fetchOffersAction } from '../store/action/async-action';
 import { useAppDispatch } from '../shared/hooks/use-app-dispatch';
 import { useEffect } from 'react';
-
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(fetchOffersAction());
     dispatch(checkAuthAction());
+    dispatch(fetchFavoriteOffersAction());
   }, [dispatch]);
-  const offersList = useAppSelector(offersSelector);
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={RoutePath.MAIN}
           element={
-            <MainLayout
-              favoritesList={FAVORITES_LIST_MOCK}
-            />
+            <MainLayout />
           }
         >
-          <Route index element={<MainPage offersList={offersList} />} />
+          <Route index element={<MainPage />} />
           <Route
             path={RoutePath.LOGIN}
             element={
@@ -47,14 +40,14 @@ function App(): JSX.Element {
             path={RoutePath.FAVORITES}
             element={
               <RedirectionRouteByAuth>
-                <FavoritesPage favoritesList={FAVORITES_LIST_MOCK} />
+                <FavoritesPage />
               </RedirectionRouteByAuth>
             }
           />
           <Route
             path={RoutePath.OFFER}
             element={
-              <OfferPage offersList={offersList} commentsList={COMMENTS_MOCK} />
+              <OfferPage />
             }
           />
         </Route>

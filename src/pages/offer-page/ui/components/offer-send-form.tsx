@@ -7,8 +7,15 @@ import {
   MIN_COMMENTS_LENGTH,
   MAX_COMMENTS_LENGTH,
 } from '../../consts/comments-length';
+import { useAppDispatch } from '../../../../shared/hooks/use-app-dispatch';
+import { sendCommentAction } from '../../../../store/action/async-action';
 
-export function OfferSendForm() {
+type OfferSendFormProps = {
+  offerId: string;
+}
+
+export function OfferSendForm({ offerId }: OfferSendFormProps) {
+  const dispatch = useAppDispatch();
   const [formData, setFormData] = useState<SendFormType>(
     INITIAL_SEND_FORM_STATE
   );
@@ -27,8 +34,8 @@ export function OfferSendForm() {
     }
     if (
       formData.rating &&
-      formData.review.length >= MIN_COMMENTS_LENGTH &&
-      formData.review.length < MAX_COMMENTS_LENGTH
+      formData.comment.length >= MIN_COMMENTS_LENGTH &&
+      formData.comment.length < MAX_COMMENTS_LENGTH
     ) {
       setSendButtonDisabled(false);
     } else {
@@ -38,9 +45,10 @@ export function OfferSendForm() {
 
   const handleSubmitForm = (e: FormEvent) => {
     e.preventDefault();
-    setFormData(INITIAL_SEND_FORM_STATE);
+    dispatch(sendCommentAction({ offerId, formData }));
     setSendButtonDisabled(true);
     setStarChecked(null);
+    setFormData(INITIAL_SEND_FORM_STATE);
   };
   return (
     <form
@@ -71,8 +79,8 @@ export function OfferSendForm() {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        value={formData.review}
-        onChange={(e) => onFormChangeHandle('review', e.target.value)}
+        value={formData.comment}
+        onChange={(e) => onFormChangeHandle('comment', e.target.value)}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">

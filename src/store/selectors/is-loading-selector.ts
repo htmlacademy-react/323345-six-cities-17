@@ -1,3 +1,3 @@
-import { AppStore } from '../types/app-store';
+import { AppState } from '../types/app-state';
 
-export const isLoadingSelector = (state: AppStore)=> state.isLoading;
+export const isLoadingSelector = (state: AppState) => state.offersSlice.isLoading || state.favoriteSlice.isLoading || state.userSlice.isLoading || state.commentsSlice.isLoading;

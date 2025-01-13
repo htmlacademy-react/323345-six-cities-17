@@ -6,15 +6,11 @@ import { loginAction } from '../../../store/action/async-action';
 import { AuthStatus } from '../../../shared/consts/auth-status';
 import { useAppSelector } from '../../../shared/hooks/use-app-selector';
 import { authSelector } from '../../../store/selectors/auth-selector';
-import { setError } from '../../../store/action/action';
 import { validatePassword } from '../utils/validatePassword';
+import { toast } from 'react-toastify';
 
 export function LoginPage(): JSX.Element {
   const dispatch = useAppDispatch();
-  const showError = (error: string) => {
-    dispatch(setError(error));
-    setTimeout(() => dispatch(setError(null)), 4000);
-  };
   const authStatus = useAppSelector(authSelector);
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
@@ -35,7 +31,7 @@ export function LoginPage(): JSX.Element {
                       password: passwordRef.current.value,
                     }));
                   } else {
-                    showError('Пароль должен содержать хотя бы по одной цифре и букве');
+                    toast.error('Пароль должен содержать хотя бы по одной цифре и латинской букве');
                   }
                 }
                 if (authStatus === AuthStatus.Auth) {
@@ -63,6 +59,7 @@ export function LoginPage(): JSX.Element {
                   name="password"
                   placeholder="Password"
                   ref={passwordRef}
+                  autoComplete="off"
                   required
                 />
               </div>

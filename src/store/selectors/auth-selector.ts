@@ -1,3 +1,3 @@
-import { AppStore } from '../types/app-store';
+import { AppState } from '../types/app-state';
 
-export const authSelector = (state: AppStore) => state.AuthorizationStatus;
+export const authSelector = (state: AppState) => state.userSlice.authorizationStatus;
