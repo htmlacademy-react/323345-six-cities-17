@@ -10,8 +10,10 @@ export const citySlice = createSlice({
   name: 'citySlice',
   initialState,
   reducers: {
-    changeActiveCity: (state, { payload }: PayloadAction<CityNameType>) => {
+    changeActiveCity(state, { payload }: PayloadAction<CityNameType>) {
       state.activeCity = payload;
     },
-  }
+  },
 });
+
+export const { changeActiveCity } = citySlice.actions;

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import L, { Icon, layerGroup, Marker } from 'leaflet';
+import { Icon, layerGroup, Marker } from 'leaflet';
 import classNames from 'classnames';
 import {
   URL_MARKER_CURRENT,
@@ -57,17 +57,23 @@ export function CityMap({
         13
       );
 
+      const markerLayer = layerGroup().addTo(map);
+
       if (offerPage) {
-        L.circle(
-          [
-            Number(offerPage.location.latitude),
-            Number(offerPage.location.longitude),
-          ],
-          { radius: 1000 }
-        ).addTo(map);
+        new Marker(
+          {
+            lat: offerPage.location.latitude,
+            lng: offerPage.location.longitude,
+          },
+          {
+            alt: `${offerPage.type}`,
+            title: `${offerPage.title}`,
+          }
+        )
+          .setIcon(currentCustomIcon)
+          .addTo(markerLayer);
       }
 
-      const markerLayer = layerGroup().addTo(map);
       points?.forEach((point) => {
         const marker = new Marker(
           {

@@ -1,13 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AppDispatch, AppState } from '../types/app-state';
+import { AppState } from '../types/app-state';
 import { AxiosInstance } from 'axios';
 import { AuthData, CommentType, OfferType, SendFormType, UserData } from '../../shared/types';
 import { APIRoute } from '../../shared/consts/api-route';
-import { setError, authorizationStatus } from './action';
+import { setError } from './action';
 import { appStore } from '../app-store';
 import { TIMEOUT_SHOW_ERROR } from '../../shared/consts/timeout-show-error';
-import { AuthStatus } from '../../shared/consts/auth-status';
-import { dropToken } from '../../api/token';
 import { UserType } from '../../shared/types/types/user-type';
 
 export const fetchOffersAction = createAsyncThunk<OfferType[], undefined, {
@@ -17,6 +15,17 @@ export const fetchOffersAction = createAsyncThunk<OfferType[], undefined, {
   'offers/fetchOffers',
   async (_arg, { extra: api }) => {
     const { data } = await api.get<OfferType[]>(APIRoute.Offers);
+    return data;
+  },
+);
+
+export const fetchNearPointsAction = createAsyncThunk<OfferType[], string, {
+  state: AppState;
+  extra: AxiosInstance;
+}>(
+  'offers/loadNearPoints',
+  async (id, { extra: api }) => {
+    const { data } = await api.get<OfferType[]>((`${APIRoute.Offers}/${id}/nearby`));
     return data;
   },
 );
@@ -95,15 +104,12 @@ export const loginAction = createAsyncThunk<
   );
 
 export const logoutAction = createAsyncThunk<void, undefined, {
-  dispatch: AppDispatch;
   state: AppState;
   extra: AxiosInstance;
 }>(
   'user/logout',
-  async (_arg, { dispatch, extra: api }) => {
+  async (_arg, { extra: api }) => {
     await api.delete(APIRoute.Logout);
-    dropToken();
-    dispatch(authorizationStatus(AuthStatus.NoAuth));
   },
 );
 

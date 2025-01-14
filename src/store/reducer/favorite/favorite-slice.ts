@@ -5,7 +5,7 @@ import { InitialFavoriteType } from './initial-favorite-type';
 
 const initialState: InitialFavoriteType = {
   favoriteOffers: [],
-  isLoading: true,
+  isLoading: false,
   error: false,
 };
 

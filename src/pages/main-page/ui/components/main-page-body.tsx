@@ -4,9 +4,9 @@ import { CityMap } from '../../../../widgets/city-map/ui/city-map';
 import { useAppSelector } from '../../../../shared/hooks/use-app-selector';
 import { SortBy } from '../../../../widgets/sort-by/ui/sort-by';
 import { sortOffers } from '../../../../features/sort-offers/sort-offers';
-import { activeOfferSelector } from '../../../../store/selectors/acctive-offer-selector';
 import { useState } from 'react';
 import { sortKeys } from '../../../../shared/consts/sort-keys';
+import { activeOfferSelector } from '../../../../store/selectors/acctive-offer-selector';
 
 type mainPageBodyProps = {
   activeCityOffersList: OfferType[];
@@ -40,7 +40,7 @@ export function MainPageBody({
           <CityMap
             city={activeCity}
             points={activeCityOffersList}
-            selectedPoint={activeOffer?.id}
+            selectedPoint={activeOffer}
             offerPage={false}
           />
         </div>

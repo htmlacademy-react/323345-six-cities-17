@@ -2,7 +2,7 @@ import { OfferCardMark } from './components/offer-card-mark';
 import { OfferCardImg } from './components/offer-card-img';
 import { OfferCardInfo } from './components/offer-card-info';
 import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
-import { changeActiveOffer } from '../../../store/action/action';
+import { changeActiveOffer } from '../../../store/reducer/offers/offers-slice';
 
 type CardProps = {
   id: string;
@@ -27,7 +27,7 @@ export function OfferCard({
 }: CardProps): JSX.Element {
   const dispatch = useAppDispatch();
   const choseOffer = (offerId: string | undefined) => {
-    dispatch(changeActiveOffer(offerId));
+    dispatch(changeActiveOffer(offerId!));
   };
   return (
     <article
