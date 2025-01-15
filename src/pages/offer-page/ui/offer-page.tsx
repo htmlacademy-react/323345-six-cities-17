@@ -20,11 +20,11 @@ export function OfferPage(): JSX.Element {
 
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(fetchCurrentOfferAction(offerId!))
+    dispatch(fetchCurrentOfferAction(offerId!));
     dispatch(fetchNearPointsAction(offerId!));
   }, [dispatch, offerId]);
 
-  let offer: OfferType | null = useAppSelector(currentOfferSelector);
+  const offer: OfferType | null = useAppSelector(currentOfferSelector);
   const nearPoints = useAppSelector(nearPointsSelector).slice(0, 3);
 
   if (!offer) {
@@ -33,7 +33,7 @@ export function OfferPage(): JSX.Element {
 
   function toFavoriteToggle() {
     if (offer!.isFavorite) {
-      dispatch(removeFromFavoriteAction(offerId!))
+      dispatch(removeFromFavoriteAction(offerId!));
     } else {
       dispatch(sendToFavoriteAction(offerId!));
     }

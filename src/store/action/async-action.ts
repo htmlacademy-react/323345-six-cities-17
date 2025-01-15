@@ -76,10 +76,10 @@ export const sendToFavoriteAction = createAsyncThunk<
     async (offerId, { extra: api }) => {
       await api.post<OfferType>(`${APIRoute.Favorite}/${offerId}/1`);
       try {
-        appStore.dispatch(fetchFavoriteOffersAction())
-        appStore.dispatch(fetchCurrentOfferAction(offerId))
+        appStore.dispatch(fetchFavoriteOffersAction());
+        appStore.dispatch(fetchCurrentOfferAction(offerId));
       } catch (error) {
-        toast.warn('Не смог связаться с сервером')
+        toast.warn('Не смог связаться с сервером');
       }
     }
   );
@@ -94,10 +94,10 @@ export const removeFromFavoriteAction = createAsyncThunk<
     async (offerId, { extra: api }) => {
       await api.post<OfferType>(`${APIRoute.Favorite}/${offerId}/0`);
       try {
-        appStore.dispatch(fetchFavoriteOffersAction())
-        appStore.dispatch(fetchCurrentOfferAction(offerId))
+        appStore.dispatch(fetchFavoriteOffersAction());
+        appStore.dispatch(fetchCurrentOfferAction(offerId));
       } catch (error) {
-        toast.warn('Не смог связаться с сервером')
+        toast.warn('Не смог связаться с сервером');
       }
     }
   );
