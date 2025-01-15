@@ -23,6 +23,7 @@ export function FavoritesList({ favoritesList }: FavoritesListProps): JSX.Elemen
             key={`favorite-${favorite.id}`}
             id={favorite.id}
             place="favorites"
+            isFavorite={favorite.isFavorite}
             isPremium={favorite.isPremium}
             price={favorite.price}
             previewImage={favorite.previewImage}

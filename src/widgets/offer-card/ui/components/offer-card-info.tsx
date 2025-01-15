@@ -2,17 +2,19 @@ import { capitalizeFirstLetter } from '../../utils/capitalize-first-letter';
 import { getPercentFromRating } from '../../utils/percent-from-rating';
 import { RoutePath } from '../../../../shared/consts/route-path.ts';
 import { NavLink } from 'react-router-dom';
+import classNames from 'classnames';
 
 type OffersCardInfo = {
   id: string;
   place: 'main' | 'favorites';
+  isFavorite: boolean;
   price: number;
   type: string;
   title: string;
   rating: number;
 }
 
-export function OfferCardInfo({ id, place, price, type, title, rating }: OffersCardInfo): JSX.Element {
+export function OfferCardInfo({ id, place, isFavorite, price, type, title, rating }: OffersCardInfo): JSX.Element {
   const ratingPercent: number = getPercentFromRating(rating);
   return (
     <div className={`place-card__info ${place === 'favorites' && 'favorites__card-info'}`}>
@@ -22,7 +24,7 @@ export function OfferCardInfo({ id, place, price, type, title, rating }: OffersC
           <span className="place-card__price-text">&#47;&nbsp;night</span>
         </div>
         <button className="place-card__bookmark-button button" type="button">
-          <svg className="place-card__bookmark-icon" width="18" height="19">
+          <svg className={classNames('place-card__bookmark-icon', { 'place-card__bookmark-icon--checked': isFavorite })} width="18" height="19">
             <use xlinkHref="#icon-bookmark"></use>
           </svg>
           <span className="visually-hidden">To bookmarks</span>

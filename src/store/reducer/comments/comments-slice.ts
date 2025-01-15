@@ -47,3 +47,5 @@ export const commentsSlice = createSlice({
       });
   }
 });
+
+export const { loadComments } = commentsSlice.actions;

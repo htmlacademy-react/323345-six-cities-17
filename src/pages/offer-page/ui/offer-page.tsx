@@ -1,53 +1,43 @@
-import { Navigate, useParams } from 'react-router-dom';
-import { RoutePath } from '../../../shared/consts/route-path';
 import { OfferType } from '../../../shared/types';
-import { getOfferById } from '../../../shared/get-offer-by-id/ui/get-offer-by-id';
+import classNames from 'classnames';
 import { capitalizeFirstLetter } from '../../../widgets/offer-card/utils/capitalize-first-letter';
 import { CityMap } from '../../../widgets/city-map/index';
-import { findNearestPoint } from '../../../widgets/city-map/utils/getNearPoints';
 import { CommentsList } from '../../../widgets/comments-list';
 import { OfferCard } from '../../../widgets/offer-card/index';
 import './offer-card-wrapper.css';
 import { getPercentFromRating } from '../../../widgets/offer-card/utils/percent-from-rating';
 import { useAppSelector } from '../../../shared/hooks/use-app-selector';
-import { loadOffersSelector } from '../../../store/selectors/load-offers-selector';
-
-const NEAR_OFFER_COUNT: number = 3;
-
+import { nearPointsSelector } from '../../../store/selectors/near-points-selector';
+import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
+import { useEffect } from 'react';
+import { fetchCurrentOfferAction, fetchNearPointsAction, removeFromFavoriteAction, sendToFavoriteAction } from '../../../store/action/async-action';
+import { currentOfferSelector } from '../../../store/selectors/current-offer-selector';
+import { Loader } from '../../../shared/loader/loader';
+import { useParams } from 'react-router-dom';
 
 export function OfferPage(): JSX.Element {
-  const { offerId } = useParams<{ offerId: string }>();
-  const offersList = useAppSelector(loadOffersSelector);
-  const offer: OfferType | undefined = getOfferById({
-    offerId,
-    offersList,
-  });
+  const { offerId } = useParams();
 
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchCurrentOfferAction(offerId!));
+    dispatch(fetchNearPointsAction(offerId!));
+  }, [dispatch, offerId]);
+
+  const offer: OfferType | null = useAppSelector(currentOfferSelector);
+  const nearPoints = useAppSelector(nearPointsSelector).slice(0, 3);
 
   if (!offer) {
-    return <Navigate to={RoutePath.NOT_FOUND} replace />;
+    return <Loader />;
   }
 
-  /**
-   * @param offersList - список всех предложений.
-   * @param offer.city.name - название текущего города.
-   * @returns список всех предложений для этого города.
-   */
-  const activeCityOffersList = offersList.filter(
-    (item) => item.city.name === offer.city.name
-  );
-
-  /**
-   * @param offer - текущее предложение
-   * @param activeCityOffersList - список предложений в этом городе.
-   * @param NEAR_OFFER_COUNT - число, сколько нужно отобразить близжайших предлложений.
-   * @returns список из близжайших предложений в количестве = NEAR_OFFER_COUNT.
-   */
-  const nearPoints = findNearestPoint({
-    offer,
-    activeCityOffersList,
-    NEAR_OFFER_COUNT,
-  });
+  function toFavoriteToggle() {
+    if (offer!.isFavorite) {
+      dispatch(removeFromFavoriteAction(offerId!));
+    } else {
+      dispatch(sendToFavoriteAction(offerId!));
+    }
+  }
 
   return (
     <div className="page page--gray page--main">
@@ -108,8 +98,8 @@ export function OfferPage(): JSX.Element {
               )}
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">{offer?.title}</h1>
-                <button className="offer__bookmark-button button" type="button">
-                  <svg className="offer__bookmark-icon" width="31" height="33">
+                <button className="offer__bookmark-button button" type="button" onClick={toFavoriteToggle}>
+                  <svg className={classNames('offer__bookmark-icon', { 'offer__bookmark-icon--checked': offer.isFavorite })} width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
                   <span className="visually-hidden">To bookmarks</span>
@@ -201,11 +191,12 @@ export function OfferPage(): JSX.Element {
               Other places in the neighbourhood
             </h2>
             <div className="offer__card-wrapper">
-              {nearPoints.slice(1).map((nearOffer) => (
+              {nearPoints.map((nearOffer) => (
                 <OfferCard
                   key={nearOffer.id}
                   id={nearOffer.id}
                   place='main'
+                  isFavorite={nearOffer.isFavorite}
                   isPremium={nearOffer.isPremium}
                   price={nearOffer.price}
                   previewImage={nearOffer.previewImage}

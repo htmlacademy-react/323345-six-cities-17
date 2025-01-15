@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { fetchFavoriteOffersAction, sendFavoriteOffersAction } from '../../action/async-action';
+import { fetchFavoriteOffersAction, removeFromFavoriteAction, sendToFavoriteAction } from '../../action/async-action';
 import { OfferType } from '../../../shared/types';
 import { InitialFavoriteType } from './initial-favorite-type';
 
 const initialState: InitialFavoriteType = {
   favoriteOffers: [],
-  isLoading: true,
+  isLoading: false,
   error: false,
 };
 
@@ -29,18 +29,29 @@ export const favoriteSlice = createSlice({
         state.error = true;
         state.favoriteOffers = [];
       })
-      .addCase(sendFavoriteOffersAction.pending, (state) => {
+      .addCase(sendToFavoriteAction.pending, (state) => {
         state.isLoading = true;
         state.error = false;
       })
-      .addCase(sendFavoriteOffersAction.fulfilled, (state) => {
+      .addCase(sendToFavoriteAction.fulfilled, (state) => {
         state.isLoading = false;
         state.error = false;
       })
-      .addCase(sendFavoriteOffersAction.rejected, (state) => {
+      .addCase(sendToFavoriteAction.rejected, (state) => {
         state.isLoading = false;
         state.error = true;
-
+      })
+      .addCase(removeFromFavoriteAction.pending, (state) => {
+        state.isLoading = true;
+        state.error = false;
+      })
+      .addCase(removeFromFavoriteAction.fulfilled, (state) => {
+        state.isLoading = false;
+        state.error = false;
+      })
+      .addCase(removeFromFavoriteAction.rejected, (state) => {
+        state.isLoading = false;
+        state.error = true;
       });
   }
 });

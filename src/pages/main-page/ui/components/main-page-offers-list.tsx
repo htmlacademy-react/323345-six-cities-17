@@ -15,6 +15,7 @@ function MainPageOffersList({
           key={offer.id}
           id={offer.id}
           place="main"
+          isFavorite={offer.isFavorite}
           isPremium={offer.isPremium}
           price={offer.price}
           previewImage={offer.previewImage}
