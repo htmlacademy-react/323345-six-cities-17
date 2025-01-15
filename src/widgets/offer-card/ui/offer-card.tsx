@@ -7,6 +7,7 @@ import { changeActiveOffer } from '../../../store/reducer/offers/offers-slice';
 type CardProps = {
   id: string;
   place: 'main' | 'favorites';
+  isFavorite: boolean;
   isPremium: boolean;
   price: number;
   previewImage: string;
@@ -18,6 +19,7 @@ type CardProps = {
 export function OfferCard({
   id,
   place,
+  isFavorite,
   isPremium,
   price,
   previewImage,
@@ -35,6 +37,7 @@ export function OfferCard({
         ? 'cities__card'
         : place === 'favorites' && 'favorites__card'
         }`}
+      // onClick={() => dispatch(fetchCurrentOfferAction(id))}
       onMouseEnter={() => choseOffer(id)}
       onMouseOut={() => choseOffer(undefined)}
     >
@@ -43,6 +46,7 @@ export function OfferCard({
       <OfferCardInfo
         id={id}
         place={place}
+        isFavorite={isFavorite}
         price={price}
         type={type}
         title={title}

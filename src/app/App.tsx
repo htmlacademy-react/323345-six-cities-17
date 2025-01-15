@@ -13,6 +13,7 @@ import { useEffect } from 'react';
 import { useAppSelector } from '../shared/hooks/use-app-selector';
 import { authSelector } from '../store/selectors/auth-selector';
 import { AuthStatus } from '../shared/consts/auth-status';
+import { appStore } from '../store';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -27,6 +28,8 @@ function App(): JSX.Element {
       dispatch(fetchFavoriteOffersAction());
     }
   }, [dispatch, authorizationStatus]);
+
+  // console.log(appStore.getState())
 
   return (
     <BrowserRouter>
