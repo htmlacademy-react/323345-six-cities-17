@@ -14,7 +14,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={appStore}>
-      <ToastContainer theme="colored" transition={Slide} />
+      <ToastContainer theme="colored" transition={Slide} position="top-left" />
       <App />
     </Provider>
   </React.StrictMode>,

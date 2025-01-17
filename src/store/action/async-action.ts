@@ -13,6 +13,7 @@ import { setError } from './action';
 import { appStore } from '../app-store';
 import { TIMEOUT_SHOW_ERROR } from '../../shared/consts/timeout-show-error';
 import { UserType } from '../../shared/types/types/user-type';
+import { ResponseOfferType } from '../../shared/types/types/response-offer-type';
 
 export const fetchOffersAction = createAsyncThunk<
   OfferType[],
@@ -53,39 +54,40 @@ export const fetchNearPointsAction = createAsyncThunk<
 });
 
 export const fetchFavoriteOffersAction = createAsyncThunk<
-  OfferType[],
+  ResponseOfferType[],
   undefined,
   {
     state: AppState;
     extra: AxiosInstance;
   }
 >('favorite/fetchFavoriteOffers', async (_arg, { extra: api }) => {
-  const { data } = await api.get<OfferType[]>(APIRoute.Favorite);
+  const { data } = await api.get<ResponseOfferType[]>(APIRoute.Favorite);
   return data;
 });
 
 export const sendToFavoriteAction = createAsyncThunk<
-  OfferType,
+  ResponseOfferType,
   string,
   {
     state: AppState;
     extra: AxiosInstance;
   }
 >('favorite/sendToFavorite', async (offerId, { extra: api }) => {
-  const { data } = await api.post<OfferType>(
+  const { data } = await api.post<ResponseOfferType>(
     `${APIRoute.Favorite}/${offerId}/1`
   );
   return data;
 });
+
 export const removeFromFavoriteAction = createAsyncThunk<
-  OfferType,
+  ResponseOfferType,
   string,
   {
     state: AppState;
     extra: AxiosInstance;
   }
 >('favorite/removeFromFavorite', async (offerId, { extra: api }) => {
-  const { data } = await api.post<OfferType>(
+  const { data } = await api.post<ResponseOfferType>(
     `${APIRoute.Favorite}/${offerId}/0`
   );
   return data;

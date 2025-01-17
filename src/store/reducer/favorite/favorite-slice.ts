@@ -4,9 +4,11 @@ import {
   removeFromFavoriteAction,
   sendToFavoriteAction,
 } from '../../action/async-action';
-import { OfferType } from '../../../shared/types';
+import { CurrentOfferType } from '../../../shared/types';
 import { InitialFavoriteType } from './initial-favorite-type';
 import { toast } from 'react-toastify';
+import { responseToOfferTypeAdapter } from '../../../shared/utils/response-adapter/response-to-offer-type-adapter';
+import { ResponseOfferType } from '../../../shared/types/types/response-offer-type';
 
 const initialState: InitialFavoriteType = {
   favoriteOffers: [],
@@ -24,9 +26,12 @@ export const favoriteSlice = createSlice({
       })
       .addCase(
         fetchFavoriteOffersAction.fulfilled,
-        (state, { payload }: PayloadAction<OfferType[]>) => {
+        (state, { payload }: PayloadAction<ResponseOfferType[]>) => {
+          const adaptedPayload = payload.map((item) =>
+            responseToOfferTypeAdapter(item)
+          );
           state.isLoading = false;
-          state.favoriteOffers = payload;
+          state.favoriteOffers = adaptedPayload;
         }
       )
       .addCase(fetchFavoriteOffersAction.rejected, (state) => {
@@ -38,9 +43,10 @@ export const favoriteSlice = createSlice({
       })
       .addCase(
         sendToFavoriteAction.fulfilled,
-        (state, { payload }: PayloadAction<OfferType>) => {
+        (state, { payload }: PayloadAction<ResponseOfferType>) => {
           state.isLoading = false;
-          state.favoriteOffers = [...state.favoriteOffers, payload];
+          const adaptedPayload = responseToOfferTypeAdapter(payload);
+          state.favoriteOffers = [...state.favoriteOffers, adaptedPayload];
           toast.success('Added to favorites');
         }
       )
@@ -53,7 +59,7 @@ export const favoriteSlice = createSlice({
       })
       .addCase(
         removeFromFavoriteAction.fulfilled,
-        (state, { payload }: PayloadAction<OfferType>) => {
+        (state, { payload }: PayloadAction<CurrentOfferType>) => {
           state.isLoading = false;
           state.favoriteOffers = state.favoriteOffers.filter(
             (offer) => offer.id !== payload.id

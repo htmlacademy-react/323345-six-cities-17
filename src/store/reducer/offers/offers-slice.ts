@@ -22,8 +22,28 @@ export const offersSlice = createSlice({
     changeActiveOffer(state, { payload }: PayloadAction<string>) {
       state.activeOffer = payload;
     },
-    loadOffers(state, { payload }: PayloadAction<OfferType[]>) {
-      state.offers = payload;
+    updateCurrentOffer(state, { payload }: PayloadAction<CurrentOfferType>) {
+      state.currentOffer = payload;
+    },
+    updateOffers: (state, { payload }: PayloadAction<OfferType>) => {
+      for (let offerIndex = 0; offerIndex < state.offers.length; offerIndex++) {
+        if (state.offers[offerIndex].id === payload.id) {
+          state.offers[offerIndex] = payload;
+          break;
+        }
+      }
+    },
+    updateNearPoints: (state, { payload }: PayloadAction<OfferType>) => {
+      for (
+        let offerIndex = 0;
+        offerIndex < state.nearPoints.length;
+        offerIndex++
+      ) {
+        if (state.nearPoints[offerIndex].id === payload.id) {
+          state.nearPoints[offerIndex] = payload;
+          break;
+        }
+      }
     },
     offersIsloading(state, { payload }: PayloadAction<boolean>) {
       state.isLoading = payload;
@@ -73,5 +93,10 @@ export const offersSlice = createSlice({
   },
 });
 
-export const { changeActiveOffer, loadOffers, offersIsloading } =
-  offersSlice.actions;
+export const {
+  changeActiveOffer,
+  updateCurrentOffer,
+  offersIsloading,
+  updateOffers,
+  updateNearPoints,
+} = offersSlice.actions;

@@ -14,7 +14,6 @@ export function FavoritesEmptyPage(): JSX.Element {
           </div>
         </section>
       </div>
-      <Footer />
     </main>
   );
 }

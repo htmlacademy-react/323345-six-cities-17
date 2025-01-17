@@ -23,15 +23,17 @@ export function OfferPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const { offerId } = useParams();
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
-  let offer: CurrentOfferType | undefined = useAppSelector(selectCurrentOffer);
+  let currentOffer: CurrentOfferType | undefined = useAppSelector(selectCurrentOffer);
   const nearPoints = useAppSelector(selectNearPoints).slice(0, 3);
-  const [loaderVisible, setLoaderVisible] = useState(true)
+  const [loaderVisible, setLoaderVisible] = useState(true);
 
-  const toFavoriteToggle = () => {
-    if (authorizationStatus === AuthStatus.NoAuth) {
-      return <Navigate to={RoutePath.LOGIN} />
+
+  const toFavoriteToggleHadler = () => {
+    if (authorizationStatus !== AuthStatus.Auth) {
+      <Navigate to={RoutePath.LOGIN} replace />;
+      return;
     }
-    if (offer && offer.isFavorite) {
+    if (currentOffer && currentOffer.isFavorite) {
       offerId && dispatch(removeFromFavoriteAction(offerId));
     } else {
       offerId && dispatch(sendToFavoriteAction(offerId));
@@ -49,7 +51,7 @@ export function OfferPage(): JSX.Element {
   }, [dispatch, offerId]);
 
 
-  if (!offer && !loaderVisible) {
+  if (!currentOffer && !loaderVisible) {
     return <Navigate to={RoutePath.NOT_FOUND} />;
   }
   if (loaderVisible) {
@@ -62,12 +64,12 @@ export function OfferPage(): JSX.Element {
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              {offer?.images.map((image: string) => (
+              {currentOffer?.images.map((image: string) => (
                 <div className="offer__image-wrapper" key={image}>
                   <img
                     className="offer__image"
                     src={image}
-                    alt={`Photo ${offer.type}`}
+                    alt={`Photo ${currentOffer?.type}`}
                   />
                 </div>
               ))}
@@ -75,15 +77,15 @@ export function OfferPage(): JSX.Element {
           </div>
           <div className="offer__container container">
             <div className="offer__wrapper">
-              {offer?.isPremium && (
+              {currentOffer?.isPremium && (
                 <div className="offer__mark">
                   <span>Premium</span>
                 </div>
               )}
               <div className="offer__name-wrapper">
-                <h1 className="offer__name">{offer?.title}</h1>
-                <button className="offer__bookmark-button button" type="button" onClick={toFavoriteToggle}>
-                  <svg className={classNames('offer__bookmark-icon', { 'offer__bookmark-icon--checked': offer?.isFavorite })} width="31" height="33">
+                <h1 className="offer__name">{currentOffer?.title}</h1>
+                <button className="offer__bookmark-button button" type="button" onClick={toFavoriteToggleHadler}>
+                  <svg className={classNames('offer__bookmark-icon', { 'offer__bookmark-icon--checked': currentOffer?.isFavorite })} width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
                   <span className="visually-hidden">To bookmarks</span>
@@ -92,34 +94,34 @@ export function OfferPage(): JSX.Element {
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
                   <span
-                    style={{ width: `${getPercentFromRating(offer?.rating)}%` }}
+                    style={{ width: `${getPercentFromRating(currentOffer?.rating)}%` }}
                   />
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="offer__rating-value rating__value">
-                  {offer?.rating}
+                  {currentOffer?.rating}
                 </span>
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
-                  {offer && capitalizeFirstLetter(offer.type)}
+                  {currentOffer && capitalizeFirstLetter(currentOffer.type)}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
-                  {`${offer?.bedrooms} Bedrooms`}
+                  {`${currentOffer?.bedrooms} Bedrooms`}
                 </li>
                 <li className="offer__feature offer__feature--adults">
-                  {`Max ${offer?.bedrooms} adults`}
+                  {`Max ${currentOffer?.bedrooms} adults`}
                 </li>
               </ul>
               <div className="offer__price">
-                <b className="offer__price-value">&euro;{offer?.price}</b>
+                <b className="offer__price-value">&euro;{currentOffer?.price}</b>
                 <span className="offer__price-text">&nbsp;night</span>
               </div>
               <div className="offer__inside">
                 <h2 className="offer__inside-title">What&apos;s inside</h2>
                 <ul className="offer__inside-list">
                   {
-                    offer?.goods.map((good) => (
+                    currentOffer?.goods.map((good) => (
                       <li className="offer__inside-item" key={good}>{good}</li>
                     ))
                   }
@@ -131,28 +133,28 @@ export function OfferPage(): JSX.Element {
                   <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
                     <img
                       className="offer__avatar user__avatar"
-                      src={offer?.host.avatarUrl}
+                      src={currentOffer?.host.avatarUrl}
                       width="74"
                       height="74"
                       alt="Host avatar"
                     />
                   </div>
-                  <span className="offer__user-name">{offer?.host.name}</span>
-                  {offer?.host.isPro && <span className="offer__user-status">Pro</span>}
+                  <span className="offer__user-name">{currentOffer?.host.name}</span>
+                  {currentOffer?.host.isPro && <span className="offer__user-status">Pro</span>}
                 </div>
                 <div className="offer__description">
-                  <p className="offer__text">{offer?.description}</p>
+                  <p className="offer__text">{currentOffer?.description}</p>
                 </div>
               </div>
               {offerId && <CommentsList offerId={offerId} />}
             </div>
           </div>
 
-          {offer && <CityMap
-            city={offer.city.name}
+          {currentOffer && <CityMap
+            city={currentOffer.city.name}
             points={nearPoints}
             selectedPoint={offerId}
-            offerPage={offer}
+            offerPage={currentOffer}
           />}
         </section>
         <div className="container">
