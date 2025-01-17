@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import classNames from 'classnames';
 
 import './offer-card-wrapper.css';
@@ -18,6 +18,7 @@ import { selectCurrentOffer } from '../../../store/reducer/offers/selectors/sele
 import { selectAuthorizationStatus } from '../../../store/reducer/user/selectors/select-authorization-status';
 import { Loader } from '../../../shared/loader/loader';
 import { AuthStatus } from '../../../shared/consts/auth-status';
+import { toast } from 'react-toastify';
 
 export function OfferPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -27,10 +28,12 @@ export function OfferPage(): JSX.Element {
   const nearPoints = useAppSelector(selectNearPoints).slice(0, 3);
   const [loaderVisible, setLoaderVisible] = useState(true);
 
+  const navigate = useNavigate();
 
   const toFavoriteToggleHadler = () => {
     if (authorizationStatus !== AuthStatus.Auth) {
-      <Navigate to={RoutePath.LOGIN} replace />;
+      toast.warn('You are not authorized, please authorize for this action');
+      navigate(RoutePath.LOGIN);
       return;
     }
     if (currentOffer && currentOffer.isFavorite) {

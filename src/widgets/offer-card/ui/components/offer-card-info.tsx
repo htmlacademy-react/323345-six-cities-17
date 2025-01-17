@@ -1,13 +1,14 @@
 import { capitalizeFirstLetter } from '../../utils/capitalize-first-letter';
 import { getPercentFromRating } from '../../utils/percent-from-rating';
 import { RoutePath } from '../../../../shared/consts/route-path.ts';
-import { Navigate, NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 import { useAppSelector } from '../../../../shared/hooks/use-app-selector.ts';
 import { selectAuthorizationStatus } from '../../../../store/reducer/user/selectors/select-authorization-status.ts';
 import { AuthStatus } from '../../../../shared/consts/auth-status.ts';
 import { removeFromFavoriteAction, sendToFavoriteAction } from '../../../../store/action/async-action.ts';
 import { useAppDispatch } from '../../../../shared/hooks/use-app-dispatch.ts';
+import { toast } from 'react-toastify';
 
 type OffersCardInfo = {
   id: string;
@@ -22,9 +23,12 @@ type OffersCardInfo = {
 export function OfferCardInfo({ id, place, isFavorite, price, type, title, rating }: OffersCardInfo): JSX.Element {
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const toFavoriteToggleHadler = () => {
-    if (authorizationStatus === AuthStatus.NoAuth) {
-      return <Navigate to={RoutePath.LOGIN} />
+    if (authorizationStatus !== AuthStatus.Auth) {
+      toast.warn('You are not authorized, please authorize for this action');
+      navigate(RoutePath.LOGIN);
+      return;
     }
     if (isFavorite) {
       dispatch(removeFromFavoriteAction(id));
