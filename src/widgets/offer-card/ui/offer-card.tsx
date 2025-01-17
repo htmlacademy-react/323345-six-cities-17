@@ -3,6 +3,7 @@ import { OfferCardImg } from './components/offer-card-img';
 import { OfferCardInfo } from './components/offer-card-info';
 import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
 import { changeActiveOffer } from '../../../store/reducer/offers/offers-slice';
+import { fetchCurrentOfferAction } from '../../../store/action/async-action';
 
 type CardProps = {
   id: string;
@@ -29,7 +30,7 @@ export function OfferCard({
 }: CardProps): JSX.Element {
   const dispatch = useAppDispatch();
   const choseOffer = (offerId: string | undefined) => {
-    dispatch(changeActiveOffer(offerId!));
+    offerId && dispatch(changeActiveOffer(offerId));
   };
   return (
     <article
@@ -37,7 +38,6 @@ export function OfferCard({
         ? 'cities__card'
         : place === 'favorites' && 'favorites__card'
         }`}
-      // onClick={() => dispatch(fetchCurrentOfferAction(id))}
       onMouseEnter={() => choseOffer(id)}
       onMouseOut={() => choseOffer(undefined)}
     >

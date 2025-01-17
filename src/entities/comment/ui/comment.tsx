@@ -1,13 +1,11 @@
 import { CommentType } from '../../../shared/types/types/comment-type';
-import { OfferType } from '../../../shared/types';
 import { getPercentFromRating } from '../../../widgets/offer-card/utils/percent-from-rating';
 import { getDateToComment } from '../utils/get-date-to-comment';
 
 type CommentProps = {
-  offer: OfferType;
   commentData: CommentType;
 };
-export function Comment({ offer, commentData }: CommentProps) {
+export function Comment({ commentData }: CommentProps) {
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -25,15 +23,11 @@ export function Comment({ offer, commentData }: CommentProps) {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            {offer !== undefined ? (
-              <span
-                style={{
-                  width: getPercentFromRating(commentData.rating),
-                }}
-              />
-            ) : (
-              <span style={{ width: 0 }} />
-            )}
+            <span
+              style={{
+                width: getPercentFromRating(commentData.rating),
+              }}
+            />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

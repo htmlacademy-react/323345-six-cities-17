@@ -6,7 +6,7 @@ import { SortBy } from '../../../../widgets/sort-by/ui/sort-by';
 import { sortOffers } from '../../../../features/sort-offers/sort-offers';
 import { useState } from 'react';
 import { sortKeys } from '../../../../shared/consts/sort-keys';
-import { activeOfferSelector } from '../../../../store/selectors/acctive-offer-selector';
+import { selectActiveOffer } from '../../../../store/reducer/offers/selectors/select-acctive-offer';
 
 type mainPageBodyProps = {
   activeCityOffersList: OfferType[];
@@ -17,7 +17,7 @@ export function MainPageBody({
   activeCityOffersList,
   activeCity,
 }: mainPageBodyProps): JSX.Element {
-  const activeOffer = useAppSelector(activeOfferSelector);
+  const activeOffer = useAppSelector(selectActiveOffer);
   const [currentSortType, setCurrentSortType] = useState<sortKeys>(sortKeys.POPULAR);
   const sortedOffersListHandler = (current: sortKeys): void => {
     setCurrentSortType(current);

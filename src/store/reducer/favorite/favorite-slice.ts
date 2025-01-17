@@ -1,12 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { fetchFavoriteOffersAction, removeFromFavoriteAction, sendToFavoriteAction } from '../../action/async-action';
+import {
+  fetchFavoriteOffersAction,
+  removeFromFavoriteAction,
+  sendToFavoriteAction,
+} from '../../action/async-action';
 import { OfferType } from '../../../shared/types';
 import { InitialFavoriteType } from './initial-favorite-type';
+import { toast } from 'react-toastify';
 
 const initialState: InitialFavoriteType = {
   favoriteOffers: [],
   isLoading: false,
-  error: false,
 };
 
 export const favoriteSlice = createSlice({
@@ -17,41 +21,49 @@ export const favoriteSlice = createSlice({
     builder
       .addCase(fetchFavoriteOffersAction.pending, (state) => {
         state.isLoading = true;
-        state.error = false;
       })
-      .addCase(fetchFavoriteOffersAction.fulfilled, (state, { payload }: PayloadAction<OfferType[]>) => {
-        state.isLoading = false;
-        state.error = false;
-        state.favoriteOffers = payload;
-      })
+      .addCase(
+        fetchFavoriteOffersAction.fulfilled,
+        (state, { payload }: PayloadAction<OfferType[]>) => {
+          state.isLoading = false;
+          state.favoriteOffers = payload;
+        }
+      )
       .addCase(fetchFavoriteOffersAction.rejected, (state) => {
         state.isLoading = false;
-        state.error = true;
         state.favoriteOffers = [];
       })
       .addCase(sendToFavoriteAction.pending, (state) => {
         state.isLoading = true;
-        state.error = false;
       })
-      .addCase(sendToFavoriteAction.fulfilled, (state) => {
-        state.isLoading = false;
-        state.error = false;
-      })
+      .addCase(
+        sendToFavoriteAction.fulfilled,
+        (state, { payload }: PayloadAction<OfferType>) => {
+          state.isLoading = false;
+          state.favoriteOffers = [...state.favoriteOffers, payload];
+          toast.success('Added to favorites');
+        }
+      )
       .addCase(sendToFavoriteAction.rejected, (state) => {
         state.isLoading = false;
-        state.error = true;
+        toast.warn('Не смог связаться с сервером');
       })
       .addCase(removeFromFavoriteAction.pending, (state) => {
         state.isLoading = true;
-        state.error = false;
       })
-      .addCase(removeFromFavoriteAction.fulfilled, (state) => {
-        state.isLoading = false;
-        state.error = false;
-      })
+      .addCase(
+        removeFromFavoriteAction.fulfilled,
+        (state, { payload }: PayloadAction<OfferType>) => {
+          state.isLoading = false;
+          state.favoriteOffers = state.favoriteOffers.filter(
+            (offer) => offer.id !== payload.id
+          );
+          toast.success('Removed from favorites');
+        }
+      )
       .addCase(removeFromFavoriteAction.rejected, (state) => {
         state.isLoading = false;
-        state.error = true;
+        toast.warn('Не смог связаться с сервером');
       });
-  }
+  },
 });

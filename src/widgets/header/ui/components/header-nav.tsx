@@ -3,14 +3,14 @@ import { RoutePath } from '../../../../shared/consts/route-path.ts';
 import '../header.css';
 import { useAppDispatch } from '../../../../shared/hooks/use-app-dispatch.ts';
 import { useAppSelector } from '../../../../shared/hooks/use-app-selector.ts';
-import { userSelector } from '../../../../store/selectors/user-selector.ts';
 import { logoutAction } from '../../../../store/action/async-action.ts';
-import { loadFavoriteOffersSelector } from '../../../../store/selectors/load-favorite-offers-selector.ts';
+import { selectLoadFavoriteOffers } from '../../../../store/reducer/favorite/selectors/select-load-favorite-offers.ts';
+import { selectUser } from '../../../../store/reducer/user/selectors/select-user.ts';
 
 export function HeaderNav(): JSX.Element {
   const dispatch = useAppDispatch();
-  const favoritesList = useAppSelector(loadFavoriteOffersSelector);
-  const user = useAppSelector(userSelector);
+  const favoritesList = useAppSelector(selectLoadFavoriteOffers);
+  const user = useAppSelector(selectUser);
   function logout() {
     dispatch(logoutAction());
   }

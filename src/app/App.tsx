@@ -11,12 +11,12 @@ import { checkAuthAction, fetchFavoriteOffersAction, fetchOffersAction } from '.
 import { useAppDispatch } from '../shared/hooks/use-app-dispatch';
 import { useEffect } from 'react';
 import { useAppSelector } from '../shared/hooks/use-app-selector';
-import { authSelector } from '../store/selectors/auth-selector';
 import { AuthStatus } from '../shared/consts/auth-status';
+import { selectAuthorizationStatus } from '../store/reducer/user/selectors/select-authorization-status';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector(authSelector);
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   useEffect(() => {
     dispatch(fetchOffersAction());
     dispatch(checkAuthAction());

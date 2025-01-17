@@ -1,42 +1,59 @@
-import { OfferType } from '../../../shared/types';
+import { useEffect, useState } from 'react';
+import { Navigate, useParams } from 'react-router-dom';
 import classNames from 'classnames';
+
+import './offer-card-wrapper.css';
+import { CurrentOfferType } from '../../../shared/types';
+import { RoutePath } from '../../../shared/consts/route-path';
 import { capitalizeFirstLetter } from '../../../widgets/offer-card/utils/capitalize-first-letter';
+import { getPercentFromRating } from '../../../widgets/offer-card/utils/percent-from-rating';
 import { CityMap } from '../../../widgets/city-map/index';
 import { CommentsList } from '../../../widgets/comments-list';
 import { OfferCard } from '../../../widgets/offer-card/index';
-import './offer-card-wrapper.css';
-import { getPercentFromRating } from '../../../widgets/offer-card/utils/percent-from-rating';
 import { useAppSelector } from '../../../shared/hooks/use-app-selector';
-import { nearPointsSelector } from '../../../store/selectors/near-points-selector';
 import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
-import { useEffect } from 'react';
 import { fetchCurrentOfferAction, fetchNearPointsAction, removeFromFavoriteAction, sendToFavoriteAction } from '../../../store/action/async-action';
-import { currentOfferSelector } from '../../../store/selectors/current-offer-selector';
+import { selectNearPoints } from '../../../store/reducer/offers/selectors/select-near-points';
+import { selectCurrentOffer } from '../../../store/reducer/offers/selectors/select-current-offer';
+import { selectAuthorizationStatus } from '../../../store/reducer/user/selectors/select-authorization-status';
 import { Loader } from '../../../shared/loader/loader';
-import { useParams } from 'react-router-dom';
+import { AuthStatus } from '../../../shared/consts/auth-status';
 
 export function OfferPage(): JSX.Element {
-  const { offerId } = useParams();
-
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(fetchCurrentOfferAction(offerId!));
-    dispatch(fetchNearPointsAction(offerId!));
-  }, [dispatch, offerId]);
+  const { offerId } = useParams();
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
+  let offer: CurrentOfferType | undefined = useAppSelector(selectCurrentOffer);
+  const nearPoints = useAppSelector(selectNearPoints).slice(0, 3);
+  const [loaderVisible, setLoaderVisible] = useState(true)
 
-  const offer: OfferType | null = useAppSelector(currentOfferSelector);
-  const nearPoints = useAppSelector(nearPointsSelector).slice(0, 3);
-
-  if (!offer) {
-    return <Loader />;
+  const toFavoriteToggle = () => {
+    if (authorizationStatus === AuthStatus.NoAuth) {
+      return <Navigate to={RoutePath.LOGIN} />
+    }
+    if (offer && offer.isFavorite) {
+      offerId && dispatch(removeFromFavoriteAction(offerId));
+    } else {
+      offerId && dispatch(sendToFavoriteAction(offerId));
+    }
   }
 
-  function toFavoriteToggle() {
-    if (offer!.isFavorite) {
-      dispatch(removeFromFavoriteAction(offerId!));
-    } else {
-      dispatch(sendToFavoriteAction(offerId!));
-    }
+  useEffect(() => {
+    (async () => {
+      if (offerId) {
+        await dispatch(fetchCurrentOfferAction(offerId));
+        await dispatch(fetchNearPointsAction(offerId));
+        setLoaderVisible(false);
+      }
+    })();
+  }, [dispatch, offerId]);
+
+
+  if (!offer && !loaderVisible) {
+    return <Navigate to={RoutePath.NOT_FOUND} />;
+  }
+  if (loaderVisible) {
+    return <Loader />
   }
 
   return (
@@ -45,48 +62,15 @@ export function OfferPage(): JSX.Element {
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="/img/room.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="/img/apartment-01.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="/img/apartment-02.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="/img/apartment-03.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="/img/studio-01.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="/img/apartment-01.jpg"
-                  alt="Photo studio"
-                />
-              </div>
+              {offer?.images.map((image: string) => (
+                <div className="offer__image-wrapper" key={image}>
+                  <img
+                    className="offer__image"
+                    src={image}
+                    alt={`Photo ${offer.type}`}
+                  />
+                </div>
+              ))}
             </div>
           </div>
           <div className="offer__container container">
@@ -99,7 +83,7 @@ export function OfferPage(): JSX.Element {
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">{offer?.title}</h1>
                 <button className="offer__bookmark-button button" type="button" onClick={toFavoriteToggle}>
-                  <svg className={classNames('offer__bookmark-icon', { 'offer__bookmark-icon--checked': offer.isFavorite })} width="31" height="33">
+                  <svg className={classNames('offer__bookmark-icon', { 'offer__bookmark-icon--checked': offer?.isFavorite })} width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
                   <span className="visually-hidden">To bookmarks</span>
@@ -108,23 +92,23 @@ export function OfferPage(): JSX.Element {
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
                   <span
-                    style={{ width: `${getPercentFromRating(offer.rating)}%` }}
+                    style={{ width: `${getPercentFromRating(offer?.rating)}%` }}
                   />
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="offer__rating-value rating__value">
-                  {offer.rating}
+                  {offer?.rating}
                 </span>
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
-                  {offer !== undefined && capitalizeFirstLetter(offer.type)}
+                  {offer && capitalizeFirstLetter(offer.type)}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
-                  3 Bedrooms
+                  {`${offer?.bedrooms} Bedrooms`}
                 </li>
                 <li className="offer__feature offer__feature--adults">
-                  Max 4 adults
+                  {`Max ${offer?.bedrooms} adults`}
                 </li>
               </ul>
               <div className="offer__price">
@@ -134,16 +118,11 @@ export function OfferPage(): JSX.Element {
               <div className="offer__inside">
                 <h2 className="offer__inside-title">What&apos;s inside</h2>
                 <ul className="offer__inside-list">
-                  <li className="offer__inside-item">Wi-Fi</li>
-                  <li className="offer__inside-item">Washing machine</li>
-                  <li className="offer__inside-item">Towels</li>
-                  <li className="offer__inside-item">Heating</li>
-                  <li className="offer__inside-item">Coffee machine</li>
-                  <li className="offer__inside-item">Baby seat</li>
-                  <li className="offer__inside-item">Kitchen</li>
-                  <li className="offer__inside-item">Dishwasher</li>
-                  <li className="offer__inside-item">Cabel TV</li>
-                  <li className="offer__inside-item">Fridge</li>
+                  {
+                    offer?.goods.map((good) => (
+                      <li className="offer__inside-item" key={good}>{good}</li>
+                    ))
+                  }
                 </ul>
               </div>
               <div className="offer__host">
@@ -152,38 +131,29 @@ export function OfferPage(): JSX.Element {
                   <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
                     <img
                       className="offer__avatar user__avatar"
-                      src="/img/avatar-angelina.jpg"
+                      src={offer?.host.avatarUrl}
                       width="74"
                       height="74"
                       alt="Host avatar"
                     />
                   </div>
-                  <span className="offer__user-name">Angelina</span>
-                  <span className="offer__user-status">Pro</span>
+                  <span className="offer__user-name">{offer?.host.name}</span>
+                  {offer?.host.isPro && <span className="offer__user-status">Pro</span>}
                 </div>
                 <div className="offer__description">
-                  <p className="offer__text">
-                    A quiet cozy and picturesque that hides behind a a river by
-                    the unique lightness of Amsterdam. The building is green and
-                    from 18th century.
-                  </p>
-                  <p className="offer__text">
-                    An independent House, strategically located between
-                    Rembrandt Square and National Opera, but where the bustle of
-                    the city comes to rest in this alley flowery and colorful.
-                  </p>
+                  <p className="offer__text">{offer?.description}</p>
                 </div>
               </div>
-              {offerId && <CommentsList offer={offer} offerId={offerId} />}
+              {offerId && <CommentsList offerId={offerId} />}
             </div>
           </div>
 
-          <CityMap
+          {offer && <CityMap
             city={offer.city.name}
             points={nearPoints}
             selectedPoint={offerId}
             offerPage={offer}
-          />
+          />}
         </section>
         <div className="container">
           <section className="near-places places">
@@ -210,5 +180,5 @@ export function OfferPage(): JSX.Element {
         </div>
       </main>
     </div>
-  );
+  )
 }

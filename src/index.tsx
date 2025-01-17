@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { appStore } from './store/app-store.ts';
 
 import App from './app/App.tsx';
-import { ToastContainer } from 'react-toastify';
+import { Slide, ToastContainer } from 'react-toastify';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -14,7 +14,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={appStore}>
-      <ToastContainer theme="colored" />
+      <ToastContainer theme="colored" transition={Slide} />
       <App />
     </Provider>
   </React.StrictMode>,

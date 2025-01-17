@@ -5,5 +5,4 @@ export type InitialUserType = {
   authorizationStatus: AuthStatus;
   user: UserType;
   isLoading: boolean;
-  error: boolean;
 };
