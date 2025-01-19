@@ -1,4 +1,4 @@
-import { Action, Middleware } from '@reduxjs/toolkit';
+import { Middleware, PayloadAction } from '@reduxjs/toolkit';
 import {
   removeFromFavoriteAction,
   sendToFavoriteAction,
@@ -12,16 +12,17 @@ import {
 import { responseToCurrentOfferTypeAdapter } from '../../shared/utils/response-adapter/response-to-current-offer-type-adapter';
 import { responseToOfferTypeAdapter } from '../../shared/utils/response-adapter/response-to-offer-type-adapter';
 import { CurrentOfferType, OfferType } from '../../shared/types';
+import { ResponseOfferType } from '../../shared/types/types/response-offer-type';
 
 export const updateOfferFavoriteStatusMiddleware: Middleware =
-  (_) => (next) => (action) => {
+  () => (next) => (action: PayloadAction<ResponseOfferType>) => {
     const result = next(action);
 
     if (
-      sendToFavoriteAction.fulfilled.match(<Action>action) ||
-      removeFromFavoriteAction.fulfilled.match(<Action>action)
+      sendToFavoriteAction.fulfilled.match(action) ||
+      removeFromFavoriteAction.fulfilled.match(action)
     ) {
-      const responseData = action.payload;
+      const responseData: ResponseOfferType = action.payload;
       const currentOffer = appStore.getState().offersSlice.currentOffer;
       if (currentOffer && currentOffer.id === responseData.id) {
         const adaptetOffer: CurrentOfferType =
