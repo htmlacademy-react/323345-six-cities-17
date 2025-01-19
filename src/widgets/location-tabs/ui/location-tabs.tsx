@@ -5,7 +5,7 @@ import { selectActiveCity } from '../../../store/reducer/city/selectors/select-a
 import { City } from './components/city';
 import { CITIES_LIST } from '../../../shared/consts/cities';
 
-function LocationTabs(): JSX.Element {
+function LocationTabsTemplate(): JSX.Element {
   const activeCity = useAppSelector(selectActiveCity);
 
   return (
@@ -25,4 +25,6 @@ function LocationTabs(): JSX.Element {
   );
 }
 
-export default memo(LocationTabs);
+const LocationTabs = memo(LocationTabsTemplate);
+
+export default LocationTabs;

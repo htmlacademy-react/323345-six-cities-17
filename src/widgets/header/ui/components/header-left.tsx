@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
 
-function HeaderLeft(): JSX.Element {
+function HeaderLeftTemplate(): JSX.Element {
 
   return (
     <div className="header__left">
@@ -18,4 +18,6 @@ function HeaderLeft(): JSX.Element {
   );
 }
 
-export default memo(HeaderLeft);
+const HeaderLeft = memo(HeaderLeftTemplate);
+
+export default HeaderLeft;

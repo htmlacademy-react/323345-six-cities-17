@@ -7,7 +7,7 @@ type SortByProps = {
   currentSortType: string;
 }
 
-function SortBy({ onSortedOffersListHandler, currentSortType }: SortByProps) {
+function SortByTemplate({ onSortedOffersListHandler, currentSortType }: SortByProps) {
   const [isOpened, setIsOpened] = useState(false);
   const keysList = Object.keys(sortKeys);
 
@@ -42,5 +42,6 @@ function SortBy({ onSortedOffersListHandler, currentSortType }: SortByProps) {
     </form>
   );
 }
+const SortBy = memo(SortByTemplate);
 
-export default memo(SortBy);
+export default SortBy;

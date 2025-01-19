@@ -9,7 +9,7 @@ import { logoutAction } from '../../../../store/action/async-action.ts';
 import { selectLoadFavoriteOffers } from '../../../../store/reducer/favorite/selectors/select-load-favorite-offers.ts';
 import { selectUser } from '../../../../store/reducer/user/selectors/select-user.ts';
 
-function HeaderNav(): JSX.Element {
+function HeaderNavTemplate(): JSX.Element {
   const dispatch = useAppDispatch();
   const favoritesList = useAppSelector(selectLoadFavoriteOffers);
   const user = useAppSelector(selectUser);
@@ -49,4 +49,6 @@ function HeaderNav(): JSX.Element {
   );
 }
 
-export default memo(HeaderNav);
+const HeaderNav = memo(HeaderNavTemplate);
+
+export default HeaderNav;

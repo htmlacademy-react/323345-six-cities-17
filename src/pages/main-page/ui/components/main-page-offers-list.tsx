@@ -7,7 +7,7 @@ type MainPageOffersListProps = {
   activeCityOffersList: OfferType[];
 };
 
-function MainPageOffersList({
+function MainPageOffersListTemplate({
   activeCityOffersList,
 }: MainPageOffersListProps) {
   return (
@@ -29,5 +29,6 @@ function MainPageOffersList({
     </div>
   );
 }
+const MainPageOffersList = memo(MainPageOffersListTemplate);
 
-export default memo(MainPageOffersList);
+export default MainPageOffersList;
