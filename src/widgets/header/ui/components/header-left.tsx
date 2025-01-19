@@ -1,6 +1,8 @@
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
 
-export function HeaderLeft(): JSX.Element {
+function HeaderLeft(): JSX.Element {
+
   return (
     <div className="header__left">
       <Link className="header__logo-link header__logo-link--active" to='/' title='Home'>
@@ -15,3 +17,5 @@ export function HeaderLeft(): JSX.Element {
     </div>
   );
 }
+
+export default memo(HeaderLeft);

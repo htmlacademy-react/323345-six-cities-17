@@ -36,12 +36,14 @@ export function OfferPage(): JSX.Element {
       navigate(RoutePath.LOGIN);
       return;
     }
-    if (currentOffer && currentOffer.isFavorite) {
-      offerId && dispatch(removeFromFavoriteAction(offerId));
+    if (offerId && currentOffer && currentOffer.isFavorite) {
+      dispatch(removeFromFavoriteAction(offerId));
     } else {
-      offerId && dispatch(sendToFavoriteAction(offerId));
+      if (offerId) {
+        dispatch(sendToFavoriteAction(offerId));
+      }
     }
-  }
+  };
 
   useEffect(() => {
     (async () => {
@@ -58,7 +60,7 @@ export function OfferPage(): JSX.Element {
     return <Navigate to={RoutePath.NOT_FOUND} />;
   }
   if (loaderVisible) {
-    return <Loader />
+    return <Loader />;
   }
 
   return (
@@ -186,5 +188,5 @@ export function OfferPage(): JSX.Element {
         </div>
       </main>
     </div >
-  )
+  );
 }

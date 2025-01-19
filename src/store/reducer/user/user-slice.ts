@@ -40,7 +40,9 @@ export const userSlice = createSlice({
         state.isLoading = false;
         state.authorizationStatus = AuthStatus.Auth;
         state.user = payload;
-        payload.token && saveToken(payload.token);
+        if (payload.token) {
+          saveToken(payload.token);
+        }
       })
       .addCase(checkAuthAction.rejected, (state) => {
         state.isLoading = false;
@@ -56,7 +58,9 @@ export const userSlice = createSlice({
           state.isLoading = false;
           state.authorizationStatus = AuthStatus.Auth;
           state.user = payload;
-          payload.token && saveToken(payload.token);
+          if (payload.token) {
+            saveToken(payload.token);
+          }
         }
       )
       .addCase(loginAction.rejected, (state) => {

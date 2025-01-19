@@ -18,6 +18,5 @@ export function FavoritesPage(): JSX.Element {
       </div>
     </main>
   )
-    : <FavoritesEmptyPage />
-    ;
+    : <FavoritesEmptyPage />;
 }

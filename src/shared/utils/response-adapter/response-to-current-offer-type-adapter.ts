@@ -16,7 +16,7 @@ export const responseToCurrentOfferTypeAdapter = (
     location: {
       latitude: responseData.location.latitude,
       longitude: responseData.location.longitude,
-      zoom: <13 | 16>responseData.location.zoom,
+      zoom: responseData.location.zoom,
     },
     isFavorite: responseData.isFavorite,
     isPremium: responseData.isPremium,

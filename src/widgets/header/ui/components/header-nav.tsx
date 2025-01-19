@@ -1,24 +1,27 @@
+import { memo } from 'react';
 import { NavLink } from 'react-router-dom';
+
 import { RoutePath } from '../../../../shared/consts/route-path.ts';
-import '../header.css';
+import styles from './header.module.css';
 import { useAppDispatch } from '../../../../shared/hooks/use-app-dispatch.ts';
 import { useAppSelector } from '../../../../shared/hooks/use-app-selector.ts';
 import { logoutAction } from '../../../../store/action/async-action.ts';
 import { selectLoadFavoriteOffers } from '../../../../store/reducer/favorite/selectors/select-load-favorite-offers.ts';
 import { selectUser } from '../../../../store/reducer/user/selectors/select-user.ts';
 
-export function HeaderNav(): JSX.Element {
+function HeaderNav(): JSX.Element {
   const dispatch = useAppDispatch();
   const favoritesList = useAppSelector(selectLoadFavoriteOffers);
   const user = useAppSelector(selectUser);
   function logout() {
     dispatch(logoutAction());
   }
+
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
         <li className="header__nav-item user">
-          <NavLink className="user__link" to={RoutePath.FAVORITES}>
+          <NavLink className={styles.userLink} to={RoutePath.FAVORITES}>
             <span className="header__nav-link header__nav-link--profile">
               <div className="header__avatar-wrapper user__avatar-wrapper">
                 <img
@@ -45,3 +48,5 @@ export function HeaderNav(): JSX.Element {
     </nav>
   );
 }
+
+export default memo(HeaderNav);

@@ -28,7 +28,7 @@ const currentCustomIcon = new Icon({
   iconAnchor: [14, 39],
 });
 
-export function CityMap({
+function CityMap({
   city,
   points,
   selectedPoint,
@@ -118,3 +118,5 @@ export function CityMap({
     />
   );
 }
+
+export default CityMap;

@@ -2,27 +2,26 @@ import { useState } from 'react';
 
 import { useAppSelector } from '../../../../shared/hooks/use-app-selector';
 import { selectActiveOffer } from '../../../../store/reducer/offers/selectors/select-acctive-offer';
+import { selectActiveCity } from '../../../../store/reducer/city/selectors/select-active-city';
 import MainPageOffersList from './main-page-offers-list';
-import { CityMap } from '../../../../widgets/city-map/ui/city-map';
-import { SortBy } from '../../../../widgets/sort-by/ui/sort-by';
+import CityMap from '../../../../widgets/city-map/ui/city-map';
+import SortBy from '../../../../widgets/sort-by/ui/sort-by';
 import { sortOffers } from '../../../../features/sort-offers/sort-offers';
-import type { CityNameType, OfferType } from '../../../../shared/types';
+import type { OfferType } from '../../../../shared/types';
 import { sortKeys } from '../../../../shared/consts/sort-keys';
 
 type mainPageBodyProps = {
   activeCityOffersList: OfferType[];
-  activeCity: CityNameType;
 };
 
 export function MainPageBody({
   activeCityOffersList,
-  activeCity,
 }: mainPageBodyProps): JSX.Element {
   const activeOffer = useAppSelector(selectActiveOffer);
+  const activeCity = useAppSelector(selectActiveCity);
   const [currentSortType, setCurrentSortType] = useState<sortKeys>(sortKeys.POPULAR);
-  const sortedOffersListHandler = (current: sortKeys): void => {
-    setCurrentSortType(current);
-  };
+  const sortedOffersListHandler = (current: sortKeys): void => setCurrentSortType(current);
+
   const sortedOffers = sortOffers({ currentSortType, activeCityOffersList });
   return (
     <div className="cities">

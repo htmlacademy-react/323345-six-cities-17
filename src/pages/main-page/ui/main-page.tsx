@@ -4,7 +4,7 @@ import { selectOffersIsLoading } from '../../../store/reducer/offers/selectors/s
 import { selectActiveCity } from '../../../store/reducer/city/selectors/select-active-city.ts';
 import { MainPageBody } from './components/main-page-body.tsx';
 import { MainPageEmpty } from './main-page-empty';
-import { LocationTabs } from '../../../widgets/location-tabs';
+import LocationTabs from '../../../widgets/location-tabs';
 import { Loader } from '../../../shared/ui/loader/loader.tsx';
 
 export function MainPage(): JSX.Element {
@@ -21,15 +21,10 @@ export function MainPage(): JSX.Element {
         className={`page__main page__main--index ${isEmptyOffersList ? 'page__main--index-empty' : ''}`}
       >
         <h1 className="visually-hidden">Cities</h1>
-        <LocationTabs
-          activeCity={activeCity}
-        />
+        <LocationTabs />
         {
           (!isEmptyOffersList && !isLoading) &&
-          <MainPageBody
-            activeCityOffersList={activeCityOffersList}
-            activeCity={activeCity}
-          />
+          <MainPageBody activeCityOffersList={activeCityOffersList} />
         }
         {
           isLoading && <Loader />

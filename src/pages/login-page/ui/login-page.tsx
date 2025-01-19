@@ -27,7 +27,7 @@ export function LoginPage(): JSX.Element {
     });
   };
 
-  const redirectHandle = (name: CityNameType) => appStore.dispatch(changeActiveCity(name))
+  const redirectHandle = (name: CityNameType) => appStore.dispatch(changeActiveCity(name));
 
   const onLoginChangeHandle = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -45,7 +45,7 @@ export function LoginPage(): JSX.Element {
     if (authStatus === AuthStatus.Auth) {
       return <Navigate to={RoutePath.MAIN} />;
     }
-  }
+  };
 
   return (
     <div className="page page--gray page--login">

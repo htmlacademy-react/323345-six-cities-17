@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import { OfferCard } from '../../../../widgets/offer-card';
 import type { OfferType } from '../../../../shared/types';
 
@@ -28,4 +30,4 @@ function MainPageOffersList({
   );
 }
 
-export default MainPageOffersList;
+export default memo(MainPageOffersList);

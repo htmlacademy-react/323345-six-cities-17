@@ -1,1 +1,3 @@
-export {CityMap} from './ui/city-map.tsx';
+import CityMap from './ui/city-map.tsx';
+
+export { CityMap };

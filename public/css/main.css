@@ -492,12 +492,13 @@ img {
   font-size: 14px;
   line-height: 1.2143;
   -webkit-transition: text-shadow .3s;
-  transition: text-shadow .3s
+  transition: text-shadow .3s;
+  cursor: pointer
 }
 
 .header__nav-link:focus,
 .header__nav-link:hover {
-  text-shadow: .5px 0 0, -.5px 0 0
+  text-shadow: .5px 0 0, -.5px 0 0;
 }
 
 .header__avatar-wrapper {
@@ -528,7 +529,12 @@ img {
   text-align: center;
   color: #fff;
   background: #4481c3;
-  border-radius: 15px
+  border-radius: 15px;
+  transition: background 0.3s;
+
+  &:hover {
+    background: #2571c3;
+  }
 }
 
 .user__avatar-wrapper {
@@ -795,6 +801,7 @@ img {
   -webkit-transform: skew(-15deg);
   transform: skew(-15deg);
   border-radius: 3px;
+  cursor: pointer;
   -webkit-transition: background .3s, color .3s, text-shadow .3s;
   transition: background .3s, color .3s, text-shadow .3s
 }
@@ -2001,6 +2008,16 @@ img {
 .header__logo-link:not(.header__logo-link--active):focus,
 .header__logo-link:not(.header__logo-link--active):hover {
   opacity: .5
+}
+
+.header__logo,
+.footer__logo {
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s;
+  }
 }
 
 /*# sourceMappingURL=main-page.css.map */

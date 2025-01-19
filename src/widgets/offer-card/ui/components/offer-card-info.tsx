@@ -37,7 +37,8 @@ export function OfferCardInfo({ id, place, isFavorite, price, type, title, ratin
     } else {
       dispatch(sendToFavoriteAction(id));
     }
-  }
+  };
+
   return (
     <div className={`place-card__info ${place === 'favorites' && 'favorites__card-info'}`}>
       <div className="place-card__price-wrapper">
