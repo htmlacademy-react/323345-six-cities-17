@@ -1,11 +1,11 @@
-import { LocationTabs } from '../../../widgets/location-tabs';
-import { MainPageBody } from './components/main-page-body.tsx';
-import { MainPageEmpty } from './main-page-empty';
 import { useAppSelector } from '../../../shared/hooks/use-app-selector.ts';
-import { Loader } from '../../../shared/loader/loader.tsx';
 import { selectLoadOffers } from '../../../store/reducer/offers/selectors/select-load-offers.ts';
 import { selectOffersIsLoading } from '../../../store/reducer/offers/selectors/select-offers-is-loading.ts';
 import { selectActiveCity } from '../../../store/reducer/city/selectors/select-active-city.ts';
+import { MainPageBody } from './components/main-page-body.tsx';
+import { MainPageEmpty } from './main-page-empty';
+import { LocationTabs } from '../../../widgets/location-tabs';
+import { Loader } from '../../../shared/ui/loader/loader.tsx';
 
 export function MainPage(): JSX.Element {
   const offersList = useAppSelector(selectLoadOffers);

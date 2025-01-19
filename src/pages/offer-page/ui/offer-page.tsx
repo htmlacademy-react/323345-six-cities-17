@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import classNames from 'classnames';
 
-import './offer-card-wrapper.css';
+import styles from './offer-page.module.css';
 import { CurrentOfferType } from '../../../shared/types';
 import { RoutePath } from '../../../shared/consts/route-path';
-import { capitalizeFirstLetter } from '../../../widgets/offer-card/utils/capitalize-first-letter';
-import { getPercentFromRating } from '../../../widgets/offer-card/utils/percent-from-rating';
+import { capitalizeFirstLetter } from '../../../shared/utils/capitalize-first-letter/capitalize-first-letter';
+import { getPercentFromRating } from '../../../shared/utils/percent-from-rating/percent-from-rating';
 import { CityMap } from '../../../widgets/city-map/index';
 import { CommentsList } from '../../../widgets/comments-list';
 import { OfferCard } from '../../../widgets/offer-card/index';
@@ -16,7 +16,7 @@ import { fetchCurrentOfferAction, fetchNearPointsAction, removeFromFavoriteActio
 import { selectNearPoints } from '../../../store/reducer/offers/selectors/select-near-points';
 import { selectCurrentOffer } from '../../../store/reducer/offers/selectors/select-current-offer';
 import { selectAuthorizationStatus } from '../../../store/reducer/user/selectors/select-authorization-status';
-import { Loader } from '../../../shared/loader/loader';
+import { Loader } from '../../../shared/ui/loader/loader';
 import { AuthStatus } from '../../../shared/consts/auth-status';
 import { toast } from 'react-toastify';
 
@@ -24,7 +24,7 @@ export function OfferPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const { offerId } = useParams();
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
-  let currentOffer: CurrentOfferType | undefined = useAppSelector(selectCurrentOffer);
+  const currentOffer: CurrentOfferType | undefined = useAppSelector(selectCurrentOffer);
   const nearPoints = useAppSelector(selectNearPoints).slice(0, 3);
   const [loaderVisible, setLoaderVisible] = useState(true);
 
@@ -87,8 +87,8 @@ export function OfferPage(): JSX.Element {
               )}
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">{currentOffer?.title}</h1>
-                <button className="offer__bookmark-button button" type="button" onClick={toFavoriteToggleHadler}>
-                  <svg className={classNames('offer__bookmark-icon', { 'offer__bookmark-icon--checked': currentOffer?.isFavorite })} width="31" height="33">
+                <button className={classNames('offer__bookmark-button button', { 'offer__bookmark-button--active': currentOffer?.isFavorite })} type="button" onClick={toFavoriteToggleHadler}>
+                  <svg className="offer__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
                   <span className="visually-hidden">To bookmarks</span>
@@ -153,19 +153,20 @@ export function OfferPage(): JSX.Element {
             </div>
           </div>
 
-          {currentOffer && <CityMap
-            city={currentOffer.city.name}
-            points={nearPoints}
-            selectedPoint={offerId}
-            offerPage={currentOffer}
-          />}
+          {currentOffer && offerId &&
+            <CityMap
+              city={currentOffer.city.name}
+              points={nearPoints}
+              selectedPoint={offerId}
+              offerPage={currentOffer}
+            />}
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">
               Other places in the neighbourhood
             </h2>
-            <div className="offer__card-wrapper">
+            <div className={styles.offerCardWrapper}>
               {nearPoints.map((nearOffer) => (
                 <OfferCard
                   key={nearOffer.id}
@@ -184,6 +185,6 @@ export function OfferPage(): JSX.Element {
           </section>
         </div>
       </main>
-    </div>
+    </div >
   )
 }

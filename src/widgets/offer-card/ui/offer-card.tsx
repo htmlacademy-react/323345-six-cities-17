@@ -1,8 +1,8 @@
+import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
+import { changeActiveOffer } from '../../../store/reducer/offers/offers-slice';
 import { OfferCardMark } from './components/offer-card-mark';
 import { OfferCardImg } from './components/offer-card-img';
 import { OfferCardInfo } from './components/offer-card-info';
-import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
-import { changeActiveOffer } from '../../../store/reducer/offers/offers-slice';
 
 type CardProps = {
   id: string;
@@ -28,8 +28,8 @@ export function OfferCard({
   rating,
 }: CardProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const choseOffer = (offerId: string | undefined) => {
-    offerId && dispatch(changeActiveOffer(offerId));
+  const choseOffer = (offerId: string | null) => {
+    dispatch(changeActiveOffer(offerId));
   };
   return (
     <article
@@ -38,7 +38,7 @@ export function OfferCard({
         : place === 'favorites' && 'favorites__card'
         }`}
       onMouseEnter={() => choseOffer(id)}
-      onMouseOut={() => choseOffer(undefined)}
+      onMouseLeave={() => choseOffer(null)}
     >
       {isPremium ? <OfferCardMark /> : null}
       <OfferCardImg id={id} place={place} previewImage={previewImage} />

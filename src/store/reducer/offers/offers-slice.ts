@@ -8,7 +8,7 @@ import { CurrentOfferType, OfferType } from '../../../shared/types';
 import { InitialOffersType } from './initiail-offers-type';
 
 const initialState: InitialOffersType = {
-  activeOffer: undefined,
+  activeOffer: null,
   offers: [],
   currentOffer: undefined,
   nearPoints: [],
@@ -19,7 +19,7 @@ export const offersSlice = createSlice({
   name: 'offersSlice',
   initialState,
   reducers: {
-    changeActiveOffer(state, { payload }: PayloadAction<string>) {
+    changeActiveOffer(state, { payload }: PayloadAction<string | null>) {
       state.activeOffer = payload;
     },
     updateCurrentOffer(state, { payload }: PayloadAction<CurrentOfferType>) {

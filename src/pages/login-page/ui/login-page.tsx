@@ -1,17 +1,18 @@
 import { FormEvent, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
-import { RoutePath } from '../../../shared/consts/route-path';
-import { loginAction } from '../../../store/action/async-action';
-import { AuthStatus } from '../../../shared/consts/auth-status';
-import { useAppSelector } from '../../../shared/hooks/use-app-selector';
-import { validatePassword } from '../utils/validatePassword';
 import { toast } from 'react-toastify';
-import { INITIAL_LOGIN_FORM_STATE } from '../../../shared/consts/initial-login-form-state';
+
+import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
+import { useAppSelector } from '../../../shared/hooks/use-app-selector';
 import { appStore } from '../../../store';
+import { loginAction } from '../../../store/action/async-action';
 import { changeActiveCity } from '../../../store/reducer/city/city-slice';
-import { CityNameType } from '../../../shared/types';
 import { selectAuthorizationStatus } from '../../../store/reducer/user/selectors/select-authorization-status';
+import { validatePassword } from '../../../shared/utils/validate-password/validatePassword';
+import { CityNameType } from '../../../shared/types';
+import { INITIAL_LOGIN_FORM_STATE } from '../../../shared/consts/initial-login-form-state';
+import { AuthStatus } from '../../../shared/consts/auth-status';
+import { RoutePath } from '../../../shared/consts/route-path';
 
 
 export function LoginPage(): JSX.Element {

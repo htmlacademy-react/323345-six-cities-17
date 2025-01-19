@@ -1,5 +1,5 @@
-import { offerByCityType, OfferType } from '../../../../shared/types';
 import { OfferCard } from '../../../../widgets/offer-card';
+import { offerByCityType, OfferType } from '../../../../shared/types';
 
 type FavoritesListProps = {
   favoritesList: OfferType[];

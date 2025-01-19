@@ -1,14 +1,14 @@
 import { FormEvent, useState } from 'react';
-import { StarElement } from './star-element';
-import { SendFormType } from '../../../../shared/types/types/send-form-type';
-import { StarCount } from '../../../../shared/consts/star-count';
-import { INITIAL_SEND_FORM_STATE } from '../../../../shared/consts/Initial-send-form-state';
+import { StarElement } from '../../../shared/ui/star-element/star-element';
+import { SendFormType } from '../../../shared/types/types/send-form-type';
+import { StarCount } from '../../../shared/consts/star-count';
+import { INITIAL_SEND_FORM_STATE } from '../../../shared/consts/Initial-send-form-state';
 import {
   MIN_COMMENTS_LENGTH,
   MAX_COMMENTS_LENGTH,
-} from '../../consts/comments-length';
-import { useAppDispatch } from '../../../../shared/hooks/use-app-dispatch';
-import { sendCommentAction } from '../../../../store/action/async-action';
+} from '../../../shared/consts/comments-length';
+import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
+import { sendCommentAction } from '../../../store/action/async-action';
 
 type OfferSendFormProps = {
   offerId: string;

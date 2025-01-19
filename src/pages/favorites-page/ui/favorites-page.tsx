@@ -1,6 +1,6 @@
-import { FavoritesList } from './components/favorites-list.tsx';
 import { useAppSelector } from '../../../shared/hooks/use-app-selector.ts';
 import { selectLoadFavoriteOffers } from '../../../store/reducer/favorite/selectors/select-load-favorite-offers.ts';
+import { FavoritesList } from './components/favorites-list.tsx';
 import { FavoritesEmptyPage } from './favorites-empty-page.tsx';
 
 

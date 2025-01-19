@@ -1,10 +1,11 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import { useEffect, useState, } from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { Header } from '../../../../widgets/header';
-import { Footer } from '../../../../widgets/footer';
-import { getMetaTitlePage, MetaTitlePage } from '../../../consts/meta-title-page';
-import { RoutePath } from '../../../consts/route-path';
+
+import { RoutePath } from '../../../../consts/route-path';
+import { Header } from '../../../../../widgets/header';
+import { Footer } from '../../../../../widgets/footer';
+import { getMetaTitlePage, MetaTitlePage } from '../../../../consts/meta-title-page';
 
 export function MainLayout(): JSX.Element {
   const location = useLocation();

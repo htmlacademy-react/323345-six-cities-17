@@ -12,7 +12,7 @@ import { CITIES_LIST } from '../../../shared/consts/cities';
 type MapProps = {
   city: string;
   points: OfferType[] | undefined;
-  selectedPoint: string | undefined;
+  selectedPoint: string | null;
   offerPage: OfferType | false | CurrentOfferType;
 };
 

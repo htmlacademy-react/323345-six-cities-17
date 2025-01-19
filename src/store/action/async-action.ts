@@ -9,9 +9,6 @@ import {
   SendFormType,
 } from '../../shared/types';
 import { APIRoute } from '../../shared/consts/api-route';
-import { setError } from './action';
-import { appStore } from '../app-store';
-import { TIMEOUT_SHOW_ERROR } from '../../shared/consts/timeout-show-error';
 import { UserType } from '../../shared/types/types/user-type';
 import { ResponseOfferType } from '../../shared/types/types/response-offer-type';
 
@@ -156,8 +153,4 @@ export const logoutAction = createAsyncThunk<
   }
 >('user/logout', async (_arg, { extra: api }) => {
   await api.delete(APIRoute.Logout);
-});
-
-export const clearErrorAction = createAsyncThunk('app/clearError', () => {
-  setTimeout(() => appStore.dispatch(setError(null)), TIMEOUT_SHOW_ERROR);
 });

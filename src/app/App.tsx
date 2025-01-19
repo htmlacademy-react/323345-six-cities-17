@@ -1,18 +1,19 @@
+import { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { RoutePath } from '../shared/consts/route-path';
+
+import { checkAuthAction, fetchFavoriteOffersAction, fetchOffersAction } from '../store/action/async-action';
+import { useAppDispatch } from '../shared/hooks/use-app-dispatch';
+import { useAppSelector } from '../shared/hooks/use-app-selector';
+import { selectAuthorizationStatus } from '../store/reducer/user/selectors/select-authorization-status';
+import { RedirectionRouteByAuth } from './routes/redirection-route-by-auth';
 import { MainPage } from '../pages/main-page';
 import { LoginPage } from '../pages/login-page';
 import { FavoritesPage } from '../pages/favorites-page';
 import { OfferPage } from '../pages/offer-page';
-import { MainLayout } from '../shared/layout/main-layout';
+import { MainLayout } from '../shared/ui/layout/main-layout';
 import { NotFoundPage } from '../pages/not-found-page';
-import { RedirectionRouteByAuth } from './routes/redirection-route-by-auth';
-import { checkAuthAction, fetchFavoriteOffersAction, fetchOffersAction } from '../store/action/async-action';
-import { useAppDispatch } from '../shared/hooks/use-app-dispatch';
-import { useEffect } from 'react';
-import { useAppSelector } from '../shared/hooks/use-app-selector';
 import { AuthStatus } from '../shared/consts/auth-status';
-import { selectAuthorizationStatus } from '../store/reducer/user/selectors/select-authorization-status';
+import { RoutePath } from '../shared/consts/route-path';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();

@@ -16,13 +16,7 @@ export const createAPI = (): AxiosInstance => {
     if (token && config.headers) {
       config.headers['x-token'] = token;
     }
-    // const controller = new AbortController();
-    // if (config.url && !token && config.url.includes('/favorite')) {
-    //   toast.warn('You are not authorized, please authorize for this action');
 
-    //   controller.abort();
-    //   return;
-    // }
     return config;
   });
 
