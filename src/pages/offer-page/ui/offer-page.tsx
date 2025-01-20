@@ -12,13 +12,14 @@ import { CommentsList } from '../../../widgets/comments-list';
 import { OfferCard } from '../../../widgets/offer-card/index';
 import { useAppSelector } from '../../../shared/hooks/use-app-selector';
 import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
-import { fetchCurrentOfferAction, fetchNearPointsAction, removeFromFavoriteAction, sendToFavoriteAction } from '../../../store/action/async-action';
+import { favoriteRequestAction, fetchCurrentOfferAction, fetchNearPointsAction } from '../../../store/action/async-action';
 import { selectNearPoints } from '../../../store/reducer/offers/selectors/select-near-points';
 import { selectCurrentOffer } from '../../../store/reducer/offers/selectors/select-current-offer';
 import { selectAuthorizationStatus } from '../../../store/reducer/user/selectors/select-authorization-status';
 import { Loader } from '../../../shared/ui/loader/loader';
 import { AuthStatus } from '../../../shared/consts/auth-status';
 import { toast } from 'react-toastify';
+import { favoriteRequestParams } from '../../../shared/consts/favorite-request-params';
 
 export function OfferPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -37,10 +38,10 @@ export function OfferPage(): JSX.Element {
       return;
     }
     if (offerId && currentOffer && currentOffer.isFavorite) {
-      dispatch(removeFromFavoriteAction(offerId));
+      dispatch(favoriteRequestAction({ offerId, requestParams: favoriteRequestParams.DEL }));
     } else {
       if (offerId) {
-        dispatch(sendToFavoriteAction(offerId));
+        dispatch(favoriteRequestAction({ offerId, requestParams: favoriteRequestParams.ADD }));
       }
     }
   };

@@ -62,33 +62,28 @@ export const fetchFavoriteOffersAction = createAsyncThunk<
   return data;
 });
 
-export const sendToFavoriteAction = createAsyncThunk<
-  ResponseOfferType,
-  string,
+export const favoriteRequestAction = createAsyncThunk<
+  {
+    requestParams: string;
+    data: ResponseOfferType;
+  },
+  {
+    offerId: string;
+    requestParams: string;
+  },
   {
     state: AppState;
     extra: AxiosInstance;
   }
->('favorite/sendToFavorite', async (offerId, { extra: api }) => {
-  const { data } = await api.post<ResponseOfferType>(
-    `${APIRoute.Favorite}/${offerId}/1`
-  );
-  return data;
-});
-
-export const removeFromFavoriteAction = createAsyncThunk<
-  ResponseOfferType,
-  string,
-  {
-    state: AppState;
-    extra: AxiosInstance;
+>(
+  'favorite/favoriteRequestAction',
+  async ({ offerId, requestParams }, { extra: api }) => {
+    const { data } = await api.post<ResponseOfferType>(
+      `${APIRoute.Favorite}/${offerId}/${requestParams}`
+    );
+    return { requestParams, data };
   }
->('favorite/removeFromFavorite', async (offerId, { extra: api }) => {
-  const { data } = await api.post<ResponseOfferType>(
-    `${APIRoute.Favorite}/${offerId}/0`
-  );
-  return data;
-});
+);
 
 export const fetchCommentsAction = createAsyncThunk<
   CommentType[],

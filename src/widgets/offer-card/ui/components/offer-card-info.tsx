@@ -6,10 +6,12 @@ import { RoutePath } from '../../../../shared/consts/route-path.ts';
 import { useAppSelector } from '../../../../shared/hooks/use-app-selector.ts';
 import { useAppDispatch } from '../../../../shared/hooks/use-app-dispatch.ts';
 import { selectAuthorizationStatus } from '../../../../store/reducer/user/selectors/select-authorization-status.ts';
-import { removeFromFavoriteAction, sendToFavoriteAction } from '../../../../store/action/async-action.ts';
 import { getPercentFromRating } from '../../../../shared/utils/percent-from-rating/percent-from-rating.ts';
 import { capitalizeFirstLetter } from '../../../../shared/utils/capitalize-first-letter/capitalize-first-letter.ts';
 import { AuthStatus } from '../../../../shared/consts/auth-status.ts';
+import { favoriteRequestAction } from '../../../../store/action/async-action.ts';
+import { favoriteRequestParams } from '../../../../shared/consts/favorite-request-params.ts';
+
 
 type OffersCardInfo = {
   id: string;
@@ -33,9 +35,9 @@ export function OfferCardInfo({ id, place, isFavorite, price, type, title, ratin
       return;
     }
     if (isFavorite) {
-      dispatch(removeFromFavoriteAction(id));
+      dispatch(favoriteRequestAction({ offerId: id, requestParams: favoriteRequestParams.DEL }));
     } else {
-      dispatch(sendToFavoriteAction(id));
+      dispatch(favoriteRequestAction({ offerId: id, requestParams: favoriteRequestParams.ADD }));
     }
   };
 
