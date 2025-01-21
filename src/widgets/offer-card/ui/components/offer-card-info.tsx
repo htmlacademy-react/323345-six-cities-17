@@ -1,8 +1,17 @@
-import { capitalizeFirstLetter } from '../../utils/capitalize-first-letter';
-import { getPercentFromRating } from '../../utils/percent-from-rating';
-import { RoutePath } from '../../../../shared/consts/route-path.ts';
-import { NavLink } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { NavLink, useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
+
+import { RoutePath } from '../../../../shared/consts/route-path.ts';
+import { useAppSelector } from '../../../../shared/hooks/use-app-selector.ts';
+import { useAppDispatch } from '../../../../shared/hooks/use-app-dispatch.ts';
+import { selectAuthorizationStatus } from '../../../../store/reducer/user/selectors/select-authorization-status.ts';
+import { getPercentFromRating } from '../../../../shared/utils/percent-from-rating/percent-from-rating.ts';
+import { capitalizeFirstLetter } from '../../../../shared/utils/capitalize-first-letter/capitalize-first-letter.ts';
+import { AuthStatus } from '../../../../shared/consts/auth-status.ts';
+import { favoriteRequestAction } from '../../../../store/action/async-action.ts';
+import { favoriteRequestParams } from '../../../../shared/consts/favorite-request-params.ts';
+
 
 type OffersCardInfo = {
   id: string;
@@ -15,7 +24,23 @@ type OffersCardInfo = {
 }
 
 export function OfferCardInfo({ id, place, isFavorite, price, type, title, rating }: OffersCardInfo): JSX.Element {
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const ratingPercent: number = getPercentFromRating(rating);
+  const toFavoriteToggleHadler = () => {
+    if (authorizationStatus !== AuthStatus.Auth) {
+      toast.warn('You are not authorized, please authorize for this action');
+      navigate(RoutePath.LOGIN);
+      return;
+    }
+    if (isFavorite) {
+      dispatch(favoriteRequestAction({ offerId: id, requestParams: favoriteRequestParams.DEL }));
+    } else {
+      dispatch(favoriteRequestAction({ offerId: id, requestParams: favoriteRequestParams.ADD }));
+    }
+  };
+
   return (
     <div className={`place-card__info ${place === 'favorites' && 'favorites__card-info'}`}>
       <div className="place-card__price-wrapper">
@@ -23,8 +48,8 @@ export function OfferCardInfo({ id, place, isFavorite, price, type, title, ratin
           <b className="place-card__price-value">&euro;{price}</b>
           <span className="place-card__price-text">&#47;&nbsp;night</span>
         </div>
-        <button className="place-card__bookmark-button button" type="button">
-          <svg className={classNames('place-card__bookmark-icon', { 'place-card__bookmark-icon--checked': isFavorite })} width="18" height="19">
+        <button className={classNames('place-card__bookmark-button button', { 'place-card__bookmark-button--active': isFavorite })} type="button" onClick={toFavoriteToggleHadler}>
+          <svg className="place-card__bookmark-icon" width="18" height="19">
             <use xlinkHref="#icon-bookmark"></use>
           </svg>
           <span className="visually-hidden">To bookmarks</span>

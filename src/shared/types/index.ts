@@ -7,6 +7,8 @@ export type { OfferType } from './types/offer-type';
 export type { SendFormType } from './types/send-form-type';
 export type { AuthData } from './types/auth-data';
 export type { UserData } from './types/user-data';
+export type { UserType } from './types/user-type';
+export type { CurrentOfferType } from './types/current-offer-type';
 
 declare global {
   interface Object {

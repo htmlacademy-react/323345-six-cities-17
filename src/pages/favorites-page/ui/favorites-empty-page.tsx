@@ -1,4 +1,3 @@
-import { Footer } from '../../../widgets/footer';
 
 export function FavoritesEmptyPage(): JSX.Element {
   return (
@@ -14,7 +13,6 @@ export function FavoritesEmptyPage(): JSX.Element {
           </div>
         </section>
       </div>
-      <Footer />
     </main>
   );
 }

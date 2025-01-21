@@ -1,10 +1,9 @@
-import { OfferType } from '../../../shared/types';
+import { CurrentOfferType, OfferType } from '../../../shared/types';
 
 export type InitialOffersType = {
-  activeOffer: undefined | string;
+  activeOffer: null | string;
   offers: OfferType[];
-  currentOffer: OfferType | null;
+  currentOffer: CurrentOfferType | undefined;
   nearPoints: OfferType[];
   isLoading: boolean;
-  error: boolean;
 };

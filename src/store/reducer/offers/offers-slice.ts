@@ -1,71 +1,102 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { fetchCurrentOfferAction, fetchNearPointsAction, fetchOffersAction } from '../../action/async-action';
-import { OfferType } from '../../../shared/types';
+import {
+  fetchCurrentOfferAction,
+  fetchNearPointsAction,
+  fetchOffersAction,
+} from '../../action/async-action';
+import { CurrentOfferType, OfferType } from '../../../shared/types';
 import { InitialOffersType } from './initiail-offers-type';
 
 const initialState: InitialOffersType = {
-  activeOffer: undefined,
+  activeOffer: null,
   offers: [],
-  currentOffer: null,
+  currentOffer: undefined,
   nearPoints: [],
   isLoading: true,
-  error: false,
 };
 
 export const offersSlice = createSlice({
   name: 'offersSlice',
   initialState,
   reducers: {
-    changeActiveOffer(state, { payload }: PayloadAction<string>) {
+    changeActiveOffer(state, { payload }: PayloadAction<string | null>) {
       state.activeOffer = payload;
     },
-    loadOffers(state, { payload }: PayloadAction<OfferType[]>) {
-      state.offers = payload;
+    updateCurrentOffer(state, { payload }: PayloadAction<CurrentOfferType>) {
+      state.currentOffer = payload;
+    },
+    updateOffers: (state, { payload }: PayloadAction<OfferType>) => {
+      for (let offerIndex = 0; offerIndex < state.offers.length; offerIndex++) {
+        if (state.offers[offerIndex].id === payload.id) {
+          state.offers[offerIndex] = payload;
+          break;
+        }
+      }
+    },
+    updateNearPoints: (state, { payload }: PayloadAction<OfferType>) => {
+      for (
+        let offerIndex = 0;
+        offerIndex < state.nearPoints.length;
+        offerIndex++
+      ) {
+        if (state.nearPoints[offerIndex].id === payload.id) {
+          state.nearPoints[offerIndex] = payload;
+          break;
+        }
+      }
+    },
+    offersIsloading(state, { payload }: PayloadAction<boolean>) {
+      state.isLoading = payload;
     },
   },
   extraReducers(builder) {
     builder
       .addCase(fetchOffersAction.pending, (state) => {
         state.isLoading = true;
-        state.error = false;
       })
-      .addCase(fetchOffersAction.fulfilled, (state, { payload }: PayloadAction<OfferType[]>) => {
-        state.isLoading = false;
-        state.error = false;
-        state.offers = payload;
-      })
+      .addCase(
+        fetchOffersAction.fulfilled,
+        (state, { payload }: PayloadAction<OfferType[]>) => {
+          state.isLoading = false;
+          state.offers = payload;
+        }
+      )
       .addCase(fetchOffersAction.rejected, (state) => {
         state.isLoading = false;
-        state.error = true;
       })
       .addCase(fetchNearPointsAction.pending, (state) => {
         state.isLoading = true;
-        state.error = false;
       })
-      .addCase(fetchNearPointsAction.fulfilled, (state, { payload }: PayloadAction<OfferType[]>) => {
-        state.isLoading = false;
-        state.error = false;
-        state.nearPoints = payload;
-      })
+      .addCase(
+        fetchNearPointsAction.fulfilled,
+        (state, { payload }: PayloadAction<OfferType[]>) => {
+          state.isLoading = false;
+          state.nearPoints = payload;
+        }
+      )
       .addCase(fetchNearPointsAction.rejected, (state) => {
         state.isLoading = false;
-        state.error = true;
       })
       .addCase(fetchCurrentOfferAction.pending, (state) => {
         state.isLoading = true;
-        state.error = false;
       })
-      .addCase(fetchCurrentOfferAction.fulfilled, (state, { payload }: PayloadAction<OfferType>) => {
-        state.isLoading = false;
-        state.error = false;
-        state.currentOffer = payload;
-      })
+      .addCase(
+        fetchCurrentOfferAction.fulfilled,
+        (state, { payload }: PayloadAction<CurrentOfferType>) => {
+          state.isLoading = false;
+          state.currentOffer = payload;
+        }
+      )
       .addCase(fetchCurrentOfferAction.rejected, (state) => {
         state.isLoading = false;
-        state.error = true;
       });
-  }
+  },
 });
 
-
-export const { changeActiveOffer, loadOffers } = offersSlice.actions;
+export const {
+  changeActiveOffer,
+  updateCurrentOffer,
+  offersIsloading,
+  updateOffers,
+  updateNearPoints,
+} = offersSlice.actions;

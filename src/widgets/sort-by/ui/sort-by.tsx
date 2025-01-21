@@ -1,15 +1,16 @@
 import classNames from 'classnames';
 import { sortKeys } from '../../../shared/consts/sort-keys';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 
 type SortByProps = {
   onSortedOffersListHandler: (current: sortKeys) => void;
   currentSortType: string;
 }
 
-export function SortBy({ onSortedOffersListHandler, currentSortType }: SortByProps) {
+function SortByTemplate({ onSortedOffersListHandler, currentSortType }: SortByProps) {
   const [isOpened, setIsOpened] = useState(false);
   const keysList = Object.keys(sortKeys);
+
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by </span>
@@ -41,3 +42,6 @@ export function SortBy({ onSortedOffersListHandler, currentSortType }: SortByPro
     </form>
   );
 }
+const SortBy = memo(SortByTemplate);
+
+export default SortBy;

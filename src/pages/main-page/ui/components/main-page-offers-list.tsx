@@ -1,11 +1,13 @@
-import type { OfferType } from '../../../../shared/types';
+import { memo } from 'react';
+
 import { OfferCard } from '../../../../widgets/offer-card';
+import type { OfferType } from '../../../../shared/types';
 
 type MainPageOffersListProps = {
   activeCityOffersList: OfferType[];
 };
 
-function MainPageOffersList({
+function MainPageOffersListTemplate({
   activeCityOffersList,
 }: MainPageOffersListProps) {
   return (
@@ -27,5 +29,6 @@ function MainPageOffersList({
     </div>
   );
 }
+const MainPageOffersList = memo(MainPageOffersListTemplate);
 
 export default MainPageOffersList;

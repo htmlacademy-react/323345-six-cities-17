@@ -1,1 +1,3 @@
-export { LocationTabs } from './ui/location-tabs';
+import LocationTabs from './ui/location-tabs';
+
+export default LocationTabs;

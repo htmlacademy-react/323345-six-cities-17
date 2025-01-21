@@ -6,14 +6,14 @@ import {
   URL_MARKER_DEFAULT,
 } from '../../../shared/consts/map-markers-url';
 import useMap from '../../../shared/hooks/use-map';
-import { CityType, OfferType } from '../../../shared/types';
+import { CityType, CurrentOfferType, OfferType } from '../../../shared/types';
 import { CITIES_LIST } from '../../../shared/consts/cities';
 
 type MapProps = {
   city: string;
   points: OfferType[] | undefined;
-  selectedPoint: string | undefined;
-  offerPage: OfferType | false;
+  selectedPoint: string | null;
+  offerPage: OfferType | false | CurrentOfferType;
 };
 
 const defaultCustomIcon = new Icon({
@@ -28,7 +28,7 @@ const currentCustomIcon = new Icon({
   iconAnchor: [14, 39],
 });
 
-export function CityMap({
+function CityMap({
   city,
   points,
   selectedPoint,
@@ -118,3 +118,5 @@ export function CityMap({
     />
   );
 }
+
+export default CityMap;

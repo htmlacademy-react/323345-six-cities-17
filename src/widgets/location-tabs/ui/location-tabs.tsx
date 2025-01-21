@@ -1,13 +1,13 @@
-import { CITIES_LIST } from '../../../shared/consts/cities';
+import { memo } from 'react';
+
+import { useAppSelector } from '../../../shared/hooks/use-app-selector';
+import { selectActiveCity } from '../../../store/reducer/city/selectors/select-active-city';
 import { City } from './components/city';
+import { CITIES_LIST } from '../../../shared/consts/cities';
 
-type LocationTabsType = {
-  activeCity: string;
-};
+function LocationTabsTemplate(): JSX.Element {
+  const activeCity = useAppSelector(selectActiveCity);
 
-export function LocationTabs({
-  activeCity,
-}: LocationTabsType): JSX.Element {
   return (
     <div className="tabs">
       <section className="locations container">
@@ -24,3 +24,7 @@ export function LocationTabs({
     </div>
   );
 }
+
+const LocationTabs = memo(LocationTabsTemplate);
+
+export default LocationTabs;
