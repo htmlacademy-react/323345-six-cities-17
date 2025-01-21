@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
+import { memo, useEffect } from 'react';
 
 import { Comment } from '../../../entities/comment';
-import { OfferSendForm } from '../../offer-send-form/ui/offer-send-form';
+import OfferSendForm from '../../offer-send-form/ui/offer-send-form';
 import { useAppSelector } from '../../../shared/hooks/use-app-selector';
 import { AuthStatus } from '../../../shared/consts/auth-status';
 import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
@@ -39,4 +39,4 @@ function CommentsList({ offerId }: CommentsListProps) {
   );
 }
 
-export default CommentsList;
+export default memo(CommentsList);

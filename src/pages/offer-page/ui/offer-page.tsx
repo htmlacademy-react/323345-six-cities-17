@@ -2,31 +2,28 @@ import { useEffect, useState } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import classNames from 'classnames';
 
-import styles from './offer-page.module.css';
 import { CurrentOfferType } from '../../../shared/types';
 import { RoutePath } from '../../../shared/consts/route-path';
 import { capitalizeFirstLetter } from '../../../shared/utils/capitalize-first-letter/capitalize-first-letter';
 import { getPercentFromRating } from '../../../shared/utils/percent-from-rating/percent-from-rating';
-import { CityMap } from '../../../widgets/city-map/index';
 import { CommentsList } from '../../../widgets/comments-list';
-import { OfferCard } from '../../../widgets/offer-card/index';
 import { useAppSelector } from '../../../shared/hooks/use-app-selector';
 import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
 import { favoriteRequestAction, fetchCurrentOfferAction, fetchNearPointsAction } from '../../../store/action/async-action';
-import { selectNearPoints } from '../../../store/reducer/offers/selectors/select-near-points';
 import { selectCurrentOffer } from '../../../store/reducer/offers/selectors/select-current-offer';
 import { selectAuthorizationStatus } from '../../../store/reducer/user/selectors/select-authorization-status';
 import { Loader } from '../../../shared/ui/loader/loader';
 import { AuthStatus } from '../../../shared/consts/auth-status';
 import { toast } from 'react-toastify';
 import { favoriteRequestParams } from '../../../shared/consts/favorite-request-params';
+import MapWrapper from '../../../widgets/map-wrapper/ui/map-wrapper';
+import NearPointsList from '../../../widgets/near-poits-list';
 
 export function OfferPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const { offerId } = useParams();
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   const currentOffer: CurrentOfferType | undefined = useAppSelector(selectCurrentOffer);
-  const nearPoints = useAppSelector(selectNearPoints).slice(0, 3);
   const [loaderVisible, setLoaderVisible] = useState(true);
 
   const navigate = useNavigate();
@@ -155,36 +152,14 @@ export function OfferPage(): JSX.Element {
               {offerId && <CommentsList offerId={offerId} />}
             </div>
           </div>
-
-          {currentOffer && offerId &&
-            <CityMap
-              city={currentOffer.city.name}
-              points={nearPoints}
-              selectedPoint={offerId}
-              offerPage={currentOffer}
-            />}
+          <MapWrapper />
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">
               Other places in the neighbourhood
             </h2>
-            <div className={styles.offerCardWrapper}>
-              {nearPoints.map((nearOffer) => (
-                <OfferCard
-                  key={nearOffer.id}
-                  id={nearOffer.id}
-                  place='main'
-                  isFavorite={nearOffer.isFavorite}
-                  isPremium={nearOffer.isPremium}
-                  price={nearOffer.price}
-                  previewImage={nearOffer.previewImage}
-                  type={nearOffer.type}
-                  title={nearOffer.title}
-                  rating={nearOffer.rating}
-                />
-              ))}
-            </div>
+            <NearPointsList />
           </section>
         </div>
       </main>

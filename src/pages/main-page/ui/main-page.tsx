@@ -15,23 +15,23 @@ export function MainPage(): JSX.Element {
   );
   const isLoading: boolean = useAppSelector(selectOffersIsLoading);
   const isEmptyOffersList: boolean = activeCityOffersList.length === 0;
+
+  if (isLoading) {
+    return <Loader />
+  }
+
   return (
     <div className="page page--gray page--main">
-      <main
-        className={`page__main page__main--index ${isEmptyOffersList ? 'page__main--index-empty' : ''}`}
-      >
+      <main className={`page__main page__main--index ${isEmptyOffersList ? 'page__main--index-empty' : ''}`}>
         <h1 className="visually-hidden">Cities</h1>
         <LocationTabs />
-        {
-          (!isEmptyOffersList && !isLoading) &&
-          <MainPageBody activeCityOffersList={activeCityOffersList} />
-        }
-        {
-          isLoading && <Loader />
-        }
-        {
-          (isEmptyOffersList && !isLoading) && <MainPageEmpty />
-        }
+        <div className="cities">
+          {
+            isEmptyOffersList
+              ? <MainPageEmpty />
+              : <MainPageBody activeCityOffersList={activeCityOffersList} />
+          }
+        </div>
       </main>
     </div>
   );

@@ -21,29 +21,27 @@ export function MainPageBody({
   const activeCity = useAppSelector(selectActiveCity);
   const [currentSortType, setCurrentSortType] = useState<sortKeys>(sortKeys.POPULAR);
   const sortedOffersListHandler = (current: sortKeys): void => setCurrentSortType(current);
-
   const sortedOffers = sortOffers({ currentSortType, activeCityOffersList });
+
   return (
-    <div className="cities">
-      <div className="cities__places-container container">
-        <section className="cities__places places">
-          <h2 className="visually-hidden">Places</h2>
-          <b className="places__found">
-            {activeCityOffersList.length} places to stay in {activeCity}
-          </b>
-          <SortBy onSortedOffersListHandler={sortedOffersListHandler} currentSortType={currentSortType} />
-          <MainPageOffersList
-            activeCityOffersList={sortedOffers}
-          />
-        </section>
-        <div className="cities__right-section">
-          <CityMap
-            city={activeCity}
-            points={activeCityOffersList}
-            selectedPoint={activeOffer}
-            offerPage={false}
-          />
-        </div>
+    <div className="cities__places-container container">
+      <section className="cities__places places">
+        <h2 className="visually-hidden">Places</h2>
+        <b className="places__found">
+          {activeCityOffersList.length} places to stay in {activeCity}
+        </b>
+        <SortBy onSortedOffersListHandler={sortedOffersListHandler} currentSortType={currentSortType} />
+        <MainPageOffersList
+          activeCityOffersList={sortedOffers}
+        />
+      </section>
+      <div className="cities__right-section">
+        <CityMap
+          city={activeCity}
+          points={activeCityOffersList}
+          selectedPoint={activeOffer}
+          offerPage={false}
+        />
       </div>
     </div>
   );

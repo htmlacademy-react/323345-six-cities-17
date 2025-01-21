@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, memo, useState } from 'react';
 import { StarElement } from '../../../shared/ui/star-element/star-element';
 import { SendFormType } from '../../../shared/types/types/send-form-type';
 import { StarCount } from '../../../shared/consts/star-count';
@@ -14,7 +14,7 @@ type OfferSendFormProps = {
   offerId: string;
 }
 
-export function OfferSendForm({ offerId }: OfferSendFormProps) {
+function OfferSendForm({ offerId }: OfferSendFormProps) {
   const dispatch = useAppDispatch();
   const [formData, setFormData] = useState<SendFormType>(
     INITIAL_SEND_FORM_STATE
@@ -99,3 +99,5 @@ export function OfferSendForm({ offerId }: OfferSendFormProps) {
     </form>
   );
 }
+
+export default memo(OfferSendForm);

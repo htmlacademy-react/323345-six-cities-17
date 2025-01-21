@@ -6,10 +6,14 @@ import { RoutePath } from '../../../../consts/route-path';
 import { Header } from '../../../../../widgets/header';
 import { Footer } from '../../../../../widgets/footer';
 import { getMetaTitlePage, MetaTitlePage } from '../../../../consts/meta-title-page';
+import classNames from 'classnames';
+import { useAppSelector } from '../../../../hooks/use-app-selector';
+import { selectLoadFavoriteOffers } from '../../../../../store/reducer/favorite/selectors/select-load-favorite-offers';
 
 export function MainLayout(): JSX.Element {
   const location = useLocation();
   const [titleName, setTitleName] = useState<string>(location.pathname);
+  const favoriteList = useAppSelector(selectLoadFavoriteOffers)
 
   useEffect(() => {
     setTitleName(location.pathname);
@@ -21,14 +25,14 @@ export function MainLayout(): JSX.Element {
         <title>{getMetaTitlePage(titleName)}</title>
         <meta name="description" content={MetaTitlePage(titleName)} />
       </Helmet>
-      <div className={`page ${location.pathname !== `${RoutePath.FAVORITES}` && 'page--gray page--main'}`}>
+      <div className={classNames('page', { 'page--gray page--main': (location.pathname !== RoutePath.FAVORITES), 'page--favorites-empty': (location.pathname === RoutePath.FAVORITES && favoriteList.length === 0) })}>
         <Header
           isLoginPage={location.pathname === `${RoutePath.LOGIN}`}
         />
         <Outlet />
         {location.pathname === `${RoutePath.FAVORITES}` && <Footer />}
       </div>
-    </HelmetProvider>
+    </HelmetProvider >
 
   );
 }
