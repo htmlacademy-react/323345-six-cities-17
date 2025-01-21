@@ -13,7 +13,7 @@ import { selectLoadFavoriteOffers } from '../../../../../store/reducer/favorite/
 export function MainLayout(): JSX.Element {
   const location = useLocation();
   const [titleName, setTitleName] = useState<string>(location.pathname);
-  const favoriteList = useAppSelector(selectLoadFavoriteOffers)
+  const favoriteList = useAppSelector(selectLoadFavoriteOffers);
 
   useEffect(() => {
     setTitleName(location.pathname);
@@ -25,7 +25,7 @@ export function MainLayout(): JSX.Element {
         <title>{getMetaTitlePage(titleName)}</title>
         <meta name="description" content={MetaTitlePage(titleName)} />
       </Helmet>
-      <div className={classNames('page', { 'page--gray page--main': (location.pathname !== RoutePath.FAVORITES), 'page--favorites-empty': (location.pathname === RoutePath.FAVORITES && favoriteList.length === 0) })}>
+      <div className={classNames('page', { 'page--gray page--main': (location.pathname !== `${RoutePath.FAVORITES}`), 'page--favorites-empty': (location.pathname === `${RoutePath.FAVORITES}` && favoriteList.length === 0) })}>
         <Header
           isLoginPage={location.pathname === `${RoutePath.LOGIN}`}
         />

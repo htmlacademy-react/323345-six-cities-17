@@ -1,11 +1,11 @@
-import { memo } from "react";
+import { memo } from 'react';
 
 import styles from './near-points.module.css';
-import { useAppSelector } from "../../../shared/hooks/use-app-selector";
-import { selectNearPoints } from "../../../store/reducer/offers/selectors/select-near-points";
-import { OfferCard } from "../../offer-card";
+import { useAppSelector } from '../../../shared/hooks/use-app-selector';
+import { selectNearPoints } from '../../../store/reducer/offers/selectors/select-near-points';
+import { OfferCard } from '../../offer-card';
 
-function NearPointsList(): JSX.Element {
+function NearPointsListTemplate(): JSX.Element {
   const nearPoints = useAppSelector(selectNearPoints).slice(0, 3);
 
   return (
@@ -25,7 +25,8 @@ function NearPointsList(): JSX.Element {
         />
       ))}
     </div>
-  )
+  );
 }
 
-export default memo(NearPointsList);
+const NearPointsList = memo(NearPointsListTemplate);
+export default NearPointsList;

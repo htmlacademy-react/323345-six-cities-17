@@ -13,7 +13,7 @@ type CommentsListProps = {
   offerId: string;
 };
 
-function CommentsList({ offerId }: CommentsListProps) {
+function CommentsListTemplate({ offerId }: CommentsListProps) {
   const isAuthenticated = useAppSelector(selectAuthorizationStatus);
   const dispatch = useAppDispatch();
   const commentsList = useAppSelector(selectLoadComments);
@@ -38,5 +38,6 @@ function CommentsList({ offerId }: CommentsListProps) {
     </section>
   );
 }
+const CommentsList = memo(CommentsListTemplate);
 
-export default memo(CommentsList);
+export default CommentsList;

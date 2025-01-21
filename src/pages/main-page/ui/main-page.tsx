@@ -17,7 +17,7 @@ export function MainPage(): JSX.Element {
   const isEmptyOffersList: boolean = activeCityOffersList.length === 0;
 
   if (isLoading) {
-    return <Loader />
+    return <Loader />;
   }
 
   return (

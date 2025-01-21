@@ -14,7 +14,7 @@ type OfferSendFormProps = {
   offerId: string;
 }
 
-function OfferSendForm({ offerId }: OfferSendFormProps) {
+function OfferSendFormTemplate({ offerId }: OfferSendFormProps) {
   const dispatch = useAppDispatch();
   const [formData, setFormData] = useState<SendFormType>(
     INITIAL_SEND_FORM_STATE
@@ -100,4 +100,5 @@ function OfferSendForm({ offerId }: OfferSendFormProps) {
   );
 }
 
-export default memo(OfferSendForm);
+const OfferSendForm = memo(OfferSendFormTemplate);
+export default OfferSendForm;
