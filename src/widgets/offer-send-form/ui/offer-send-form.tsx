@@ -9,7 +9,6 @@ import {
 } from '../../../shared/consts/comments-length';
 import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
 import { sendCommentAction } from '../../../store/action/async-action';
-import { appStore } from '../../../store';
 import { toast } from 'react-toastify';
 
 type OfferSendFormProps = {
@@ -56,11 +55,10 @@ function OfferSendFormTemplate({ offerId }: OfferSendFormProps) {
         setFormData(INITIAL_SEND_FORM_STATE);
         setBlockedForm(false);
       })
-      .catch((error) => {
+      .catch(() => {
         setBlockedForm(false);
-        toast.warn('Ошибка связи с сервером', error)
-      })
-
+        toast.warn('Ошибка связи с сервером');
+      });
   };
   return (
     <form

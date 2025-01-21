@@ -28,14 +28,14 @@ export function LoginPage(): JSX.Element {
     });
   };
 
-  const getRandomCity = () => (useMemo(() => {
+  const cityName = useMemo(() => {
     const nameIndex = Math.floor(Math.random() * CITIES_LIST.length);
-    const cityName = `${CITIES_LIST[nameIndex].name}` as CityNameType;
-    return cityName;
-  }, []));
-  const cityName = getRandomCity();
+    const cityNameData: CityNameType = CITIES_LIST[nameIndex].name;
+    return cityNameData;
+  }, []);
+
   const redirectHandle = () => {
-    appStore.dispatch(changeActiveCity(cityName))
+    appStore.dispatch(changeActiveCity(cityName));
   };
 
   const onLoginChangeHandle = (e: FormEvent<HTMLFormElement>) => {
