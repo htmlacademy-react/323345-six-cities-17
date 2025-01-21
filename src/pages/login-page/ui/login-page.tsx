@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useMemo, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -13,6 +13,7 @@ import { CityNameType } from '../../../shared/types';
 import { INITIAL_LOGIN_FORM_STATE } from '../../../shared/consts/initial-login-form-state';
 import { AuthStatus } from '../../../shared/consts/auth-status';
 import { RoutePath } from '../../../shared/consts/route-path';
+import { CITIES_LIST } from '../../../shared/consts/cities';
 
 
 export function LoginPage(): JSX.Element {
@@ -27,7 +28,15 @@ export function LoginPage(): JSX.Element {
     });
   };
 
-  const redirectHandle = (name: CityNameType) => appStore.dispatch(changeActiveCity(name));
+  const getRandomCity = () => (useMemo(() => {
+    const nameIndex = Math.floor(Math.random() * CITIES_LIST.length);
+    const cityName = `${CITIES_LIST[nameIndex].name}` as CityNameType;
+    return cityName;
+  }, []));
+  const cityName = getRandomCity();
+  const redirectHandle = () => {
+    appStore.dispatch(changeActiveCity(cityName))
+  };
 
   const onLoginChangeHandle = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -89,8 +98,8 @@ export function LoginPage(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link className="locations__item-link" to={RoutePath.MAIN} onClick={() => redirectHandle('Amsterdam')}>
-                <span>Amsterdam</span>
+              <Link className="locations__item-link" to={RoutePath.MAIN} onClick={redirectHandle}>
+                <span>{cityName}</span>
               </Link>
             </div>
           </section>

@@ -2,9 +2,10 @@ type StarType = {
   value: number;
   formChangeHandle: (rating: number) => void;
   isChecked: boolean;
+  isdisabled: boolean;
 }
 
-export function StarElement({ value, formChangeHandle, isChecked }: StarType) {
+export function StarElement({ value, formChangeHandle, isChecked, isdisabled }: StarType) {
   return (
     <>
       <input
@@ -15,6 +16,7 @@ export function StarElement({ value, formChangeHandle, isChecked }: StarType) {
         type="radio"
         onChange={() => formChangeHandle(value)}
         checked={isChecked}
+        disabled={isdisabled}
       />
       <label
         htmlFor={`${value}-stars`}

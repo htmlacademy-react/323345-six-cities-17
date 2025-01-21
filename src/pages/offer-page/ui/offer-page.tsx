@@ -67,8 +67,8 @@ export function OfferPage(): JSX.Element {
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              {currentOffer?.images.map((image: string) => (
-                <div className="offer__image-wrapper" key={image}>
+              {currentOffer?.images.slice(6).map((image: string) => (
+                <div className="offer__image-wrapper" key={crypto.randomUUID()}>
                   <img
                     className="offer__image"
                     src={image}
