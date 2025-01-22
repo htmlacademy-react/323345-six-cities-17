@@ -8,7 +8,8 @@ import {
   MAX_COMMENTS_LENGTH,
 } from '../../../shared/consts/comments-length';
 import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
-import { sendCommentAction } from '../../../store/action/async-action';
+import { toast } from 'react-toastify';
+import { sendCommentAction } from '../../../store/reducer/comments/actions/comments-slice-actions';
 
 type OfferSendFormProps = {
   offerId: string;
@@ -21,6 +22,7 @@ function OfferSendFormTemplate({ offerId }: OfferSendFormProps) {
   );
   const [sendButtonDisabled, setSendButtonDisabled] = useState(true);
   const [starChecked, setStarChecked] = useState<null | number>(null);
+  const [blockedForm, setBlockedForm] = useState<boolean>(false);
   const onFormChangeHandle = (
     inputName: keyof SendFormType,
     value: number | string
@@ -45,10 +47,18 @@ function OfferSendFormTemplate({ offerId }: OfferSendFormProps) {
 
   const handleSubmitForm = (e: FormEvent) => {
     e.preventDefault();
-    dispatch(sendCommentAction({ offerId, formData }));
-    setSendButtonDisabled(true);
-    setStarChecked(null);
-    setFormData(INITIAL_SEND_FORM_STATE);
+    setBlockedForm(true);
+    dispatch(sendCommentAction({ offerId, formData }))
+      .then(() => {
+        setSendButtonDisabled(true);
+        setStarChecked(null);
+        setFormData(INITIAL_SEND_FORM_STATE);
+        setBlockedForm(false);
+      })
+      .catch(() => {
+        setBlockedForm(false);
+        toast.warn('Ошибка связи с сервером');
+      });
   };
   return (
     <form
@@ -70,6 +80,7 @@ function OfferSendFormTemplate({ offerId }: OfferSendFormProps) {
                 onFormChangeHandle('rating', rating);
               }}
               isChecked={starChecked === star}
+              isdisabled={blockedForm}
             />
           )
         )}
@@ -81,6 +92,7 @@ function OfferSendFormTemplate({ offerId }: OfferSendFormProps) {
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={formData.comment}
         onChange={(e) => onFormChangeHandle('comment', e.target.value)}
+        disabled={blockedForm}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">

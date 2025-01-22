@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { CurrentOfferType, OfferType } from '../../../shared/types';
+import { InitialOffersType } from './initiail-offers-type';
 import {
   fetchCurrentOfferAction,
   fetchNearPointsAction,
   fetchOffersAction,
-} from '../../action/async-action';
-import { CurrentOfferType, OfferType } from '../../../shared/types';
-import { InitialOffersType } from './initiail-offers-type';
+} from './actions/offers-slice-actions';
 
 const initialState: InitialOffersType = {
   activeOffer: null,

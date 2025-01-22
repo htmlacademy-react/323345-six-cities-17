@@ -23,9 +23,9 @@ export function FavoritesList({ favoritesList }: FavoritesListProps): JSX.Elemen
     <li className="favorites__locations-items" key={`group-${group[0]}}`}>
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
-          <div className="locations__item-link">
-            <Link to={RoutePath.MAIN} onClick={() => redirectHandle(group[0])}>{group[0]}</Link>
-          </div>
+
+          <Link className="locations__item-link" to={RoutePath.MAIN} onClick={() => redirectHandle(group[0])}><span>{group[0]}</span></Link>
+
         </div>
       </div>
       <div className="favorites__places">

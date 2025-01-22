@@ -5,9 +5,9 @@ import OfferSendForm from '../../offer-send-form/ui/offer-send-form';
 import { useAppSelector } from '../../../shared/hooks/use-app-selector';
 import { AuthStatus } from '../../../shared/consts/auth-status';
 import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
-import { fetchCommentsAction } from '../../../store/action/async-action';
 import { selectAuthorizationStatus } from '../../../store/reducer/user/selectors/select-authorization-status';
 import { selectLoadComments } from '../../../store/reducer/comments/selectors/select-load-comments';
+import { fetchCommentsAction } from '../../../store/reducer/comments/actions/comments-slice-actions';
 
 type CommentsListProps = {
   offerId: string;
@@ -16,7 +16,8 @@ type CommentsListProps = {
 function CommentsListTemplate({ offerId }: CommentsListProps) {
   const isAuthenticated = useAppSelector(selectAuthorizationStatus);
   const dispatch = useAppDispatch();
-  const commentsList = useAppSelector(selectLoadComments);
+  const commentsListData = useAppSelector(selectLoadComments);
+  const commentsList = commentsListData.slice(-10).reverse();
 
   useEffect(() => {
     dispatch(fetchCommentsAction(offerId));
@@ -26,7 +27,7 @@ function CommentsListTemplate({ offerId }: CommentsListProps) {
     <section className="offer__reviews reviews">
       <h2 className="reviews__title">
         Reviews &middot;{' '}
-        <span className="reviews__amount">{commentsList.length}</span>
+        <span className="reviews__amount">{commentsListData.length}</span>
       </h2>
       {commentsList && commentsList.length !== 0 &&
         <ul className="reviews__list">

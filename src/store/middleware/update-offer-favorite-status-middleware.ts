@@ -9,7 +9,7 @@ import { responseToCurrentOfferTypeAdapter } from '../../shared/utils/response-a
 import { responseToOfferTypeAdapter } from '../../shared/utils/response-adapter/response-to-offer-type-adapter';
 import { CurrentOfferType, OfferType } from '../../shared/types';
 import { ResponseOfferType } from '../../shared/types/types/response-offer-type';
-import { favoriteRequestAction } from '../action/async-action';
+import { favoriteRequestAction } from '../reducer/favorite/actions/favorite-slice-actions';
 
 export const updateOfferFavoriteStatusMiddleware: Middleware =
   () => (next) => (action: PayloadAction<ResponseOfferType>) => {

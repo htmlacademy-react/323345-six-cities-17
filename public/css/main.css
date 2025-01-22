@@ -493,7 +493,13 @@ img {
   line-height: 1.2143;
   -webkit-transition: text-shadow .3s;
   transition: text-shadow .3s;
-  cursor: pointer
+  cursor: pointer;
+  transition: scale, 0.3s;
+
+  &:hover {
+    transform: scale(1.05);
+    transition: scale, 0.3s;
+  }
 }
 
 .header__nav-link:focus,
@@ -509,7 +515,8 @@ img {
 
 .header__login {
   padding-top: 2px;
-  padding-right: 8px
+  padding-right: 8px;
+  transition: scale, 0.3s;
 }
 
 .header__signout,
@@ -754,7 +761,12 @@ img {
 }
 
 .locations--current .locations__item {
-  margin: 0
+  margin: 0;
+  transition: transform, 0.3s
+}
+.locations--current .locations__item:hover {
+  transition: transform, 0.3s;
+  transform: scale(1.1)
 }
 
 .locations--current .locations__item-link {
@@ -956,17 +968,26 @@ img {
   flex-shrink: 0;
   width: 18px;
   height: 19px;
-  margin-top: 2px
+  margin-top: 2px;
+  transition: scale, 0.3s
 }
 
 .place-card__bookmark-button:focus .place-card__bookmark-icon,
 .place-card__bookmark-button:hover .place-card__bookmark-icon {
-  stroke: #4481c3
+  stroke: #4481c3;
+  transform: scale(1.1);
+  transition: scale, 0.3s
 }
 
 .place-card__bookmark-button--active .place-card__bookmark-icon {
   stroke: #4481c3;
-  fill: #4481c3
+  fill: #4481c3;
+  transition: scale, 0.3s;
+
+  &:hover {
+    transform: scale(1.1);
+    transition: scale, 0.3s
+  }
 }
 
 .place-card__bookmark-icon {
@@ -1198,17 +1219,29 @@ img {
   right: 93px;
   width: 31px;
   height: 33px;
-  margin-top: 2px
+  margin-top: 2px;
+  transition: scale, 0.3s;
+
+  &:hover {
+    transform: scale(1.05);
+    transition: scale, 0.3s
+  }
 }
 
 .offer__bookmark-button:focus .offer__bookmark-icon,
 .offer__bookmark-button:hover .offer__bookmark-icon {
-  stroke: #4481c3
+  stroke: #4481c3;
 }
 
 .offer__bookmark-button--active .offer__bookmark-icon {
   stroke: #4481c3;
-  fill: #4481c3
+  fill: #4481c3;
+  transition: scale, 0.3s;
+
+  &:hover {
+    transform: scale(1.05);
+    transition: scale, 0.3s
+  }
 }
 
 .offer__bookmark-icon {

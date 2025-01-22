@@ -9,7 +9,6 @@ import { getPercentFromRating } from '../../../shared/utils/percent-from-rating/
 import { CommentsList } from '../../../widgets/comments-list';
 import { useAppSelector } from '../../../shared/hooks/use-app-selector';
 import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
-import { favoriteRequestAction, fetchCurrentOfferAction, fetchNearPointsAction } from '../../../store/action/async-action';
 import { selectCurrentOffer } from '../../../store/reducer/offers/selectors/select-current-offer';
 import { selectAuthorizationStatus } from '../../../store/reducer/user/selectors/select-authorization-status';
 import { Loader } from '../../../shared/ui/loader/loader';
@@ -18,6 +17,8 @@ import { toast } from 'react-toastify';
 import { favoriteRequestParams } from '../../../shared/consts/favorite-request-params';
 import MapWrapper from '../../../widgets/map-wrapper/ui/map-wrapper';
 import NearPointsList from '../../../widgets/near-poits-list';
+import { favoriteRequestAction } from '../../../store/reducer/favorite/actions/favorite-slice-actions';
+import { fetchCurrentOfferAction, fetchNearPointsAction } from '../../../store/reducer/offers/actions/offers-slice-actions';
 
 export function OfferPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -67,8 +68,8 @@ export function OfferPage(): JSX.Element {
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              {currentOffer?.images.map((image: string) => (
-                <div className="offer__image-wrapper" key={image}>
+              {currentOffer?.images.slice(6).map((image: string) => (
+                <div className="offer__image-wrapper" key={crypto.randomUUID()}>
                   <img
                     className="offer__image"
                     src={image}

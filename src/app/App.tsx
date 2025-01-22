@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { checkAuthAction, fetchFavoriteOffersAction, fetchOffersAction } from '../store/action/async-action';
+import { checkAuthAction } from '../store/reducer/user/actions/user-slice-actions';
 import { useAppDispatch } from '../shared/hooks/use-app-dispatch';
 import { useAppSelector } from '../shared/hooks/use-app-selector';
 import { selectAuthorizationStatus } from '../store/reducer/user/selectors/select-authorization-status';
@@ -14,6 +14,8 @@ import { MainLayout } from '../shared/ui/layout/main-layout';
 import { NotFoundPage } from '../pages/not-found-page';
 import { AuthStatus } from '../shared/consts/auth-status';
 import { RoutePath } from '../shared/consts/route-path';
+import { fetchFavoriteOffersAction } from '../store/reducer/favorite/actions/favorite-slice-actions';
+import { fetchOffersAction } from '../store/reducer/offers/actions/offers-slice-actions';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
