@@ -4,7 +4,7 @@ import {
   checkAuthAction,
   loginAction,
   logoutAction,
-} from '../../action/async-action';
+} from './actions/user-slice-actions';
 import { InitialUserType } from './initial-user-type';
 import { UserType } from '../../../shared/types/types/user-type';
 import { dropToken, saveToken } from '../../../api/token';

@@ -5,9 +5,9 @@ import OfferSendForm from '../../offer-send-form/ui/offer-send-form';
 import { useAppSelector } from '../../../shared/hooks/use-app-selector';
 import { AuthStatus } from '../../../shared/consts/auth-status';
 import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
-import { fetchCommentsAction } from '../../../store/action/async-action';
 import { selectAuthorizationStatus } from '../../../store/reducer/user/selectors/select-authorization-status';
 import { selectLoadComments } from '../../../store/reducer/comments/selectors/select-load-comments';
+import { fetchCommentsAction } from '../../../store/reducer/comments/actions/comments-slice-actions';
 
 type CommentsListProps = {
   offerId: string;

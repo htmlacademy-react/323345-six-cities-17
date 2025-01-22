@@ -8,8 +8,8 @@ import {
   MAX_COMMENTS_LENGTH,
 } from '../../../shared/consts/comments-length';
 import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
-import { sendCommentAction } from '../../../store/action/async-action';
 import { toast } from 'react-toastify';
+import { sendCommentAction } from '../../../store/reducer/comments/actions/comments-slice-actions';
 
 type OfferSendFormProps = {
   offerId: string;

@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {
-  favoriteRequestAction,
-  fetchFavoriteOffersAction,
-} from '../../action/async-action';
 import { InitialFavoriteType } from './initial-favorite-type';
 import { toast } from 'react-toastify';
 import { responseToOfferTypeAdapter } from '../../../shared/utils/response-adapter/response-to-offer-type-adapter';
 import { ResponseOfferType } from '../../../shared/types/types/response-offer-type';
 import { favoriteRequestParams } from '../../../shared/consts/favorite-request-params';
+import {
+  favoriteRequestAction,
+  fetchFavoriteOffersAction,
+} from './actions/favorite-slice-actions';
 
 const initialState: InitialFavoriteType = {
   favoriteOffers: [],
