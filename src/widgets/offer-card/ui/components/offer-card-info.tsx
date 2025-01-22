@@ -9,8 +9,8 @@ import { selectAuthorizationStatus } from '../../../../store/reducer/user/select
 import { getPercentFromRating } from '../../../../shared/utils/percent-from-rating/percent-from-rating.ts';
 import { capitalizeFirstLetter } from '../../../../shared/utils/capitalize-first-letter/capitalize-first-letter.ts';
 import { AuthStatus } from '../../../../shared/consts/auth-status.ts';
-import { favoriteRequestAction } from '../../../../store/action/async-action.ts';
 import { favoriteRequestParams } from '../../../../shared/consts/favorite-request-params.ts';
+import { favoriteRequestAction } from '../../../../store/reducer/favorite/actions/favorite-slice-actions.ts';
 
 
 type OffersCardInfo = {

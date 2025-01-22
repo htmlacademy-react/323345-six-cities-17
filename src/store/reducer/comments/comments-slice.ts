@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { CommentType } from '../../../shared/types';
+import { InitialCommentsType } from './initial-comments-type';
 import {
   fetchCommentsAction,
   sendCommentAction,
-} from '../../action/async-action';
-import { CommentType } from '../../../shared/types';
-import { InitialCommentsType } from './initial-comments-type';
+} from './actions/comments-slice-actions';
 
 const initialState: InitialCommentsType = {
   comments: [],
@@ -14,11 +14,7 @@ const initialState: InitialCommentsType = {
 export const commentsSlice = createSlice({
   name: 'commentsSlice',
   initialState,
-  reducers: {
-    loadComments: (state, { payload }: PayloadAction<CommentType[]>) => {
-      state.comments = payload;
-    },
-  },
+  reducers: {},
   extraReducers(builder) {
     builder
       .addCase(fetchCommentsAction.pending, (state) => {
@@ -50,5 +46,3 @@ export const commentsSlice = createSlice({
       });
   },
 });
-
-export const { loadComments } = commentsSlice.actions;
