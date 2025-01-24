@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
-import classNames from 'classnames';
+import { Navigate, useParams } from 'react-router-dom';
 
 import { CurrentOfferType } from '../../../shared/types';
 import { RoutePath } from '../../../shared/consts/route-path';
@@ -10,39 +9,17 @@ import { CommentsList } from '../../../widgets/comments-list';
 import { useAppSelector } from '../../../shared/hooks/use-app-selector';
 import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
 import { selectCurrentOffer } from '../../../store/reducer/offers/selectors/select-current-offer';
-import { selectAuthorizationStatus } from '../../../store/reducer/user/selectors/select-authorization-status';
 import { Loader } from '../../../shared/ui/loader/loader';
-import { AuthStatus } from '../../../shared/consts/auth-status';
-import { toast } from 'react-toastify';
-import { favoriteRequestParams } from '../../../shared/consts/favorite-request-params';
 import MapWrapper from '../../../widgets/map-wrapper/ui/map-wrapper';
 import NearPointsList from '../../../widgets/near-poits-list';
-import { favoriteRequestAction } from '../../../store/reducer/favorite/actions/favorite-slice-actions';
 import { fetchCurrentOfferAction, fetchNearPointsAction } from '../../../store/reducer/offers/actions/offers-slice-actions';
+import IsFavoriteButton from '../../../widgets/is-favorite-button';
 
 export function OfferPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const { offerId } = useParams();
-  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   const currentOffer: CurrentOfferType | undefined = useAppSelector(selectCurrentOffer);
   const [loaderVisible, setLoaderVisible] = useState(true);
-
-  const navigate = useNavigate();
-
-  const toFavoriteToggleHadler = () => {
-    if (authorizationStatus !== AuthStatus.Auth) {
-      toast.warn('You are not authorized, please authorize for this action');
-      navigate(RoutePath.LOGIN);
-      return;
-    }
-    if (offerId && currentOffer && currentOffer.isFavorite) {
-      dispatch(favoriteRequestAction({ offerId, requestParams: favoriteRequestParams.DEL }));
-    } else {
-      if (offerId) {
-        dispatch(favoriteRequestAction({ offerId, requestParams: favoriteRequestParams.ADD }));
-      }
-    }
-  };
 
   useEffect(() => {
     (async () => {
@@ -68,7 +45,7 @@ export function OfferPage(): JSX.Element {
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              {currentOffer?.images.slice(6).map((image: string) => (
+              {currentOffer?.images.slice(0, 6).map((image: string) => (
                 <div className="offer__image-wrapper" key={crypto.randomUUID()}>
                   <img
                     className="offer__image"
@@ -88,12 +65,7 @@ export function OfferPage(): JSX.Element {
               )}
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">{currentOffer?.title}</h1>
-                <button className={classNames('offer__bookmark-button button', { 'offer__bookmark-button--active': currentOffer?.isFavorite })} type="button" onClick={toFavoriteToggleHadler}>
-                  <svg className="offer__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                {offerId && currentOffer && <IsFavoriteButton offerId={offerId} isFavorite={currentOffer.isFavorite} place='Offer' />}
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">

@@ -3,6 +3,7 @@ import { changeActiveOffer } from '../../../store/reducer/offers/offers-slice';
 import { OfferCardMark } from './components/offer-card-mark';
 import { OfferCardImg } from './components/offer-card-img';
 import { OfferCardInfo } from './components/offer-card-info';
+import classNames from 'classnames';
 
 type CardProps = {
   id: string;
@@ -33,10 +34,13 @@ export function OfferCard({
   };
   return (
     <article
-      className={`place-card ${place === 'main'
-        ? 'cities__card'
-        : place === 'favorites' && 'favorites__card'
-        }`}
+      className={classNames(
+        'place-card',
+        {
+          'cities__card': place === 'main',
+          'favorites__card': place === 'favorites'
+        }
+      )}
       onMouseEnter={() => choseOffer(id)}
       onMouseLeave={() => choseOffer(null)}
     >

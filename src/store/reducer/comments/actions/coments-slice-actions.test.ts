@@ -31,7 +31,6 @@ describe('comments-slice-actions', () => {
     store = mockStoreCreator({
       commentsSlice: {
         comments: [],
-        isLoading: false,
       },
     });
   });
@@ -51,7 +50,7 @@ describe('comments-slice-actions', () => {
   };
 
   describe('fetchCommentsAction', () => {
-    it('should dispatch "fetchCommentsAction.pending" and "fetchCommentsAction.fullfilled" when server response 200', async () => {
+    it('should dispatch "fetchCommentsAction.pending" and "fetchCommentsAction.fulfilled" when server response 200', async () => {
       mockAxiosAdapter
         .onGet(`${APIRoute.Comments}/${mockOfferId}`)
         .reply(200, mockComments);
