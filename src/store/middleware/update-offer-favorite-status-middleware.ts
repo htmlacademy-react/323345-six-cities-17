@@ -16,7 +16,7 @@ export const updateOfferFavoriteStatusMiddleware: Middleware =
     const result = next(action);
 
     if (favoriteRequestAction.fulfilled.match(action)) {
-      const responseData: ResponseOfferType = action.payload.data;
+      const responseData: ResponseOfferType = action.payload;
       const currentOffer = appStore.getState().offersSlice.currentOffer;
       if (currentOffer && currentOffer.id === responseData.id) {
         const adaptetOffer: CurrentOfferType =

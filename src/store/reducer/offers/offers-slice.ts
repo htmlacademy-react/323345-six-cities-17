@@ -45,9 +45,6 @@ export const offersSlice = createSlice({
         }
       }
     },
-    offersIsloading(state, { payload }: PayloadAction<boolean>) {
-      state.isLoading = payload;
-    },
   },
   extraReducers(builder) {
     builder
@@ -96,7 +93,6 @@ export const offersSlice = createSlice({
 export const {
   changeActiveOffer,
   updateCurrentOffer,
-  offersIsloading,
   updateOffers,
   updateNearPoints,
 } = offersSlice.actions;

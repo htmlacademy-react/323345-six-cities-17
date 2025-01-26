@@ -2,12 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { InitialFavoriteType } from './initial-favorite-type';
 import { toast } from 'react-toastify';
 import { responseToOfferTypeAdapter } from '../../../shared/utils/response-adapter/response-to-offer-type-adapter';
-import { ResponseOfferType } from '../../../shared/types/types/response-offer-type';
 import { favoriteRequestParams } from '../../../shared/consts/favorite-request-params';
 import {
   favoriteRequestAction,
   fetchFavoriteOffersAction,
 } from './actions/favorite-slice-actions';
+import { OfferType } from '../../../shared/types';
 
 const initialState: InitialFavoriteType = {
   favoriteOffers: [],
@@ -25,12 +25,9 @@ export const favoriteSlice = createSlice({
       })
       .addCase(
         fetchFavoriteOffersAction.fulfilled,
-        (state, { payload }: PayloadAction<ResponseOfferType[]>) => {
-          const adaptedPayload = payload.map((item) =>
-            responseToOfferTypeAdapter(item)
-          );
+        (state, { payload }: PayloadAction<OfferType[]>) => {
           state.isLoading = false;
-          state.favoriteOffers = adaptedPayload;
+          state.favoriteOffers = payload;
         }
       )
       .addCase(fetchFavoriteOffersAction.rejected, (state) => {
@@ -40,28 +37,20 @@ export const favoriteSlice = createSlice({
       .addCase(favoriteRequestAction.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(
-        favoriteRequestAction.fulfilled,
-        (
-          state,
-          {
-            payload,
-          }: PayloadAction<{ requestParams: string; data: ResponseOfferType }>
-        ) => {
-          state.isLoading = false;
-          if (payload.requestParams === `${favoriteRequestParams.ADD}`) {
-            const adaptedPayload = responseToOfferTypeAdapter(payload.data);
-            state.favoriteOffers = [...state.favoriteOffers, adaptedPayload];
-            toast.success('Added to favorites');
-          }
-          if (payload.requestParams === `${favoriteRequestParams.DEL}`) {
-            state.favoriteOffers = state.favoriteOffers.filter(
-              (offer) => offer.id !== payload.data.id
-            );
-            toast.success('Removed from favorites');
-          }
+      .addCase(favoriteRequestAction.fulfilled, (state, action) => {
+        state.isLoading = false;
+        if (action.meta.arg.requestParams === `${favoriteRequestParams.ADD}`) {
+          const adaptedPayload = responseToOfferTypeAdapter(action.payload);
+          state.favoriteOffers = [...state.favoriteOffers, adaptedPayload];
+          toast.success('Added to favorites');
         }
-      )
+        if (action.meta.arg.requestParams === `${favoriteRequestParams.DEL}`) {
+          state.favoriteOffers = state.favoriteOffers.filter(
+            (offer) => offer.id !== action.payload.id
+          );
+          toast.success('Removed from favorites');
+        }
+      })
       .addCase(favoriteRequestAction.rejected, (state, action) => {
         state.isLoading = false;
         if (action.meta.arg.requestParams === `${favoriteRequestParams.ADD}`) {

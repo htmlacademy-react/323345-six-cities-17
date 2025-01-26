@@ -29,7 +29,7 @@ export function OfferCard({
   rating,
 }: CardProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const choseOffer = (offerId: string | null) => {
+  const activeOfferHandler = (offerId: string | null) => {
     dispatch(changeActiveOffer(offerId));
   };
   return (
@@ -41,8 +41,8 @@ export function OfferCard({
           'favorites__card': place === 'favorites'
         }
       )}
-      onMouseEnter={() => choseOffer(id)}
-      onMouseLeave={() => choseOffer(null)}
+      onMouseEnter={() => activeOfferHandler(id)}
+      onMouseLeave={() => activeOfferHandler(null)}
     >
       {isPremium ? <OfferCardMark /> : null}
       <OfferCardImg id={id} place={place} previewImage={previewImage} />

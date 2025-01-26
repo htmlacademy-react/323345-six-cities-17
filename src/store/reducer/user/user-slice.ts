@@ -25,11 +25,7 @@ const initialState: InitialUserType = {
 export const userSlice = createSlice({
   name: 'userSlice',
   initialState,
-  reducers: {
-    authorizationStatus: (state, { payload }: PayloadAction<AuthStatus>) => {
-      state.authorizationStatus = payload;
-    },
-  },
+  reducers: {},
   extraReducers(builder) {
     builder
       .addCase(checkAuthAction.pending, (state) => {
@@ -50,7 +46,7 @@ export const userSlice = createSlice({
       })
       .addCase(loginAction.pending, (state) => {
         state.isLoading = true;
-        state.authorizationStatus = AuthStatus.Unknown;
+        state.authorizationStatus = AuthStatus.NoAuth;
       })
       .addCase(
         loginAction.fulfilled,
@@ -70,7 +66,7 @@ export const userSlice = createSlice({
       })
       .addCase(logoutAction.pending, (state) => {
         state.isLoading = true;
-        state.authorizationStatus = AuthStatus.Unknown;
+        state.authorizationStatus = AuthStatus.Auth;
       })
       .addCase(logoutAction.fulfilled, (state) => {
         state.isLoading = false;
