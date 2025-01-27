@@ -18,6 +18,7 @@ type OffersCardInfo = {
 
 function OfferCardInfo({ id, place, isFavorite, price, type, title, rating }: OffersCardInfo): JSX.Element {
   const ratingPercent: number = getPercentFromRating(rating);
+  const integerStarCount = `${Math.round(ratingPercent / 20) * 20}%`;
 
   return (
     <div className={`place-card__info ${place === 'favorites' && 'favorites__card-info'}`}>
@@ -30,7 +31,7 @@ function OfferCardInfo({ id, place, isFavorite, price, type, title, rating }: Of
       </div>
       <div className="place-card__rating rating">
         <div className="place-card__stars rating__stars">
-          <span style={{ width: ratingPercent }}></span>
+          <span style={{ width: integerStarCount }}></span>
           <span className="visually-hidden">Rating</span>
         </div>
       </div>
