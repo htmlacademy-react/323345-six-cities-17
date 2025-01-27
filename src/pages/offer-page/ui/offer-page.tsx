@@ -15,6 +15,7 @@ import NearPointsList from '../../../widgets/near-poits-list';
 import { fetchCurrentOfferAction, fetchNearPointsAction } from '../../../store/reducer/offers/actions/offers-slice-actions';
 import IsFavoriteButton from '../../../widgets/is-favorite-button';
 
+
 function OfferPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const { offerId } = useParams();

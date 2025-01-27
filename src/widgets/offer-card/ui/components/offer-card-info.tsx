@@ -5,7 +5,6 @@ import { getPercentFromRating } from '../../../../shared/utils/percent-from-rati
 import { capitalizeFirstLetter } from '../../../../shared/utils/capitalize-first-letter/capitalize-first-letter.ts';
 import IsFavoriteButton from '../../../is-favorite-button/index.ts';
 
-
 type OffersCardInfo = {
   id: string;
   place: 'main' | 'favorites';
