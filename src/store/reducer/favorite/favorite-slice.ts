@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { InitialFavoriteType } from './initial-favorite-type';
 import { toast } from 'react-toastify';
 import { responseToOfferTypeAdapter } from '../../../shared/utils/response-adapter/response-to-offer-type-adapter';
-import { favoriteRequestParams } from '../../../shared/consts/favorite-request-params';
+import { FavoriteRequestParams } from '../../../shared/consts/favorite-request-params';
 import {
   favoriteRequestAction,
   fetchFavoriteOffersAction,
@@ -39,12 +39,12 @@ export const favoriteSlice = createSlice({
       })
       .addCase(favoriteRequestAction.fulfilled, (state, action) => {
         state.isLoading = false;
-        if (action.meta.arg.requestParams === `${favoriteRequestParams.ADD}`) {
+        if (action.meta.arg.requestParams === `${FavoriteRequestParams.ADD}`) {
           const adaptedPayload = responseToOfferTypeAdapter(action.payload);
           state.favoriteOffers = [...state.favoriteOffers, adaptedPayload];
           toast.success('Added to favorites');
         }
-        if (action.meta.arg.requestParams === `${favoriteRequestParams.DEL}`) {
+        if (action.meta.arg.requestParams === `${FavoriteRequestParams.DEL}`) {
           state.favoriteOffers = state.favoriteOffers.filter(
             (offer) => offer.id !== action.payload.id
           );
@@ -53,10 +53,10 @@ export const favoriteSlice = createSlice({
       })
       .addCase(favoriteRequestAction.rejected, (state, action) => {
         state.isLoading = false;
-        if (action.meta.arg.requestParams === `${favoriteRequestParams.ADD}`) {
+        if (action.meta.arg.requestParams === `${FavoriteRequestParams.ADD}`) {
           toast.warn('Не смог связаться с сервером');
         }
-        if (action.meta.arg.requestParams === `${favoriteRequestParams.DEL}`) {
+        if (action.meta.arg.requestParams === `${FavoriteRequestParams.DEL}`) {
           toast.success('Removed from favorites');
         }
       });

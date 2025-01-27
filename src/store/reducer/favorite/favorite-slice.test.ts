@@ -1,5 +1,5 @@
 import { datatype } from 'faker';
-import { favoriteRequestParams } from '../../../shared/consts/favorite-request-params';
+import { FavoriteRequestParams } from '../../../shared/consts/favorite-request-params';
 import { ResponseOfferType } from '../../../shared/types/types/response-offer-type';
 import { responseToOfferTypeAdapter } from '../../../shared/utils/response-adapter/response-to-offer-type-adapter';
 import {
@@ -126,7 +126,7 @@ describe('favoriteSlice', () => {
           favoriteOffers: [mockOffer],
           isLoading: false,
         };
-        const requestParams = favoriteRequestParams.ADD;
+        const requestParams = FavoriteRequestParams.ADD;
         const result = favoriteSlice.reducer(
           beforeState,
           favoriteRequestAction.fulfilled(mockServerResponse, 'requestId', {
@@ -140,7 +140,7 @@ describe('favoriteSlice', () => {
       it('"favoriteRequestAction.fulfilled" at "favoriteRequestParams.DEL"', () => {
         const beforeState = { favoriteOffers: [mockOffer], isLoading: false };
         const mockExpectedState = { favoriteOffers: [], isLoading: false };
-        const requestParams = favoriteRequestParams.DEL;
+        const requestParams = FavoriteRequestParams.DEL;
         const result = favoriteSlice.reducer(
           beforeState,
           favoriteRequestAction.fulfilled(mockServerResponse, 'requestId', {
@@ -154,7 +154,7 @@ describe('favoriteSlice', () => {
 
     describe('should set "isLoading" to "false" with "favoriteRequestAction.rejected" at "requestParams = ADD or DEL"', () => {
       it('"favoriteRequestAction.rejected" at "favoriteRequestParams.ADD"', () => {
-        const requestParams = favoriteRequestParams.ADD;
+        const requestParams = FavoriteRequestParams.ADD;
         const result = favoriteSlice.reducer(
           undefined,
           favoriteRequestAction.rejected(null, 'requestId', {
@@ -167,7 +167,7 @@ describe('favoriteSlice', () => {
       });
 
       it('"favoriteRequestAction.rejected" at "favoriteRequestParams.DEL"', () => {
-        const requestParams = favoriteRequestParams.DEL;
+        const requestParams = FavoriteRequestParams.DEL;
         const result = favoriteSlice.reducer(
           undefined,
           favoriteRequestAction.rejected(null, 'requestId', {

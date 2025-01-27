@@ -1,7 +1,7 @@
 import { FormEvent, memo, useState } from 'react';
 import { StarElement } from '../../../shared/ui/star-element';
 import { SendFormType } from '../../../shared/types/types/send-form-type';
-import { StarCount } from '../../../shared/consts/star-count';
+import { STAR_COUNT } from '../../../shared/consts/star-count';
 import { INITIAL_SEND_FORM_STATE } from '../../../shared/consts/Initial-send-form-state';
 import {
   MIN_COMMENTS_LENGTH,
@@ -71,7 +71,7 @@ function OfferSendFormTemplate({ offerId }: OfferSendFormProps) {
         Your review
       </label>
       <div className="reviews__rating-form form__rating">
-        {StarCount.map(
+        {STAR_COUNT.map(
           (star: number): JSX.Element => (
             <StarElement
               key={star}

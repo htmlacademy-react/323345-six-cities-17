@@ -7,7 +7,7 @@ import MainPageOffersList from './main-page-offers-list';
 import CityMap from '../../../../widgets/city-map/ui/city-map';
 import SortBy from '../../../../widgets/sort-by/ui/sort-by';
 import type { OfferType } from '../../../../shared/types';
-import { sortKeys } from '../../../../shared/consts/sort-keys';
+import { SortKeys } from '../../../../shared/consts/sort-keys';
 import { sortOffers } from '../../../../shared/utils/sort-offers/sort-offers';
 
 type mainPageBodyProps = {
@@ -19,8 +19,8 @@ function MainPageBody({
 }: mainPageBodyProps): JSX.Element {
   const activeOffer = useAppSelector(selectActiveOffer);
   const activeCity = useAppSelector(selectActiveCity);
-  const [currentSortType, setCurrentSortType] = useState<sortKeys>(sortKeys.POPULAR);
-  const sortedOffersListHandler = (current: sortKeys): void => setCurrentSortType(current);
+  const [currentSortType, setCurrentSortType] = useState<SortKeys>(SortKeys.POPULAR);
+  const sortedOffersListHandler = (current: SortKeys): void => setCurrentSortType(current);
   const sortedOffers = sortOffers({ currentSortType, activeCityOffersList });
 
   return (

@@ -8,7 +8,7 @@ import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
 import { favoriteRequestAction } from '../../../store/reducer/favorite/actions/favorite-slice-actions';
 import { RoutePath } from '../../../shared/consts/route-path';
 import { AuthStatus } from '../../../shared/consts/auth-status';
-import { favoriteRequestParams } from '../../../shared/consts/favorite-request-params';
+import { FavoriteRequestParams } from '../../../shared/consts/favorite-request-params';
 
 type IsFavoriteButtonProps = {
   isFavorite: boolean;
@@ -35,8 +35,8 @@ function IsFavoriteButton({ isFavorite, offerId, place }: IsFavoriteButtonProps)
         favoriteRequestAction({
           offerId,
           requestParams: isFavorite
-            ? favoriteRequestParams.DEL
-            : favoriteRequestParams.ADD
+            ? FavoriteRequestParams.DEL
+            : FavoriteRequestParams.ADD
         }));
     }
   };
