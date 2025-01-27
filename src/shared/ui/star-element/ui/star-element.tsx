@@ -17,6 +17,7 @@ function StarElement({ value, formChangeHandle, isChecked, isdisabled }: StarTyp
         onChange={() => formChangeHandle(value)}
         checked={isChecked}
         disabled={isdisabled}
+        data-testid="star-container"
       />
       <label
         htmlFor={`${value}-stars`}
