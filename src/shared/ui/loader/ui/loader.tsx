@@ -1,7 +1,9 @@
 import style from './loader.module.css';
 
-export function Loader() {
+function Loader() {
   return (
     <span className={style.loader}></span>
   );
 }
+
+export default Loader;

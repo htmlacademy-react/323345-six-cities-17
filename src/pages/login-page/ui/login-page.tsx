@@ -16,7 +16,7 @@ import { RoutePath } from '../../../shared/consts/route-path';
 import { CITIES_LIST } from '../../../shared/consts/cities';
 
 
-export function LoginPage(): JSX.Element {
+function LoginPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const authStatus = useAppSelector(selectAuthorizationStatus);
   const [loginFormData, setLoginFormData] = useState(INITIAL_LOGIN_FORM_STATE);
@@ -108,4 +108,6 @@ export function LoginPage(): JSX.Element {
     </div>
   );
 }
+
+export default LoginPage;
 

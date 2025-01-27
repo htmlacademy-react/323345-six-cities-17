@@ -1,8 +1,8 @@
 import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
 import { changeActiveOffer } from '../../../store/reducer/offers/offers-slice';
-import { OfferCardMark } from './components/offer-card-mark';
-import { OfferCardImg } from './components/offer-card-img';
-import { OfferCardInfo } from './components/offer-card-info';
+import OfferCardMark from './components/offer-card-mark';
+import OfferCardImg from './components/offer-card-img';
+import OfferCardInfo from './components/offer-card-info';
 import classNames from 'classnames';
 
 type CardProps = {
@@ -17,7 +17,7 @@ type CardProps = {
   rating: number;
 };
 
-export function OfferCard({
+function OfferCard({
   id,
   place,
   isFavorite,
@@ -58,3 +58,5 @@ export function OfferCard({
     </article>
   );
 }
+
+export default OfferCard;

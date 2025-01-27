@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 import { useAppSelector } from '../../../shared/hooks/use-app-selector';
 import { selectActiveCity } from '../../../store/reducer/city/selectors/select-active-city';
-import { City } from './components/city';
+import City from './components/city';
 import { CITIES_LIST } from '../../../shared/consts/cities';
 
 function LocationTabsTemplate(): JSX.Element {

@@ -1,5 +1,5 @@
 import { FormEvent, memo, useState } from 'react';
-import { StarElement } from '../../../shared/ui/star-element/star-element';
+import { StarElement } from '../../../shared/ui/star-element';
 import { SendFormType } from '../../../shared/types/types/send-form-type';
 import { StarCount } from '../../../shared/consts/star-count';
 import { INITIAL_SEND_FORM_STATE } from '../../../shared/consts/Initial-send-form-state';
@@ -113,4 +113,5 @@ function OfferSendFormTemplate({ offerId }: OfferSendFormProps) {
 }
 
 const OfferSendForm = memo(OfferSendFormTemplate);
+
 export default OfferSendForm;

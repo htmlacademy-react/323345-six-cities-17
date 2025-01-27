@@ -1,12 +1,15 @@
-import { sortKeys } from '../../shared/consts/sort-keys';
-import { OfferType } from '../../shared/types';
+import { sortKeys } from '../../consts/sort-keys';
+import { OfferType } from '../../types';
 
 type SortOffersProps = {
   currentSortType: string;
   activeCityOffersList: OfferType[];
-}
+};
 
-export function sortOffers({ currentSortType, activeCityOffersList }: SortOffersProps) {
+export function sortOffers({
+  currentSortType,
+  activeCityOffersList,
+}: SortOffersProps) {
   const sortedList: OfferType[] = [...activeCityOffersList];
   switch (currentSortType) {
     case sortKeys.TOP_RATED_FIRST:

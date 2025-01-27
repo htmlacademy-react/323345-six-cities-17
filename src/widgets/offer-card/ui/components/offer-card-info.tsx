@@ -16,7 +16,7 @@ type OffersCardInfo = {
   rating: number;
 }
 
-export function OfferCardInfo({ id, place, isFavorite, price, type, title, rating }: OffersCardInfo): JSX.Element {
+function OfferCardInfo({ id, place, isFavorite, price, type, title, rating }: OffersCardInfo): JSX.Element {
   const ratingPercent: number = getPercentFromRating(rating);
 
   return (
@@ -43,3 +43,5 @@ export function OfferCardInfo({ id, place, isFavorite, price, type, title, ratin
     </div>
   );
 }
+
+export default OfferCardInfo;

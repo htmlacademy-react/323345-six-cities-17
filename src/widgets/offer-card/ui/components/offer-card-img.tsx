@@ -7,7 +7,7 @@ type OffersCardProps = {
   previewImage: string;
 }
 
-export function OfferCardImg({ id, place, previewImage }: OffersCardProps): JSX.Element {
+function OfferCardImg({ id, place, previewImage }: OffersCardProps): JSX.Element {
   return (
     <div
       className={`place-card__image-wrapper ${place === 'main' ? 'cities__image-wrapper' : place === 'favorites' && 'favorites__image-wrapper'}`}
@@ -24,3 +24,5 @@ export function OfferCardImg({ id, place, previewImage }: OffersCardProps): JSX.
     </div>
   );
 }
+
+export default OfferCardImg;

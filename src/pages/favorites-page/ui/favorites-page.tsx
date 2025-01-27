@@ -1,10 +1,10 @@
 import { useAppSelector } from '../../../shared/hooks/use-app-selector.ts';
 import { selectLoadFavoriteOffers } from '../../../store/reducer/favorite/selectors/select-load-favorite-offers.ts';
-import { FavoritesList } from './components/favorites-list.tsx';
-import { FavoritesEmptyPage } from './favorites-empty-page.tsx';
+import FavoritesList from './components/favorites-list.tsx';
+import FavoritesEmptyPage from './favorites-empty-page.tsx';
 
 
-export function FavoritesPage(): JSX.Element {
+function FavoritesPage(): JSX.Element {
   const favoritesList = useAppSelector(selectLoadFavoriteOffers);
   return (favoritesList.length > 0) ? (
     <main className="page__main page__main--favorites">
@@ -20,3 +20,5 @@ export function FavoritesPage(): JSX.Element {
   )
     : <FavoritesEmptyPage />;
 }
+
+export default FavoritesPage;

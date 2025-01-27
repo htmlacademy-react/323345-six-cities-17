@@ -5,7 +5,7 @@ type StarType = {
   isdisabled: boolean;
 }
 
-export function StarElement({ value, formChangeHandle, isChecked, isdisabled }: StarType) {
+function StarElement({ value, formChangeHandle, isChecked, isdisabled }: StarType) {
   return (
     <>
       <input
@@ -31,3 +31,5 @@ export function StarElement({ value, formChangeHandle, isChecked, isdisabled }: 
 
   );
 }
+
+export default StarElement;

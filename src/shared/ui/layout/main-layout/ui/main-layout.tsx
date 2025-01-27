@@ -10,7 +10,7 @@ import classNames from 'classnames';
 import { useAppSelector } from '../../../../hooks/use-app-selector';
 import { selectLoadFavoriteOffers } from '../../../../../store/reducer/favorite/selectors/select-load-favorite-offers';
 
-export function MainLayout(): JSX.Element {
+function MainLayout(): JSX.Element {
   const location = useLocation();
   const [titleName, setTitleName] = useState<string>(location.pathname);
   const favoriteList = useAppSelector(selectLoadFavoriteOffers);
@@ -36,3 +36,5 @@ export function MainLayout(): JSX.Element {
 
   );
 }
+
+export default MainLayout;
