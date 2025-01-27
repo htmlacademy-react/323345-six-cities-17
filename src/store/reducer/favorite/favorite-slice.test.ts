@@ -79,21 +79,24 @@ describe('favoriteSlice', () => {
 
   describe('checks the validity of "fetchFavoriteOffersAction" in pending, fulfilled, rejected state', () => {
     it('should set "isLoading" to "true" with "fetchFavoriteOffersAction.pending" ', () => {
-      const expectedState = { favoriteOffers: [], isLoading: true };
+      const mockExpectedState = { favoriteOffers: [], isLoading: true };
       const result = favoriteSlice.reducer(
-        expectedState,
+        mockExpectedState,
         fetchFavoriteOffersAction.pending
       );
-      expect(expectedState).toEqual(result);
+      expect(mockExpectedState).toEqual(result);
     });
 
     it('should set "mockOffer" to array with "favoriteOffers" and set "isLoading" to "false" with "fetchFavoriteOffersAction.fulfilled" ', () => {
-      const expectedState = { favoriteOffers: [mockOffer], isLoading: false };
+      const mockExpectedState = {
+        favoriteOffers: [mockOffer],
+        isLoading: false,
+      };
       const result = favoriteSlice.reducer(
         undefined,
         fetchFavoriteOffersAction.fulfilled([mockOffer], '', undefined)
       );
-      expect(expectedState).toEqual(result);
+      expect(mockExpectedState).toEqual(result);
     });
 
     it('should set "isLoading" to "false" with "fetchFavoriteOffersAction.rejected" ', () => {
@@ -108,18 +111,21 @@ describe('favoriteSlice', () => {
   describe('checks the validity of "favoriteRequestAction" in pending, fulfilled, rejected state', () => {
     const mockOfferId = datatype.uuid();
     it('should set "isLoading" to "true" with "favoriteRequestAction.pending" ', () => {
-      const expectedState = { favoriteOffers: [], isLoading: true };
+      const mockExpectedState = { favoriteOffers: [], isLoading: true };
       const result = favoriteSlice.reducer(
-        expectedState,
+        mockExpectedState,
         favoriteRequestAction.pending
       );
-      expect(expectedState).toEqual(result);
+      expect(mockExpectedState).toEqual(result);
     });
 
     describe('should add or remove "mockOffer" to array with "favoriteOffers" and set "isLoading" to "false" with "favoriteRequestAction.fulfilled" at "favoriteRequestParams = ADD or DEL"', () => {
       it('"favoriteRequestAction.fulfilled" at "favoriteRequestParams.ADD"', () => {
         const beforeState = { favoriteOffers: [], isLoading: false };
-        const expectedState = { favoriteOffers: [mockOffer], isLoading: false };
+        const mockExpectedState = {
+          favoriteOffers: [mockOffer],
+          isLoading: false,
+        };
         const requestParams = favoriteRequestParams.ADD;
         const result = favoriteSlice.reducer(
           beforeState,
@@ -128,12 +134,12 @@ describe('favoriteSlice', () => {
             requestParams,
           })
         );
-        expect(expectedState).toEqual(result);
+        expect(mockExpectedState).toEqual(result);
       });
 
       it('"favoriteRequestAction.fulfilled" at "favoriteRequestParams.DEL"', () => {
         const beforeState = { favoriteOffers: [mockOffer], isLoading: false };
-        const expectedState = { favoriteOffers: [], isLoading: false };
+        const mockExpectedState = { favoriteOffers: [], isLoading: false };
         const requestParams = favoriteRequestParams.DEL;
         const result = favoriteSlice.reducer(
           beforeState,
@@ -142,7 +148,7 @@ describe('favoriteSlice', () => {
             requestParams,
           })
         );
-        expect(expectedState).toEqual(result);
+        expect(mockExpectedState).toEqual(result);
       });
     });
 

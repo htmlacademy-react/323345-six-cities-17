@@ -34,16 +34,16 @@ describe('commentsSlice', () => {
 
   describe('checks the validity of "fetchCommentsAction" in pending, fulfilled, rejected state', () => {
     it('should set "isLoading" to "true" with "fetchCommentsAction.pending" ', () => {
-      const expectedState = { comments: [], isLoading: true };
+      const mockExpectedState = { comments: [], isLoading: true };
       const result = commentsSlice.reducer(
-        expectedState,
+        mockExpectedState,
         fetchCommentsAction.pending
       );
-      expect(expectedState).toEqual(result);
+      expect(mockExpectedState).toEqual(result);
     });
 
     it('should set "mockComment" to array with "comments" and set "isLoading" to "false" with "fetchCommentsAction.fulfilled" ', () => {
-      const expectedState = { comments: [mockComment], isLoading: false };
+      const mockExpectedState = { comments: [mockComment], isLoading: false };
       const result = commentsSlice.reducer(
         undefined,
         fetchCommentsAction.fulfilled(
@@ -52,7 +52,7 @@ describe('commentsSlice', () => {
           'this plase for offerId'
         )
       );
-      expect(expectedState).toEqual(result);
+      expect(mockExpectedState).toEqual(result);
     });
 
     it('should set "isLoading" to "false" with "fetchCommentsAction.rejected" ', () => {
@@ -66,16 +66,16 @@ describe('commentsSlice', () => {
 
   describe('checks the validity of "sendCommentAction" in pending, fulfilled, rejected state', () => {
     it('should set "isLoading" to "true" with "fetchCommentsAction.pending"', () => {
-      const expectedState = { comments: [], isLoading: true };
+      const mockExpectedState = { comments: [], isLoading: true };
       const result = commentsSlice.reducer(
-        expectedState,
+        mockExpectedState,
         sendCommentAction.pending
       );
-      expect(expectedState).toEqual(result);
+      expect(mockExpectedState).toEqual(result);
     });
 
     it('should set "mockComment" to array with "comments" and set "isLoading" to "false" with "sendCommentAction.fulfilled"', () => {
-      const expectedState = { comments: [mockComment], isLoading: false };
+      const mockExpectedState = { comments: [mockComment], isLoading: false };
       const result = commentsSlice.reducer(
         undefined,
         fetchCommentsAction.fulfilled(
@@ -84,7 +84,7 @@ describe('commentsSlice', () => {
           'this plase for offerId'
         )
       );
-      expect(expectedState).toEqual(result);
+      expect(mockExpectedState).toEqual(result);
     });
 
     it('should set "isLoading" to "false" with "fetchCommentsAction.rejected"', () => {
