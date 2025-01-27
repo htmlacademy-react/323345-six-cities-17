@@ -9,7 +9,7 @@ type FavoritesListProps = {
   favoritesList: OfferType[];
 }
 
-export function FavoritesList({ favoritesList }: FavoritesListProps): JSX.Element[] {
+function FavoritesList({ favoritesList }: FavoritesListProps): JSX.Element[] {
   const groupedList: object = Object.groupBy(favoritesList, ((item: OfferType) => item.city.name));
   const favoritesListByCities: offerByCityType[] = Object.entries(groupedList);
   const redirectHandle = (name: string) => {
@@ -46,4 +46,4 @@ export function FavoritesList({ favoritesList }: FavoritesListProps): JSX.Elemen
     </li>));
 }
 
-
+export default FavoritesList;

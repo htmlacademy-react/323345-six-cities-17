@@ -1,1 +1,3 @@
-export { Comment } from './ui/comment';
+import Comment from './ui/comment';
+
+export { Comment };

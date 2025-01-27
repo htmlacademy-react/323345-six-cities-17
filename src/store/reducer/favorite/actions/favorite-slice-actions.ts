@@ -4,24 +4,22 @@ import { AxiosInstance } from 'axios';
 import { ResponseOfferType } from '../../../../shared/types/types/response-offer-type';
 import { AppState } from '../../../types/app-state';
 import { APIRoute } from '../../../../shared/consts/api-route';
+import { OfferType } from '../../../../shared/types';
 
 export const fetchFavoriteOffersAction = createAsyncThunk<
-  ResponseOfferType[],
+  OfferType[],
   undefined,
   {
     state: AppState;
     extra: AxiosInstance;
   }
 >('favorite/fetchFavoriteOffers', async (_arg, { extra: api }) => {
-  const { data } = await api.get<ResponseOfferType[]>(APIRoute.Favorite);
+  const { data } = await api.get<OfferType[]>(APIRoute.Favorite);
   return data;
 });
 
 export const favoriteRequestAction = createAsyncThunk<
-  {
-    requestParams: string;
-    data: ResponseOfferType;
-  },
+  ResponseOfferType,
   {
     offerId: string;
     requestParams: string;
@@ -36,6 +34,6 @@ export const favoriteRequestAction = createAsyncThunk<
     const { data } = await api.post<ResponseOfferType>(
       `${APIRoute.Favorite}/${offerId}/${requestParams}`
     );
-    return { requestParams, data };
+    return data;
   }
 );

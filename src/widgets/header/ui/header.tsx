@@ -1,6 +1,6 @@
 import HeaderLeft from './components/header-left.tsx';
 import HeaderNav from './components/header-nav.tsx';
-import { HeaderNavNotLogin } from './header-nav-not-logined';
+import HeaderNavNotLogin from './header-nav-not-logined';
 import { useAppSelector } from '../../../shared/hooks/use-app-selector.ts';
 import { AuthStatus } from '../../../shared/consts/auth-status.ts';
 import { selectAuthorizationStatus } from '../../../store/reducer/user/selectors/select-authorization-status.ts';
@@ -9,7 +9,7 @@ type HeaderProps = {
   isLoginPage: boolean;
 }
 
-export function Header({ isLoginPage }: HeaderProps): JSX.Element {
+function Header({ isLoginPage }: HeaderProps): JSX.Element {
   const isAuthenticated = useAppSelector(selectAuthorizationStatus);
   return (
     <header className="header">
@@ -22,3 +22,5 @@ export function Header({ isLoginPage }: HeaderProps): JSX.Element {
     </header>
   );
 }
+
+export default Header;

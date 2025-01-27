@@ -1,15 +1,15 @@
 import classNames from 'classnames';
-import { sortKeys } from '../../../shared/consts/sort-keys';
+import { SortKeys } from '../../../shared/consts/sort-keys';
 import { memo, useState } from 'react';
 
 type SortByProps = {
-  onSortedOffersListHandler: (current: sortKeys) => void;
+  onSortedOffersListHandler: (current: SortKeys) => void;
   currentSortType: string;
 }
 
 function SortByTemplate({ onSortedOffersListHandler, currentSortType }: SortByProps) {
   const [isOpened, setIsOpened] = useState(false);
-  const keysList = Object.keys(sortKeys);
+  const keysList = Object.keys(SortKeys);
 
   return (
     <form className="places__sorting" action="#" method="get">
@@ -22,18 +22,18 @@ function SortByTemplate({ onSortedOffersListHandler, currentSortType }: SortByPr
       </span>
       <ul className={classNames('places__options places__options--custom', { 'places__options--opened': isOpened })} >
         {keysList.map((current): JSX.Element => {
-          const currentValue = current as keyof typeof sortKeys;
+          const currentValue = current as keyof typeof SortKeys;
           return (
             <li
               className="places__option"
               tabIndex={0}
               onClick={() => {
-                onSortedOffersListHandler(sortKeys[currentValue]);
+                onSortedOffersListHandler(SortKeys[currentValue]);
                 setIsOpened(!isOpened);
               }}
               key={crypto.randomUUID()}
             >
-              {sortKeys[currentValue]}
+              {SortKeys[currentValue]}
             </li>
           );
         })}

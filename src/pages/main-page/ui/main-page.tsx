@@ -2,12 +2,12 @@ import { useAppSelector } from '../../../shared/hooks/use-app-selector.ts';
 import { selectLoadOffers } from '../../../store/reducer/offers/selectors/select-load-offers.ts';
 import { selectOffersIsLoading } from '../../../store/reducer/offers/selectors/select-offers-is-loading.ts';
 import { selectActiveCity } from '../../../store/reducer/city/selectors/select-active-city.ts';
-import { MainPageBody } from './components/main-page-body.tsx';
-import { MainPageEmpty } from './main-page-empty';
+import MainPageBody from './components/main-page-body.tsx';
+import MainPageEmpty from './main-page-empty';
 import LocationTabs from '../../../widgets/location-tabs';
-import { Loader } from '../../../shared/ui/loader/loader.tsx';
+import { Loader } from '../../../shared/ui/loader';
 
-export function MainPage(): JSX.Element {
+function MainPage(): JSX.Element {
   const offersList = useAppSelector(selectLoadOffers);
   const activeCity = useAppSelector(selectActiveCity);
   const activeCityOffersList = offersList.filter(
@@ -36,3 +36,5 @@ export function MainPage(): JSX.Element {
     </div>
   );
 }
+
+export default MainPage;

@@ -1,4 +1,4 @@
-export function MetaTitlePage(title: string) {
+export function metaTitlePage(title: string) {
   let descriptionPage: string = 'Main page';
   switch (title) {
     case 'Login':

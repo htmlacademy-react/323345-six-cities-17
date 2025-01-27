@@ -1,3 +1,3 @@
-import MapWrapper from './ui/map-wrapper';
+import MapWrapped from './ui/map-wrapper';
 
-export default MapWrapper;
+export default MapWrapped;

@@ -6,21 +6,21 @@ import { selectActiveCity } from '../../../../store/reducer/city/selectors/selec
 import MainPageOffersList from './main-page-offers-list';
 import CityMap from '../../../../widgets/city-map/ui/city-map';
 import SortBy from '../../../../widgets/sort-by/ui/sort-by';
-import { sortOffers } from '../../../../features/sort-offers/sort-offers';
 import type { OfferType } from '../../../../shared/types';
-import { sortKeys } from '../../../../shared/consts/sort-keys';
+import { SortKeys } from '../../../../shared/consts/sort-keys';
+import { sortOffers } from '../../../../shared/utils/sort-offers/sort-offers';
 
 type mainPageBodyProps = {
   activeCityOffersList: OfferType[];
 };
 
-export function MainPageBody({
+function MainPageBody({
   activeCityOffersList,
 }: mainPageBodyProps): JSX.Element {
   const activeOffer = useAppSelector(selectActiveOffer);
   const activeCity = useAppSelector(selectActiveCity);
-  const [currentSortType, setCurrentSortType] = useState<sortKeys>(sortKeys.POPULAR);
-  const sortedOffersListHandler = (current: sortKeys): void => setCurrentSortType(current);
+  const [currentSortType, setCurrentSortType] = useState<SortKeys>(SortKeys.POPULAR);
+  const sortedOffersListHandler = (current: SortKeys): void => setCurrentSortType(current);
   const sortedOffers = sortOffers({ currentSortType, activeCityOffersList });
 
   return (
@@ -46,3 +46,5 @@ export function MainPageBody({
     </div>
   );
 }
+
+export default MainPageBody;

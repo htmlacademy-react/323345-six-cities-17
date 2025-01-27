@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { RoutePath } from '../../../shared/consts/route-path.ts';
 
-export function HeaderNavNotLogin(): JSX.Element {
+function HeaderNavNotLogin(): JSX.Element {
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
@@ -16,3 +16,5 @@ export function HeaderNavNotLogin(): JSX.Element {
     </nav>
   );
 }
+
+export default HeaderNavNotLogin;

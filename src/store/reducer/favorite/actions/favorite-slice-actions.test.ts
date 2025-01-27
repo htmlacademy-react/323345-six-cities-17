@@ -1,15 +1,16 @@
+
+import { createAPI } from '../../../../api/api-app-to-server';
 import MockAdapter from 'axios-mock-adapter';
 import thunk from 'redux-thunk';
 import { Action } from 'redux';
-import { configureMockStore } from '@jedmao/redux-mock-store';
-import { createAPI } from '../../../../api/api-app-to-server';
-import { fetchFavoriteOffersAction } from './favorite-slice-actions';
-import { APIRoute } from '../../../../shared/consts/api-route';
 import { AppState } from '../../../types/app-state';
+import { configureMockStore } from '@jedmao/redux-mock-store';
 import {
   AppThunkDispatch,
   extractActionsType,
 } from '../../../../shared/utils/mocks-for-tests/mock-for-tests';
+import { APIRoute } from '../../../../shared/consts/api-route';
+import { fetchFavoriteOffersAction } from './favorite-slice-actions';
 
 describe('favorite-slice-actions', () => {
   const axios = createAPI();
@@ -26,27 +27,16 @@ describe('favorite-slice-actions', () => {
     store = mockStoreCreator({
       favoriteSlice: {
         favoriteOffers: [],
-        isLoading: false,
       },
     });
   });
 
-  const mockResponseOffer = {
-    id: '21aa14a3-934c-4aca-b546-4937363c44a4',
-    title: 'Amazing and Extremely Central Flat',
-    description:
-      'Discover daily local life in city center, friendly neighborhood, clandestine casino, karaoke, old-style artisans, art gallery and artist studio downstairs.',
+  const mockFavoriteOffers = {
+    id: 'ff2695f4-187b-4adc-814e-fe92528cfedd',
+    title: 'The house among olive ',
     type: 'room',
-    price: 180,
-    previewImage: 'https://16.design.htmlacademy.pro/static/hotel/7.jpg',
-    images: [
-      'https://16.design.htmlacademy.pro/static/hotel/12.jpg',
-      'https://16.design.htmlacademy.pro/static/hotel/4.jpg',
-      'https://16.design.htmlacademy.pro/static/hotel/9.jpg',
-      'https://16.design.htmlacademy.pro/static/hotel/18.jpg',
-      'https://16.design.htmlacademy.pro/static/hotel/8.jpg',
-      'https://16.design.htmlacademy.pro/static/hotel/14.jpg',
-    ],
+    price: 219,
+    previewImage: 'https://16.design.htmlacademy.pro/static/hotel/4.jpg',
     city: {
       name: 'Paris',
       location: {
@@ -60,35 +50,44 @@ describe('favorite-slice-actions', () => {
       longitude: 2.330499,
       zoom: 16,
     },
-    goods: ['Baby seat', 'Dishwasher', 'Breakfast', 'Washer', 'Towels'],
-    host: {
-      isPro: true,
-      name: 'Angelina',
-      avatarUrl:
-        'https://16.design.htmlacademy.pro/static/host/avatar-angelina.jpg',
-    },
-    isPremium: false,
     isFavorite: true,
-    rating: 1.8,
-    bedrooms: 1,
-    maxAdults: 3,
+    isPremium: true,
+    rating: 3.9,
   };
 
-  describe('should dispatch "fetchFavoriteOffersAction.pending" and "fetchFavoriteOffersAction.fullfilled" when server response 200', async () => {
-    mockAxiosAdapter.onGet(APIRoute.Favorite).reply(200, mockResponseOffer);
+  describe('fetchFavoriteOffersAction', () => {
+    it('should dispatch "fetchFavoriteOffersAction.pending" and "fetchFavoriteOffers.fulfilled when server response 200', async () => {
+      mockAxiosAdapter.onGet(APIRoute.Favorite).reply(200, mockFavoriteOffers);
 
-    await store.dispatch(fetchFavoriteOffersAction());
+      await store.dispatch(fetchFavoriteOffersAction());
 
-    const emittedActions = store.getActions();
-    const extractedActionsType = extractActionsType(emittedActions);
-    const fetchFavoriteOffersFulfilled = emittedActions.at(1) as ReturnType<
-      typeof fetchFavoriteOffersAction.fulfilled
-    >;
-    expect(extractedActionsType).toEqual([
-      fetchFavoriteOffersAction.pending.type,
-      fetchFavoriteOffersAction.fulfilled.type,
-    ]);
+      const emittedActions = store.getActions();
+      const extractedActionsType = extractActionsType(emittedActions);
+      const fetchFavoriteOffersActionFulfilled = emittedActions.at(
+        1
+      ) as ReturnType<typeof fetchFavoriteOffersAction.fulfilled>;
 
-    expect(fetchFavoriteOffersFulfilled.payload).toEqual(mockResponseOffer);
+      expect(extractedActionsType).toEqual([
+        fetchFavoriteOffersAction.pending.type,
+        fetchFavoriteOffersAction.fulfilled.type,
+      ]);
+
+      expect(fetchFavoriteOffersActionFulfilled.payload).toEqual(
+        mockFavoriteOffers
+      );
+    });
+
+    it('should dispatch "fetchCommentsAction.pending" and "fetchCommentsAction.rejected" when server response 400', async () => {
+      mockAxiosAdapter.onGet(APIRoute.Favorite).reply(400, []);
+
+      await store.dispatch(fetchFavoriteOffersAction());
+
+      const actions = extractActionsType(store.getActions());
+
+      expect(actions).toEqual([
+        fetchFavoriteOffersAction.pending.type,
+        fetchFavoriteOffersAction.rejected.type,
+      ]);
+    });
   });
 });

@@ -1,8 +1,9 @@
 import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
 import { changeActiveOffer } from '../../../store/reducer/offers/offers-slice';
-import { OfferCardMark } from './components/offer-card-mark';
-import { OfferCardImg } from './components/offer-card-img';
-import { OfferCardInfo } from './components/offer-card-info';
+import OfferCardMark from './components/offer-card-mark';
+import OfferCardImg from './components/offer-card-img';
+import OfferCardInfo from './components/offer-card-info';
+import classNames from 'classnames';
 
 type CardProps = {
   id: string;
@@ -16,7 +17,7 @@ type CardProps = {
   rating: number;
 };
 
-export function OfferCard({
+function OfferCard({
   id,
   place,
   isFavorite,
@@ -28,17 +29,20 @@ export function OfferCard({
   rating,
 }: CardProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const choseOffer = (offerId: string | null) => {
+  const activeOfferHandler = (offerId: string | null) => {
     dispatch(changeActiveOffer(offerId));
   };
   return (
     <article
-      className={`place-card ${place === 'main'
-        ? 'cities__card'
-        : place === 'favorites' && 'favorites__card'
-        }`}
-      onMouseEnter={() => choseOffer(id)}
-      onMouseLeave={() => choseOffer(null)}
+      className={classNames(
+        'place-card',
+        {
+          'cities__card': place === 'main',
+          'favorites__card': place === 'favorites'
+        }
+      )}
+      onMouseEnter={() => activeOfferHandler(id)}
+      onMouseLeave={() => activeOfferHandler(null)}
     >
       {isPremium ? <OfferCardMark /> : null}
       <OfferCardImg id={id} place={place} previewImage={previewImage} />
@@ -54,3 +58,5 @@ export function OfferCard({
     </article>
   );
 }
+
+export default OfferCard;

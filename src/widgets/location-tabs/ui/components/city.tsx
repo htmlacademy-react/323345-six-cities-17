@@ -8,7 +8,7 @@ type CityProps = {
   isActive: boolean;
 };
 
-export function City({
+function City({
   city,
   isActive,
 }: CityProps): JSX.Element {
@@ -28,3 +28,5 @@ export function City({
     </li>
   );
 }
+
+export default City;

@@ -4,7 +4,7 @@ import { Header } from '../../../widgets/header';
 import pageNotFoundImage from '../assets/blue-monday.png';
 import styles from './not-found-page.module.css';
 
-export function NotFoundPage(): JSX.Element {
+function NotFoundPage(): JSX.Element {
   return (
     <>
       {<Header isLoginPage={false} />}
@@ -24,4 +24,6 @@ export function NotFoundPage(): JSX.Element {
     </>
   );
 }
+
+export default NotFoundPage;
 

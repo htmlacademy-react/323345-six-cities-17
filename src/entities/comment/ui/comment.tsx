@@ -5,7 +5,7 @@ import { getDateToComment } from '../utils/get-date-to-comment';
 type CommentProps = {
   commentData: CommentType;
 };
-export function Comment({ commentData }: CommentProps) {
+function Comment({ commentData }: CommentProps) {
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -39,3 +39,5 @@ export function Comment({ commentData }: CommentProps) {
     </li>
   );
 }
+
+export default Comment;

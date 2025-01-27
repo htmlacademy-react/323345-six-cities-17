@@ -1,1 +1,1 @@
-export const StarCount: number[] = [5, 4, 3, 2, 1];
+export const STAR_COUNT: number[] = [5, 4, 3, 2, 1];

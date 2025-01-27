@@ -6,7 +6,7 @@ import { selectCurrentOffer } from '../../../store/reducer/offers/selectors/sele
 import { selectNearPoints } from '../../../store/reducer/offers/selectors/select-near-points';
 import { CityMap } from '../../city-map';
 
-function MapWrapperTemplate() {
+function MapWrappedTemplate() {
   const { offerId } = useParams();
   const nearPoints = useAppSelector(selectNearPoints).slice(0, 3);
   const currentOffer = useAppSelector(selectCurrentOffer);
@@ -22,5 +22,6 @@ function MapWrapperTemplate() {
   );
 }
 
-const MapWrapper = memo(MapWrapperTemplate);
-export default MapWrapper;
+const MapWrapped = memo(MapWrappedTemplate);
+
+export default MapWrapped;
