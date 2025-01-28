@@ -2,8 +2,8 @@ import { memo } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useAppSelector } from '../../../shared/hooks/use-app-selector';
-import { selectCurrentOffer } from '../../../store/reducer/offers/selectors/select-current-offer';
-import { selectNearPoints } from '../../../store/reducer/offers/selectors/select-near-points';
+import { selectCurrentOffer } from '../../../store/reducer/offers/selectors';
+import { selectNearPoints } from '../../../store/reducer/offers/selectors';
 import { CityMap } from '../../city-map';
 
 function MapWrappedTemplate() {

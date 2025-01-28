@@ -1,9 +1,9 @@
 import { OfferCard } from '../../../../widgets/offer-card';
 import { CityNameType, offerByCityType, OfferType } from '../../../../shared/types';
 import { appStore } from '../../../../store';
-import { changeActiveCity } from '../../../../store/reducer/city/city-slice';
+import { changeActiveCity } from '../../../../store/reducer/city';
 import { Link } from 'react-router-dom';
-import { RoutePath } from '../../../../shared/consts/route-path';
+import { RoutePath } from '../../../../shared/consts';
 
 type FavoritesListProps = {
   favoritesList: OfferType[];

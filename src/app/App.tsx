@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { checkAuthAction } from '../store/reducer/user/actions/user-slice-actions';
+import { checkAuthAction } from '../store/reducer/user/actions';
 import { useAppDispatch } from '../shared/hooks/use-app-dispatch';
 import { useAppSelector } from '../shared/hooks/use-app-selector';
-import { selectAuthorizationStatus } from '../store/reducer/user/selectors/select-authorization-status';
+import { selectAuthorizationStatus } from '../store/reducer/user/selectors';
 import { RedirectionRouteByAuth } from './routes/redirection-route-by-auth';
 import { MainPage } from '../pages/main-page';
 import { LoginPage } from '../pages/login-page';
@@ -12,10 +12,9 @@ import { FavoritesPage } from '../pages/favorites-page';
 import { OfferPage } from '../pages/offer-page';
 import { MainLayout } from '../shared/ui/layout/main-layout';
 import { NotFoundPage } from '../pages/not-found-page';
-import { AuthStatus } from '../shared/consts/auth-status';
-import { RoutePath } from '../shared/consts/route-path';
-import { fetchFavoriteOffersAction } from '../store/reducer/favorite/actions/favorite-slice-actions';
-import { fetchOffersAction } from '../store/reducer/offers/actions/offers-slice-actions';
+import { fetchFavoriteOffersAction } from '../store/reducer/favorite/actions';
+import { fetchOffersAction } from '../store/reducer/offers/actions';
+import { AuthStatus, RoutePath } from '../shared/consts';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();

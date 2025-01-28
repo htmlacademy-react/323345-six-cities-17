@@ -1,5 +1,7 @@
 import { CityNameType } from '../../../shared/types';
 
-export type InitialCityType = {
+type InitialCityType = {
   activeCity: CityNameType;
 };
+
+export { type InitialCityType };

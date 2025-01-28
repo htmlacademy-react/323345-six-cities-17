@@ -1,6 +1,7 @@
 import classNames from 'classnames';
-import { SortKeys } from '../../../shared/consts/sort-keys';
 import { memo, useState } from 'react';
+
+import { SortKeys } from '../../../shared/consts';
 
 type SortByProps = {
   onSortedOffersListHandler: (current: SortKeys) => void;

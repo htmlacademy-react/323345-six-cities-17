@@ -1,1 +1,3 @@
-export { appStore } from './app-store';
+import { appStore } from './app-store';
+
+export { appStore };

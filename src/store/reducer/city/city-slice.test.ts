@@ -1,5 +1,5 @@
 import { CityNameType } from '../../../shared/types';
-import { citySlice } from './city-slice';
+import { citySlice } from './index';
 
 describe('sitySlice', () => {
   const emptyAction = { type: '' };

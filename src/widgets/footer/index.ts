@@ -1,3 +1,3 @@
-import Footer from './ui/footer';
+import { Footer } from './ui';
 
 export { Footer };

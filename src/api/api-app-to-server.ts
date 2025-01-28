@@ -1,10 +1,10 @@
 import axios, { AxiosError, AxiosInstance } from 'axios';
-import { StatusCodes } from 'http-status-codes';
-import { BASE_URL, REQUEST_TIMEOUT } from '../shared/consts/axios-route-params';
-import { getToken } from './token';
 import { toast } from 'react-toastify';
+import { StatusCodes } from 'http-status-codes';
+import { BASE_URL, REQUEST_TIMEOUT } from '../shared/consts';
+import { getToken } from './index';
 
-export const createAPI = (): AxiosInstance => {
+const createAPI = (): AxiosInstance => {
   const api: AxiosInstance = axios.create({
     baseURL: BASE_URL,
     timeout: REQUEST_TIMEOUT,
@@ -33,3 +33,5 @@ export const createAPI = (): AxiosInstance => {
   );
   return api;
 };
+
+export default createAPI;

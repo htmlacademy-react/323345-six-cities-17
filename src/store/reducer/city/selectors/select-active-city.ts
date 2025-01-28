@@ -1,3 +1,5 @@
 import { AppState } from '../../../types/app-state';
 
-export const selectActiveCity = (state: AppState) => state.citySlice.activeCity;
+const selectActiveCity = (state: AppState) => state.citySlice.activeCity;
+
+export default selectActiveCity;

@@ -1,12 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 
-import { ResponseOfferType } from '../../../../shared/types/types/response-offer-type';
 import { AppState } from '../../../types/app-state';
-import { APIRoute } from '../../../../shared/consts/api-route';
-import { OfferType } from '../../../../shared/types';
+import { APIRoute } from '../../../../shared/consts';
+import { OfferType, ResponseOfferType } from '../../../../shared/types';
 
-export const fetchFavoriteOffersAction = createAsyncThunk<
+const fetchFavoriteOffersAction = createAsyncThunk<
   OfferType[],
   undefined,
   {
@@ -18,7 +17,7 @@ export const fetchFavoriteOffersAction = createAsyncThunk<
   return data;
 });
 
-export const favoriteRequestAction = createAsyncThunk<
+const favoriteRequestAction = createAsyncThunk<
   ResponseOfferType,
   {
     offerId: string;
@@ -37,3 +36,5 @@ export const favoriteRequestAction = createAsyncThunk<
     return data;
   }
 );
+
+export { fetchFavoriteOffersAction, favoriteRequestAction };

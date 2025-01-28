@@ -1,11 +1,16 @@
 import { NavLink } from 'react-router-dom';
-import { RoutePath } from '../../../../shared/consts/route-path.ts';
+import { RoutePath } from '../../../../shared/consts';
 
 type OffersCardProps = {
   id: string;
   place: 'main' | 'favorites';
   previewImage: string;
 }
+
+const MAIN_PAGE_WIDTH = '260';
+const MAIN_PAGE_HEIGHT = '200';
+const FAVORITE_PAGE_WIDTH = '150';
+const FAVORITE_PAGE_HEIGHT = '110';
 
 function OfferCardImg({ id, place, previewImage }: OffersCardProps): JSX.Element {
   return (
@@ -16,8 +21,8 @@ function OfferCardImg({ id, place, previewImage }: OffersCardProps): JSX.Element
         <img
           className="place-card__image"
           src={previewImage}
-          width={`${place === 'main' ? '260' : place === 'favorites' && '150'}`}
-          height={`${place === 'main' ? '200' : place === 'favorites' && '110'}`}
+          width={`${place === 'main' ? MAIN_PAGE_WIDTH : place === 'favorites' && FAVORITE_PAGE_WIDTH}`}
+          height={`${place === 'main' ? MAIN_PAGE_HEIGHT : place === 'favorites' && FAVORITE_PAGE_HEIGHT}`}
           alt="Place image"
         />
       </NavLink>
@@ -26,3 +31,5 @@ function OfferCardImg({ id, place, previewImage }: OffersCardProps): JSX.Element
 }
 
 export default OfferCardImg;
+
+

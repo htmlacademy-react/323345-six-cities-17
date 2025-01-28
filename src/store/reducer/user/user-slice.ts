@@ -1,14 +1,10 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AuthStatus } from '../../../shared/consts/auth-status';
-import {
-  checkAuthAction,
-  loginAction,
-  logoutAction,
-} from './actions/user-slice-actions';
-import { InitialUserType } from './initial-user-type';
-import { UserType } from '../../../shared/types/types/user-type';
-import { dropToken, saveToken } from '../../../api/token';
 import { toast } from 'react-toastify';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AuthStatus } from '../../../shared/consts';
+import { checkAuthAction, loginAction, logoutAction } from './actions';
+import { InitialUserType } from './index';
+import { UserType } from '../../../shared/types';
+import { dropToken, saveToken } from '../../../api';
 
 const initialState: InitialUserType = {
   authorizationStatus: AuthStatus.Unknown,
@@ -22,7 +18,7 @@ const initialState: InitialUserType = {
   isLoading: false,
 };
 
-export const userSlice = createSlice({
+const userSlice = createSlice({
   name: 'userSlice',
   initialState,
   reducers: {},
@@ -80,3 +76,5 @@ export const userSlice = createSlice({
       });
   },
 });
+
+export default userSlice;

@@ -1,5 +1,4 @@
-
-import { createAPI } from '../../../../api/api-app-to-server';
+import { createAPI } from '../../../../api';
 import MockAdapter from 'axios-mock-adapter';
 import thunk from 'redux-thunk';
 import { Action } from 'redux';
@@ -9,8 +8,8 @@ import {
   AppThunkDispatch,
   extractActionsType,
 } from '../../../../shared/utils/mocks-for-tests/mock-for-tests';
-import { APIRoute } from '../../../../shared/consts/api-route';
-import { fetchFavoriteOffersAction } from './favorite-slice-actions';
+import { APIRoute } from '../../../../shared/consts';
+import { fetchFavoriteOffersAction } from './index';
 
 describe('favorite-slice-actions', () => {
   const axios = createAPI();

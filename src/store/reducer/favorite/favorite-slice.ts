@@ -1,12 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { InitialFavoriteType } from './initial-favorite-type';
 import { toast } from 'react-toastify';
-import { responseToOfferTypeAdapter } from '../../../shared/utils/response-adapter/response-to-offer-type-adapter';
-import { FavoriteRequestParams } from '../../../shared/consts/favorite-request-params';
-import {
-  favoriteRequestAction,
-  fetchFavoriteOffersAction,
-} from './actions/favorite-slice-actions';
+
+import { InitialFavoriteType } from './index';
+import { responseToOfferTypeAdapter } from '../../../shared/utils/response-adapter';
+import { FavoriteRequestParams } from '../../../shared/consts';
+import { favoriteRequestAction, fetchFavoriteOffersAction } from './actions';
 import { OfferType } from '../../../shared/types';
 
 const initialState: InitialFavoriteType = {
@@ -14,7 +12,7 @@ const initialState: InitialFavoriteType = {
   isLoading: false,
 };
 
-export const favoriteSlice = createSlice({
+const favoriteSlice = createSlice({
   name: 'favoriteSlice',
   initialState,
   reducers: {},
@@ -62,3 +60,5 @@ export const favoriteSlice = createSlice({
       });
   },
 });
+
+export default favoriteSlice;

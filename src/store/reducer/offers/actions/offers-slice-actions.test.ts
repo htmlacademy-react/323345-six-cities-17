@@ -1,14 +1,14 @@
-import { createAPI } from '../../../../api/api-app-to-server';
+import { createAPI } from '../../../../api';
 import MockAdapter from 'axios-mock-adapter';
 import thunk from 'redux-thunk';
 import { Action } from 'redux';
+import { configureMockStore } from '@jedmao/redux-mock-store';
 import {
   AppThunkDispatch,
   extractActionsType,
-} from '../../../../shared/utils/mocks-for-tests/mock-for-tests';
+} from '../../../../shared/utils/mocks-for-tests';
 import { AppState } from '../../../types/app-state';
-import { configureMockStore } from '@jedmao/redux-mock-store';
-import { APIRoute } from '../../../../shared/consts/api-route';
+import { APIRoute } from '../../../../shared/consts';
 import { datatype } from 'faker';
 import {
   fetchCurrentOfferAction,

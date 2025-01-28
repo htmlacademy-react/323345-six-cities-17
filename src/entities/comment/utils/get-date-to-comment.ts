@@ -1,6 +1,6 @@
-import { Months } from '../../../shared/consts/month';
+import { Months } from '../../../shared/consts';
 
-export function getDateToComment(date: string) {
+function getDateToComment(date: string) {
   const dateData = new Date(date);
   const getMonth = dateData.getMonth();
   const month: (monthNumber: number) => string = (
@@ -11,3 +11,5 @@ export function getDateToComment(date: string) {
 
   return dateToComment;
 }
+
+export default getDateToComment;
