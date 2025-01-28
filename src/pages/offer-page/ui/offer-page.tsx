@@ -2,18 +2,18 @@ import { useEffect, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 
 import { CurrentOfferType } from '../../../shared/types';
-import { RoutePath } from '../../../shared/consts/route-path';
-import { capitalizeFirstLetter } from '../../../shared/utils/capitalize-first-letter/capitalize-first-letter';
-import { getPercentFromRating } from '../../../shared/utils/percent-from-rating/percent-from-rating';
-import { CommentsList } from '../../../widgets/comments-list';
+import { capitalizeFirstLetter } from '../../../shared/utils/capitalize-first-letter';
+import { getPercentFromRating } from '../../../shared/utils/percent-from-rating';
 import { useAppSelector } from '../../../shared/hooks/use-app-selector';
 import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
-import { selectCurrentOffer } from '../../../store/reducer/offers/selectors/select-current-offer';
-import { Loader } from '../../../shared/ui/loader';
-import MapWrapped from '../../../widgets/map-wrapper/ui/map-wrapper';
-import NearPointsList from '../../../widgets/near-poits-list';
+import { selectCurrentOffer } from '../../../store/reducer/offers/selectors';
 import { fetchCurrentOfferAction, fetchNearPointsAction } from '../../../store/reducer/offers/actions/offers-slice-actions';
+import { Loader } from '../../../shared/ui/loader';
+import { MapWrapped } from '../../../widgets/map-wrapper/ui';
+import { NearPointsList } from '../../../widgets/near-poits-list';
+import { CommentsList } from '../../../widgets/comments-list';
 import IsFavoriteButton from '../../../widgets/is-favorite-button';
+import { RoutePath } from '../../../shared/consts';
 
 
 function OfferPage(): JSX.Element {

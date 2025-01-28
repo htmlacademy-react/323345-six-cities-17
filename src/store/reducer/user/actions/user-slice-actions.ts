@@ -1,11 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppState } from '../../../types/app-state';
 import { AxiosInstance } from 'axios';
-import { AuthData } from '../../../../shared/types';
-import { APIRoute } from '../../../../shared/consts/api-route';
-import { UserType } from '../../../../shared/types/types/user-type';
+import { AuthData, UserType } from '../../../../shared/types';
+import { APIRoute } from '../../../../shared/consts';
 
-export const checkAuthAction = createAsyncThunk<
+const checkAuthAction = createAsyncThunk<
   UserType,
   undefined,
   {
@@ -17,7 +16,7 @@ export const checkAuthAction = createAsyncThunk<
   return data;
 });
 
-export const loginAction = createAsyncThunk<
+const loginAction = createAsyncThunk<
   UserType,
   AuthData,
   {
@@ -32,7 +31,7 @@ export const loginAction = createAsyncThunk<
   return data;
 });
 
-export const logoutAction = createAsyncThunk<
+const logoutAction = createAsyncThunk<
   void,
   undefined,
   {
@@ -42,3 +41,5 @@ export const logoutAction = createAsyncThunk<
 >('user/logout', async (_arg, { extra: api }) => {
   await api.delete(APIRoute.Logout);
 });
+
+export { checkAuthAction, loginAction, logoutAction };

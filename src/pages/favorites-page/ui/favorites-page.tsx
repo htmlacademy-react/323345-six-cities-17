@@ -1,5 +1,5 @@
-import { useAppSelector } from '../../../shared/hooks/use-app-selector.ts';
-import { selectLoadFavoriteOffers } from '../../../store/reducer/favorite/selectors/select-load-favorite-offers.ts';
+import { useAppSelector } from '../../../shared/hooks/use-app-selector';
+import { selectLoadFavoriteOffers } from '../../../store/reducer/favorite/selectors';
 import FavoritesList from './components/favorites-list.tsx';
 import FavoritesEmptyPage from './favorites-empty-page.tsx';
 

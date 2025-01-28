@@ -1,3 +1,3 @@
-import FavoritesPage from './ui/favorites-page';
+import { FavoritesPage } from './ui';
 
 export { FavoritesPage };

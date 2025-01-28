@@ -1,3 +1,3 @@
-import IsFavoriteButton from './ui/is-favorite-button';
+import { IsFavoriteButton } from './ui';
 
 export default IsFavoriteButton;

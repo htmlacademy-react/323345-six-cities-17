@@ -1,4 +1,4 @@
-export function metaTitlePage(title: string) {
+function metaTitlePage(title: string) {
   let descriptionPage: string = 'Main page';
   switch (title) {
     case 'Login':
@@ -14,7 +14,7 @@ export function metaTitlePage(title: string) {
   return descriptionPage;
 }
 
-export function getMetaTitlePage(path: string): string {
+function getMetaTitlePage(path: string): string {
   let namePage: string = 'Main';
   switch (path) {
     case '/login':
@@ -29,3 +29,5 @@ export function getMetaTitlePage(path: string): string {
   }
   return namePage;
 }
+
+export { metaTitlePage, getMetaTitlePage };

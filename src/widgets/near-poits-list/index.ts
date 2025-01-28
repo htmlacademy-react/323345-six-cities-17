@@ -1,3 +1,3 @@
-import nearPointsList from './ui/near-points-list';
+import { NearPointsList } from './ui';
 
-export default nearPointsList;
+export { NearPointsList };

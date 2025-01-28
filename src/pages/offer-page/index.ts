@@ -1,3 +1,3 @@
-import OfferPage from './ui/offer-page';
+import { OfferPage } from './ui';
 
 export { OfferPage };

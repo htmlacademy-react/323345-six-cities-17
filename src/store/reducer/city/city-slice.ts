@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CityNameType } from '../../../shared/types';
-import { InitialCityType } from './initial-city-type';
+import { InitialCityType } from './index';
 
 const initialState: InitialCityType = {
   activeCity: 'Paris',
 };
 
-export const citySlice = createSlice({
+const citySlice = createSlice({
   name: 'citySlice',
   initialState,
   reducers: {
@@ -17,3 +17,4 @@ export const citySlice = createSlice({
 });
 
 export const { changeActiveCity } = citySlice.actions;
+export { citySlice };

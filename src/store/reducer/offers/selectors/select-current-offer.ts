@@ -1,4 +1,5 @@
 import { AppState } from '../../../types/app-state';
 
-export const selectCurrentOffer = (state: AppState) =>
-  state.offersSlice.currentOffer;
+const selectCurrentOffer = (state: AppState) => state.offersSlice.currentOffer;
+
+export default selectCurrentOffer;

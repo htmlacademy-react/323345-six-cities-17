@@ -1,3 +1,3 @@
-import OfferSendForm from './ui/offer-send-form';
+import { OfferSendForm } from './ui';
 
 export { OfferSendForm };

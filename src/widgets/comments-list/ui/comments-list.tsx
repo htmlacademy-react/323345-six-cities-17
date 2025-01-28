@@ -3,11 +3,11 @@ import { memo, useEffect } from 'react';
 import { Comment } from '../../../entities/comment';
 import OfferSendForm from '../../offer-send-form/ui/offer-send-form';
 import { useAppSelector } from '../../../shared/hooks/use-app-selector';
-import { AuthStatus } from '../../../shared/consts/auth-status';
+import { AuthStatus } from '../../../shared/consts';
 import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
-import { selectAuthorizationStatus } from '../../../store/reducer/user/selectors/select-authorization-status';
-import { selectLoadComments } from '../../../store/reducer/comments/selectors/select-load-comments';
-import { fetchCommentsAction } from '../../../store/reducer/comments/actions/comments-slice-actions';
+import { selectAuthorizationStatus } from '../../../store/reducer/user/selectors';
+import { selectLoadComments } from '../../../store/reducer/comments/selectors';
+import { fetchCommentsAction } from '../../../store/reducer/comments/actions';
 
 type CommentsListProps = {
   offerId: string;

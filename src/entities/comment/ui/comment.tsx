@@ -1,6 +1,6 @@
-import { CommentType } from '../../../shared/types/types/comment-type';
-import { getPercentFromRating } from '../../../shared/utils/percent-from-rating/percent-from-rating';
-import { getDateToComment } from '../utils/get-date-to-comment';
+import { CommentType } from '../../../shared/types';
+import { getPercentFromRating } from '../../../shared/utils/percent-from-rating';
+import { getDateToComment } from '../utils';
 
 type CommentProps = {
   commentData: CommentType;

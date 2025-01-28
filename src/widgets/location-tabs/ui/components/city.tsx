@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import { CityNameType } from '../../../../shared/types';
 import { useAppDispatch } from '../../../../shared/hooks/use-app-dispatch';
-import { changeActiveCity } from '../../../../store/reducer/city/city-slice';
+import { changeActiveCity } from '../../../../store/reducer/city';
 
 type CityProps = {
   city: CityNameType;

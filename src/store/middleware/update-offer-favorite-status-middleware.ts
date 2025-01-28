@@ -4,14 +4,17 @@ import {
   updateCurrentOffer,
   updateNearPoints,
   updateOffers,
-} from '../reducer/offers/offers-slice';
-import { responseToCurrentOfferTypeAdapter } from '../../shared/utils/response-adapter/response-to-current-offer-type-adapter';
-import { responseToOfferTypeAdapter } from '../../shared/utils/response-adapter/response-to-offer-type-adapter';
-import { CurrentOfferType, OfferType } from '../../shared/types';
-import { ResponseOfferType } from '../../shared/types/types/response-offer-type';
+} from '../reducer/offers';
+import { responseToCurrentOfferTypeAdapter } from '../../shared/utils/response-adapter';
+import { responseToOfferTypeAdapter } from '../../shared/utils/response-adapter';
+import {
+  CurrentOfferType,
+  OfferType,
+  ResponseOfferType,
+} from '../../shared/types';
 import { favoriteRequestAction } from '../reducer/favorite/actions/favorite-slice-actions';
 
-export const updateOfferFavoriteStatusMiddleware: Middleware =
+const updateOfferFavoriteStatusMiddleware: Middleware =
   () => (next) => (action: PayloadAction<ResponseOfferType>) => {
     const result = next(action);
 
@@ -31,3 +34,5 @@ export const updateOfferFavoriteStatusMiddleware: Middleware =
     }
     return result;
   };
+
+export default updateOfferFavoriteStatusMiddleware;

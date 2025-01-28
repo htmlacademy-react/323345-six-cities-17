@@ -1,4 +1,4 @@
-import { SendFormType } from '../types/types/send-form-type.ts';
+import { SendFormType } from '../types';
 
 export const INITIAL_SEND_FORM_STATE: SendFormType = {
   comment: '',

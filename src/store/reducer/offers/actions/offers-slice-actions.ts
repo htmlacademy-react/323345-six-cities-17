@@ -3,9 +3,9 @@ import { AxiosInstance } from 'axios';
 
 import { AppState } from '../../../types/app-state';
 import { CurrentOfferType, OfferType } from '../../../../shared/types';
-import { APIRoute } from '../../../../shared/consts/api-route';
+import { APIRoute } from '../../../../shared/consts';
 
-export const fetchOffersAction = createAsyncThunk<
+const fetchOffersAction = createAsyncThunk<
   OfferType[],
   undefined,
   {
@@ -17,7 +17,7 @@ export const fetchOffersAction = createAsyncThunk<
   return data;
 });
 
-export const fetchCurrentOfferAction = createAsyncThunk<
+const fetchCurrentOfferAction = createAsyncThunk<
   CurrentOfferType,
   string,
   {
@@ -29,7 +29,7 @@ export const fetchCurrentOfferAction = createAsyncThunk<
   return data;
 });
 
-export const fetchNearPointsAction = createAsyncThunk<
+const fetchNearPointsAction = createAsyncThunk<
   OfferType[],
   string,
   {
@@ -42,3 +42,5 @@ export const fetchNearPointsAction = createAsyncThunk<
   );
   return data;
 });
+
+export { fetchOffersAction, fetchCurrentOfferAction, fetchNearPointsAction };

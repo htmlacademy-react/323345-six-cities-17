@@ -1,12 +1,12 @@
 import { datatype } from 'faker';
-import { FavoriteRequestParams } from '../../../shared/consts/favorite-request-params';
-import { ResponseOfferType } from '../../../shared/types/types/response-offer-type';
-import { responseToOfferTypeAdapter } from '../../../shared/utils/response-adapter/response-to-offer-type-adapter';
+import { FavoriteRequestParams } from '../../../shared/consts';
+import { ResponseOfferType } from '../../../shared/types';
+import { responseToOfferTypeAdapter } from '../../../shared/utils/response-adapter';
 import {
   favoriteRequestAction,
   fetchFavoriteOffersAction,
 } from './actions/favorite-slice-actions';
-import { favoriteSlice } from './favorite-slice';
+import { favoriteSlice } from './index';
 
 describe('favoriteSlice', () => {
   const expectedState = { favoriteOffers: [], isLoading: false };

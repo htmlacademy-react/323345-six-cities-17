@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CurrentOfferType, OfferType } from '../../../shared/types';
-import { InitialOffersType } from './initiail-offers-type';
+import { InitialOffersType } from './index';
 import {
   fetchCurrentOfferAction,
   fetchNearPointsAction,
@@ -15,7 +15,7 @@ const initialState: InitialOffersType = {
   isLoading: true,
 };
 
-export const offersSlice = createSlice({
+const offersSlice = createSlice({
   name: 'offersSlice',
   initialState,
   reducers: {
@@ -96,3 +96,5 @@ export const {
   updateOffers,
   updateNearPoints,
 } = offersSlice.actions;
+
+export { offersSlice };

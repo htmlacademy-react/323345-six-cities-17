@@ -4,10 +4,10 @@ import classNames from 'classnames';
 import {
   URL_MARKER_CURRENT,
   URL_MARKER_DEFAULT,
-} from '../../../shared/consts/map-markers-url';
-import useMap from '../../../shared/hooks/use-map';
+  CITIES_LIST
+} from '../../../shared/consts';
+import { useMap } from '../../../shared/hooks/use-map';
 import { CityType, CurrentOfferType, OfferType } from '../../../shared/types';
-import { CITIES_LIST } from '../../../shared/consts/cities';
 
 type MapProps = {
   city: string;

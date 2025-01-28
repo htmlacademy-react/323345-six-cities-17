@@ -1,3 +1,3 @@
-import StarElement from './ui/star-element';
+import { StarElement } from './ui';
 
 export { StarElement };

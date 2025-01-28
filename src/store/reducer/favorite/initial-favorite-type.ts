@@ -1,6 +1,8 @@
 import { OfferType } from '../../../shared/types';
 
-export type InitialFavoriteType = {
+type InitialFavoriteType = {
   favoriteOffers: OfferType[];
   isLoading: boolean;
 };
+
+export { type InitialFavoriteType };

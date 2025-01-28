@@ -1,14 +1,14 @@
 import { useState } from 'react';
 
 import { useAppSelector } from '../../../../shared/hooks/use-app-selector';
-import { selectActiveOffer } from '../../../../store/reducer/offers/selectors/select-acctive-offer';
-import { selectActiveCity } from '../../../../store/reducer/city/selectors/select-active-city';
+import { selectActiveOffer } from '../../../../store/reducer/offers/selectors';
+import { selectActiveCity } from '../../../../store/reducer/city/selectors';
 import MainPageOffersList from './main-page-offers-list';
 import CityMap from '../../../../widgets/city-map/ui/city-map';
 import SortBy from '../../../../widgets/sort-by/ui/sort-by';
 import type { OfferType } from '../../../../shared/types';
-import { SortKeys } from '../../../../shared/consts/sort-keys';
-import { sortOffers } from '../../../../shared/utils/sort-offers/sort-offers';
+import { SortKeys } from '../../../../shared/consts';
+import { sortOffers } from '../../../../shared/utils/sort-offers';
 
 type mainPageBodyProps = {
   activeCityOffersList: OfferType[];

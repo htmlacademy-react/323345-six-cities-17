@@ -1,9 +1,7 @@
-import HeaderLeft from './components/header-left.tsx';
-import HeaderNav from './components/header-nav.tsx';
-import HeaderNavNotLogin from './header-nav-not-logined';
-import { useAppSelector } from '../../../shared/hooks/use-app-selector.ts';
-import { AuthStatus } from '../../../shared/consts/auth-status.ts';
-import { selectAuthorizationStatus } from '../../../store/reducer/user/selectors/select-authorization-status.ts';
+import { HeaderNavNotLogin, HeaderLeft, HeaderNav } from './components';
+import { AuthStatus } from '../../../shared/consts';
+import { selectAuthorizationStatus } from '../../../store/reducer/user/selectors';
+import { useAppSelector } from '../../../shared/hooks/use-app-selector';
 
 type HeaderProps = {
   isLoginPage: boolean;

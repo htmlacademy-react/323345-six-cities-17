@@ -1,19 +1,19 @@
-import { createAPI } from '../../../../api/api-app-to-server';
+import { createAPI } from '../../../../api';
 import MockAdapter from 'axios-mock-adapter';
 import thunk from 'redux-thunk';
 import { Action } from 'redux';
+import { datatype } from 'faker';
 import {
   AppThunkDispatch,
   extractActionsType,
 } from '../../../../shared/utils/mocks-for-tests/mock-for-tests';
-import { AppState } from '../../../types/app-state';
 import { configureMockStore } from '@jedmao/redux-mock-store';
+import { AppState } from '../../../types/app-state';
 import {
   fetchCommentsAction,
   sendCommentAction,
 } from './comments-slice-actions';
-import { datatype } from 'faker';
-import { APIRoute } from '../../../../shared/consts/api-route';
+import { APIRoute } from '../../../../shared/consts';
 import { SendFormType } from '../../../../shared/types';
 
 describe('comments-slice-actions', () => {

@@ -1,14 +1,14 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import { useEffect, useState, } from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import classNames from 'classnames';
 
-import { RoutePath } from '../../../../consts/route-path';
+import { RoutePath } from '../../../../consts';
 import { Header } from '../../../../../widgets/header';
 import { Footer } from '../../../../../widgets/footer';
-import { getMetaTitlePage, metaTitlePage } from '../../../../consts/meta-title-page';
-import classNames from 'classnames';
+import { getMetaTitlePage, metaTitlePage } from '../../../../utils/meata-title-page';
 import { useAppSelector } from '../../../../hooks/use-app-selector';
-import { selectLoadFavoriteOffers } from '../../../../../store/reducer/favorite/selectors/select-load-favorite-offers';
+import { selectLoadFavoriteOffers } from '../../../../../store/reducer/favorite/selectors';
 
 function MainLayout(): JSX.Element {
   const location = useLocation();

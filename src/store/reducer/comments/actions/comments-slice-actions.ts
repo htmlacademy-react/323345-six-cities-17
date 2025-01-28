@@ -3,9 +3,9 @@ import { AxiosInstance } from 'axios';
 
 import { AppState } from '../../../types/app-state';
 import { CommentType, SendFormType } from '../../../../shared/types';
-import { APIRoute } from '../../../../shared/consts/api-route';
+import { APIRoute } from '../../../../shared/consts';
 
-export const fetchCommentsAction = createAsyncThunk<
+const fetchCommentsAction = createAsyncThunk<
   CommentType[],
   string,
   {
@@ -17,7 +17,7 @@ export const fetchCommentsAction = createAsyncThunk<
   return data;
 });
 
-export const sendCommentAction = createAsyncThunk<
+const sendCommentAction = createAsyncThunk<
   CommentType,
   { offerId: string; formData: SendFormType },
   {
@@ -31,3 +31,5 @@ export const sendCommentAction = createAsyncThunk<
   );
   return data;
 });
+
+export { fetchCommentsAction, sendCommentAction };

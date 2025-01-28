@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { RoutePath } from '../../../shared/consts/route-path.ts';
+import { RoutePath } from '../../../../shared/consts';
 
 function HeaderNavNotLogin(): JSX.Element {
   return (

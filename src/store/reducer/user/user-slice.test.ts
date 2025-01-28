@@ -1,12 +1,8 @@
-import { AuthStatus } from '../../../shared/consts/auth-status';
+import { AuthStatus } from '../../../shared/consts';
 import { AuthData, UserType } from '../../../shared/types';
-import {
-  checkAuthAction,
-  loginAction,
-  logoutAction,
-} from './actions/user-slice-actions';
-import { InitialUserType } from './initial-user-type';
-import { userSlice } from './user-slice';
+import { checkAuthAction, loginAction, logoutAction } from './actions';
+import { InitialUserType } from './index';
+import { userSlice } from './index';
 
 describe('userSlice', () => {
   const mockUser: UserType = {

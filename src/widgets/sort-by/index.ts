@@ -1,3 +1,3 @@
-import SortBy from './ui/sort-by';
+import { SortBy } from './ui';
 
 export { SortBy };

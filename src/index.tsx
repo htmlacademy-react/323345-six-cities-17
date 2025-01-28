@@ -3,7 +3,7 @@ import { Slide, ToastContainer } from 'react-toastify';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 
-import { appStore } from './store/app-store.ts';
+import { appStore } from './store/app-store';
 import App from './app/App.tsx';
 
 

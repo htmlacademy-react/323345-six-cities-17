@@ -1,9 +1,7 @@
-import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
-import { changeActiveOffer } from '../../../store/reducer/offers/offers-slice';
-import OfferCardMark from './components/offer-card-mark';
-import OfferCardImg from './components/offer-card-img';
-import OfferCardInfo from './components/offer-card-info';
 import classNames from 'classnames';
+import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
+import { changeActiveOffer } from '../../../store/reducer/offers';
+import { OfferCardMark, OfferCardImg, OfferCardInfo } from './components';
 
 type CardProps = {
   id: string;

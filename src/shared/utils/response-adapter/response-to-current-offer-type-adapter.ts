@@ -1,7 +1,6 @@
-import { CurrentOfferType } from '../../types';
-import { ResponseOfferType } from '../../types/types/response-offer-type';
+import { CurrentOfferType, ResponseOfferType } from '../../types';
 
-export const responseToCurrentOfferTypeAdapter = (
+const responseToCurrentOfferTypeAdapter = (
   responseData: ResponseOfferType
 ): CurrentOfferType => ({
   id: responseData.id,
@@ -31,3 +30,5 @@ export const responseToCurrentOfferTypeAdapter = (
   images: responseData.images,
   maxAdults: responseData.maxAdults,
 });
+
+export default responseToCurrentOfferTypeAdapter;

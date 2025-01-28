@@ -1,12 +1,7 @@
 import { FormEvent, memo, useState } from 'react';
 import { StarElement } from '../../../shared/ui/star-element';
-import { SendFormType } from '../../../shared/types/types/send-form-type';
-import { STAR_COUNT } from '../../../shared/consts/star-count';
-import { INITIAL_SEND_FORM_STATE } from '../../../shared/consts/Initial-send-form-state';
-import {
-  MIN_COMMENTS_LENGTH,
-  MAX_COMMENTS_LENGTH,
-} from '../../../shared/consts/comments-length';
+import { SendFormType } from '../../../shared/types';
+import { INITIAL_SEND_FORM_STATE, STAR_COUNT, MIN_COMMENTS_LENGTH, MAX_COMMENTS_LENGTH } from '../../../shared/consts';
 import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
 import { toast } from 'react-toastify';
 import { sendCommentAction } from '../../../store/reducer/comments/actions/comments-slice-actions';

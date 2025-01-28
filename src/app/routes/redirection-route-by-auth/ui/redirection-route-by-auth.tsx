@@ -1,9 +1,8 @@
 import { ReactElement } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { RoutePath } from '../../../../shared/consts/route-path.ts';
-import { useAppSelector } from '../../../../shared/hooks/use-app-selector.ts';
-import { AuthStatus } from '../../../../shared/consts/auth-status.ts';
-import { selectAuthorizationStatus } from '../../../../store/reducer/user/selectors/select-authorization-status.ts';
+import { RoutePath, AuthStatus } from '../../../../shared/consts';
+import { useAppSelector } from '../../../../shared/hooks/use-app-selector';
+import { selectAuthorizationStatus } from '../../../../store/reducer/user/selectors';
 
 
 type NoAuthRouteProps = {

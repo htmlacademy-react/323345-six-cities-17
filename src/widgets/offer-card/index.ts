@@ -1,3 +1,3 @@
-import OfferCard from './ui/offer-card';
+import { OfferCard } from './ui';
 
 export { OfferCard };

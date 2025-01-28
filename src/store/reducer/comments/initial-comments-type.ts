@@ -1,6 +1,8 @@
 import { CommentType } from '../../../shared/types';
 
-export type InitialCommentsType = {
-	comments: CommentType[];
-	isLoading: boolean;
+type InitialCommentsType = {
+  comments: CommentType[];
+  isLoading: boolean;
 };
+
+export { type InitialCommentsType };
