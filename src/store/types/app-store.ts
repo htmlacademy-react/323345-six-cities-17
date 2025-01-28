@@ -1,6 +1,5 @@
-import { AuthStatus } from '../../shared/consts/auth-status';
-import { CommentType, OfferType } from '../../shared/types';
-import { CityNameType } from '../../shared/types';
+import { AuthStatus } from '../../shared/consts';
+import { CommentType, OfferType, CityNameType } from '../../shared/types';
 
 export type AppStore = {
   authorizationStatus: AuthStatus;

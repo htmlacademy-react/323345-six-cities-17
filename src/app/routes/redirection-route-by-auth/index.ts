@@ -1,3 +1,3 @@
-import RedirectionRouteByAuth from './ui/redirection-route-by-auth';
+import { RedirectionRouteByAuth } from './ui';
 
 export { RedirectionRouteByAuth };

@@ -1,13 +1,13 @@
 import { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { RoutePath } from '../../../../shared/consts/route-path.ts';
 import styles from './header.module.css';
-import { useAppDispatch } from '../../../../shared/hooks/use-app-dispatch.ts';
-import { useAppSelector } from '../../../../shared/hooks/use-app-selector.ts';
-import { logoutAction } from '../../../../store/reducer/user/actions/user-slice-actions.ts';
-import { selectLoadFavoriteOffers } from '../../../../store/reducer/favorite/selectors/select-load-favorite-offers.ts';
-import { selectUser } from '../../../../store/reducer/user/selectors/select-user.ts';
+import { useAppDispatch } from '../../../../shared/hooks/use-app-dispatch';
+import { useAppSelector } from '../../../../shared/hooks/use-app-selector';
+import { logoutAction } from '../../../../store/reducer/user/actions';
+import { selectLoadFavoriteOffers } from '../../../../store/reducer/favorite/selectors';
+import { selectUser } from '../../../../store/reducer/user/selectors';
+import { RoutePath } from '../../../../shared/consts';
 
 function HeaderNavTemplate(): JSX.Element {
   const dispatch = useAppDispatch();

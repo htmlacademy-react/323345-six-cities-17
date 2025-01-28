@@ -1,4 +1,6 @@
 import { AppState } from '../../../types/app-state';
 
-export const selectLoadComments = (state: AppState) =>
+const selectLoadComments = (state: AppState) =>
   state.commentsSlice.comments;
+
+export default selectLoadComments;

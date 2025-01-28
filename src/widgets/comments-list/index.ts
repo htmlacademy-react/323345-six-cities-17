@@ -1,3 +1,3 @@
-import CommentsList from './ui/comments-list';
+import { CommentsList } from './ui';
 
 export { CommentsList };

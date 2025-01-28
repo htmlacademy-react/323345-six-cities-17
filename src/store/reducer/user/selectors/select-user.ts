@@ -1,3 +1,5 @@
 import { AppState } from '../../../types/app-state';
 
-export const selectUser = (state: AppState) => state.userSlice.user;
+const selectUser = (state: AppState) => state.userSlice.user;
+
+export default selectUser;

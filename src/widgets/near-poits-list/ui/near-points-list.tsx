@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 import styles from './near-points.module.css';
 import { useAppSelector } from '../../../shared/hooks/use-app-selector';
-import { selectNearPoints } from '../../../store/reducer/offers/selectors/select-near-points';
+import { selectNearPoints } from '../../../store/reducer/offers/selectors';
 import { OfferCard } from '../../offer-card';
 
 function NearPointsListTemplate(): JSX.Element {

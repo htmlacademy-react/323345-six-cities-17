@@ -5,8 +5,8 @@ import {
   updateCurrentOffer,
   updateNearPoints,
   updateOffers,
-} from './offers-slice';
-import { InitialOffersType } from './initiail-offers-type';
+} from './index';
+import { InitialOffersType } from './index';
 import { CurrentOfferType, OfferType } from '../../../shared/types';
 import {
   fetchCurrentOfferAction,

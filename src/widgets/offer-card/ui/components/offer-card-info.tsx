@@ -1,9 +1,9 @@
 import { NavLink } from 'react-router-dom';
 
-import { RoutePath } from '../../../../shared/consts/route-path.ts';
-import { getPercentFromRating } from '../../../../shared/utils/percent-from-rating/percent-from-rating.ts';
-import { capitalizeFirstLetter } from '../../../../shared/utils/capitalize-first-letter/capitalize-first-letter.ts';
-import IsFavoriteButton from '../../../is-favorite-button/index.ts';
+import { getPercentFromRating } from '../../../../shared/utils/percent-from-rating';
+import { capitalizeFirstLetter } from '../../../../shared/utils/capitalize-first-letter';
+import IsFavoriteButton from '../../../is-favorite-button/index';
+import { RoutePath } from '../../../../shared/consts';
 
 type OffersCardInfo = {
   id: string;

@@ -1,20 +1,15 @@
-import { createAPI } from '../../../../api/api-app-to-server';
+import { createAPI } from '../../../../api';
 import MockAdapter from 'axios-mock-adapter';
 import thunk from 'redux-thunk';
+import { configureMockStore } from '@jedmao/redux-mock-store';
 import { Action } from 'redux';
 import { AppState } from '../../../types/app-state';
-import { configureMockStore } from '@jedmao/redux-mock-store';
 import {
   AppThunkDispatch,
   extractActionsType,
 } from '../../../../shared/utils/mocks-for-tests/mock-for-tests';
-import { APIRoute } from '../../../../shared/consts/api-route';
-import { AuthStatus } from '../../../../shared/consts/auth-status';
-import {
-  checkAuthAction,
-  loginAction,
-  logoutAction,
-} from './user-slice-actions';
+import { APIRoute, AuthStatus } from '../../../../shared/consts';
+import { checkAuthAction, loginAction, logoutAction } from './index';
 
 describe('user-slice-actions', () => {
   const axios = createAPI();

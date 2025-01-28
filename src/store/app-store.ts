@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { appReducer } from './reducer/app-reducer';
-import { createAPI } from '../api/api-app-to-server';
-import { updateOfferFavoriteStatusMiddleware } from './middleware/update-offer-favorite-status-middleware';
+import { appReducer } from './reducer';
+import { updateOfferFavoriteStatusMiddleware } from './middleware';
+import { createAPI } from '../api';
 
-export const api = createAPI();
+const api = createAPI();
 
-export const appStore = configureStore({
+const appStore = configureStore({
   reducer: appReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -14,3 +14,5 @@ export const appStore = configureStore({
       },
     }).concat(updateOfferFavoriteStatusMiddleware),
 });
+
+export { appStore, api };

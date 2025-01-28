@@ -1,4 +1,4 @@
-import { SortKeys } from '../../consts/sort-keys';
+import { SortKeys } from '../../consts';
 import { OfferType } from '../../types';
 
 type SortOffersProps = {
@@ -6,7 +6,7 @@ type SortOffersProps = {
   activeCityOffersList: OfferType[];
 };
 
-export function sortOffers({
+function sortOffers({
   currentSortType,
   activeCityOffersList,
 }: SortOffersProps) {
@@ -22,3 +22,5 @@ export function sortOffers({
       return activeCityOffersList;
   }
 }
+
+export default sortOffers;

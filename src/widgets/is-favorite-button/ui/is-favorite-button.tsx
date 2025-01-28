@@ -3,12 +3,10 @@ import { toast } from 'react-toastify';
 import classNames from 'classnames';
 
 import { useAppSelector } from '../../../shared/hooks/use-app-selector';
-import { selectAuthorizationStatus } from '../../../store/reducer/user/selectors/select-authorization-status';
+import { selectAuthorizationStatus } from '../../../store/reducer/user/selectors';
 import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
-import { favoriteRequestAction } from '../../../store/reducer/favorite/actions/favorite-slice-actions';
-import { RoutePath } from '../../../shared/consts/route-path';
-import { AuthStatus } from '../../../shared/consts/auth-status';
-import { FavoriteRequestParams } from '../../../shared/consts/favorite-request-params';
+import { favoriteRequestAction } from '../../../store/reducer/favorite/actions';
+import { RoutePath, AuthStatus, FavoriteRequestParams } from '../../../shared/consts';
 
 type IsFavoriteButtonProps = {
   isFavorite: boolean;
@@ -16,13 +14,18 @@ type IsFavoriteButtonProps = {
   place: 'Offer' | 'Card';
 }
 
+const CARD_WIDTH = 18;
+const CARD_HEIGHT = 19;
+const OFFER_WIDTH = 31;
+const OFFER_HEIGHT = 33;
+
 function IsFavoriteButton({ isFavorite, offerId, place }: IsFavoriteButtonProps) {
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const width = (place === 'Card') ? '18' : '31';
-  const height = (place === 'Card') ? '19' : '33';
+  const width = (place === 'Card') ? CARD_WIDTH : OFFER_WIDTH;
+  const height = (place === 'Card') ? CARD_HEIGHT : OFFER_HEIGHT;
 
   const toFavoriteToggleHadler = () => {
     if (authorizationStatus !== AuthStatus.Auth) {

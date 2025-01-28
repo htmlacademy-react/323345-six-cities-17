@@ -6,15 +6,11 @@ import { useAppDispatch } from '../../../shared/hooks/use-app-dispatch';
 import { useAppSelector } from '../../../shared/hooks/use-app-selector';
 import { appStore } from '../../../store';
 import { loginAction } from '../../../store/reducer/user/actions/user-slice-actions';
-import { changeActiveCity } from '../../../store/reducer/city/city-slice';
-import { selectAuthorizationStatus } from '../../../store/reducer/user/selectors/select-authorization-status';
-import { validatePassword } from '../../../shared/utils/validate-password/validatePassword';
+import { changeActiveCity } from '../../../store/reducer/city';
+import { selectAuthorizationStatus } from '../../../store/reducer/user/selectors';
+import { validatePassword } from '../../../shared/utils/validate-password';
 import { CityNameType } from '../../../shared/types';
-import { INITIAL_LOGIN_FORM_STATE } from '../../../shared/consts/initial-login-form-state';
-import { AuthStatus } from '../../../shared/consts/auth-status';
-import { RoutePath } from '../../../shared/consts/route-path';
-import { CITIES_LIST } from '../../../shared/consts/cities';
-
+import { AuthStatus, RoutePath, CITIES_LIST, INITIAL_LOGIN_FORM_STATE } from '../../../shared/consts';
 
 function LoginPage(): JSX.Element {
   const dispatch = useAppDispatch();

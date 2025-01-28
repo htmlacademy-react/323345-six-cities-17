@@ -1,14 +1,15 @@
-export type { CityNameType } from './types/city-name-type';
-export type { CityType } from './types/city-type';
-export type { CommentType } from './types/comment-type';
-export type { LocationType } from './types/location-type';
-export type { offerByCityType } from './types/offer-by-city-type';
-export type { OfferType } from './types/offer-type';
-export type { SendFormType } from './types/send-form-type';
-export type { AuthData } from './types/auth-data';
-export type { UserData } from './types/user-data';
-export type { UserType } from './types/user-type';
-export type { CurrentOfferType } from './types/current-offer-type';
+export type { AuthData } from './auth-data';
+export type { CityNameType } from './city-name-type';
+export type { CityType } from './city-type';
+export type { CommentType } from './comment-type';
+export type { CurrentOfferType } from './current-offer-type';
+export type { LocationType } from './location-type';
+export type { offerByCityType } from './offer-by-city-type';
+export type { OfferType } from './offer-type';
+export type { ResponseOfferType } from './response-offer-type';
+export type { SendFormType } from './send-form-type';
+export type { UserData } from './user-data';
+export type { UserType } from './user-type';
 
 declare global {
   interface Object {

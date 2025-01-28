@@ -1,13 +1,15 @@
 import { ThunkDispatch } from '@reduxjs/toolkit';
-import { createAPI } from '../../../api/api-app-to-server';
+import { createAPI } from '../../../api';
 import { AppState } from '../../../store/types/app-state';
 import { Action } from 'redux';
 
-export type AppThunkDispatch = ThunkDispatch<
+type AppThunkDispatch = ThunkDispatch<
   AppState,
   ReturnType<typeof createAPI>,
   Action
 >;
 
-export const extractActionsType = (actions: Action<string>[]) =>
+const extractActionsType = (actions: Action<string>[]) =>
   actions.map(({ type }) => type);
+
+export { type AppThunkDispatch, extractActionsType };

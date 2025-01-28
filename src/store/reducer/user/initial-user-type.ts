@@ -1,8 +1,10 @@
-import { AuthStatus } from '../../../shared/consts/auth-status';
-import { UserType } from '../../../shared/types/types/user-type';
+import { AuthStatus } from '../../../shared/consts';
+import { UserType } from '../../../shared/types';
 
-export type InitialUserType = {
+type InitialUserType = {
   authorizationStatus: AuthStatus;
   user: UserType;
   isLoading: boolean;
 };
+
+export type { InitialUserType };

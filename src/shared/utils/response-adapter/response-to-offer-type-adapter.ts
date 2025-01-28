@@ -1,7 +1,6 @@
-import { OfferType } from '../../types';
-import { ResponseOfferType } from '../../types/types/response-offer-type';
+import { OfferType, ResponseOfferType } from '../../types';
 
-export const responseToOfferTypeAdapter = (
+const responseToOfferTypeAdapter = (
   responseData: ResponseOfferType
 ): OfferType => ({
   id: responseData.id,
@@ -22,3 +21,5 @@ export const responseToOfferTypeAdapter = (
   rating: responseData.rating,
   previewImage: responseData.previewImage,
 });
+
+export default responseToOfferTypeAdapter;

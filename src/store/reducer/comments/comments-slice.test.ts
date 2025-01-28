@@ -2,7 +2,7 @@ import {
   fetchCommentsAction,
   sendCommentAction,
 } from './actions/comments-slice-actions';
-import { commentsSlice } from './comments-slice';
+import { commentsSlice } from './index';
 
 describe('commentsSlice', () => {
   const expectedState = { comments: [], isLoading: false };
